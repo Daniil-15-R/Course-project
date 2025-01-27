@@ -12,61 +12,61 @@
                 <Button>
                     <Image Source="C:\3 course\Course work\icon_dog.jpg" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
-                <TextBlock Text="Текст под кнопкой 1" />
+                <TextBlock Text="Собаки" />
             </StackPanel>
             <StackPanel Margin="5">
                 <Button>
                     <Image Source="C:\3 course\Course work\icon_employe.png" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
-                <TextBlock Text="Текст под кнопкой 2" />
+                <TextBlock Text="Сотрудники" />
             </StackPanel>
             <StackPanel Margin="5">
                 <Button>
                     <Image Source="C:\3 course\Course work\icon_medicines.png" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
-                <TextBlock Text="Текст под кнопкой 3" />
+                <TextBlock Text="Лекарства" />
             </StackPanel>
             <StackPanel Margin="5">
                 <Button>
                     <Image Source="C:\3 course\Course work\ikon_foot.png" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
-                <TextBlock Text="Текст под кнопкой 4" />
+                <TextBlock Text="Еда для собак" />
             </StackPanel>
             <StackPanel Margin="5">
                 <Button>
                     <Image Source="C:\3 course\Course work\icon_needs.jpg" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
-                <TextBlock Text="Текст под кнопкой 5" />
+                <TextBlock Text="Нужды для приюта" />
             </StackPanel>
             <StackPanel Margin="5">
                 <Button>
                     <Image Source="C:\3 course\Course work\icon_finance.jpg" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
-                <TextBlock Text="Текст под кнопкой 6" />
+                <TextBlock Text="Финансовый учет" />
             </StackPanel>
             <StackPanel Margin="5">
                 <Button>
                     <Image Source="C:\3 course\Course work\icon_vaccination.png" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
-                <TextBlock Text="Текст под кнопкой 7" />
+                <TextBlock Text="График вакцинаций" />
             </StackPanel>
             <StackPanel Margin="5">
                 <Button>
                     <Image Source="C:\3 course\Course work\icon_parasite.png" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
-                <TextBlock Text="Текст под кнопкой 8" />
+                <TextBlock Text="Обработка от паразитов" />
             </StackPanel>
             <StackPanel Margin="5">
                 <Button>
                     <Image Source="C:\3 course\Course work\icon_walking.jpg" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
-                <TextBlock Text="Текст под кнопкой 9" />
+                <TextBlock Text="График выгулов" />
             </StackPanel>
             <StackPanel Margin="5">
                 <Button>
                     <Image Source="C:\3 course\Course work\icon_event.jpg" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
-                <TextBlock Text="Текст под кнопкой 10" />
+                <TextBlock Text="График мероприятий" />
             </StackPanel>
         </UniformGrid>
     </Grid>
