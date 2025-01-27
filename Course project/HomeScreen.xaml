@@ -1,0 +1,73 @@
+﻿<Window x:Class="Course_project.HomeScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Course_project"
+        mc:Ignorable="d"
+        Title="HomeScreen" Height="450" Width="800">
+    <Grid Background="#d0e6a3">
+        <UniformGrid Rows="2" Columns="5" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel Margin="5">
+                <Button>
+                    <Image Source="C:\3 course\Course work\icon_dog.jpg" Width="50" Height="50" Stretch="Uniform" />
+                </Button>
+                <TextBlock Text="Текст под кнопкой 1" />
+            </StackPanel>
+            <StackPanel Margin="5">
+                <Button>
+                    <Image Source="C:\3 course\Course work\icon_employe.png" Width="50" Height="50" Stretch="Uniform" />
+                </Button>
+                <TextBlock Text="Текст под кнопкой 2" />
+            </StackPanel>
+            <StackPanel Margin="5">
+                <Button>
+                    <Image Source="C:\3 course\Course work\icon_medicines.png" Width="50" Height="50" Stretch="Uniform" />
+                </Button>
+                <TextBlock Text="Текст под кнопкой 3" />
+            </StackPanel>
+            <StackPanel Margin="5">
+                <Button>
+                    <Image Source="C:\3 course\Course work\ikon_foot.png" Width="50" Height="50" Stretch="Uniform" />
+                </Button>
+                <TextBlock Text="Текст под кнопкой 4" />
+            </StackPanel>
+            <StackPanel Margin="5">
+                <Button>
+                    <Image Source="C:\3 course\Course work\icon_needs.jpg" Width="50" Height="50" Stretch="Uniform" />
+                </Button>
+                <TextBlock Text="Текст под кнопкой 5" />
+            </StackPanel>
+            <StackPanel Margin="5">
+                <Button>
+                    <Image Source="C:\3 course\Course work\icon_finance.jpg" Width="50" Height="50" Stretch="Uniform" />
+                </Button>
+                <TextBlock Text="Текст под кнопкой 6" />
+            </StackPanel>
+            <StackPanel Margin="5">
+                <Button>
+                    <Image Source="C:\3 course\Course work\icon_vaccination.png" Width="50" Height="50" Stretch="Uniform" />
+                </Button>
+                <TextBlock Text="Текст под кнопкой 7" />
+            </StackPanel>
+            <StackPanel Margin="5">
+                <Button>
+                    <Image Source="C:\3 course\Course work\icon_parasite.png" Width="50" Height="50" Stretch="Uniform" />
+                </Button>
+                <TextBlock Text="Текст под кнопкой 8" />
+            </StackPanel>
+            <StackPanel Margin="5">
+                <Button>
+                    <Image Source="C:\3 course\Course work\icon_walking.jpg" Width="50" Height="50" Stretch="Uniform" />
+                </Button>
+                <TextBlock Text="Текст под кнопкой 9" />
+            </StackPanel>
+            <StackPanel Margin="5">
+                <Button>
+                    <Image Source="C:\3 course\Course work\icon_event.jpg" Width="50" Height="50" Stretch="Uniform" />
+                </Button>
+                <TextBlock Text="Текст под кнопкой 10" />
+            </StackPanel>
+        </UniformGrid>
+    </Grid>
+</Window>

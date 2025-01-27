@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="026b228f76984746bd4284848b9db97f" Name="Diagram1">
+        <EntityTypeShape EntityType="course_workModel.Accounting" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="course_workModel.Dogs" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="course_workModel.FoodProducts" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="course_workModel.Medicines" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="course_workModel.ParasiteTreatmentSchedule" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="course_workModel.PlannedEvents" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="course_workModel.ShelterEmployees" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="course_workModel.ShelterNeeds" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="course_workModel.Users" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="course_workModel.VaccinationSchedule" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="course_workModel.WalkingSchedule" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <AssociationConnector Association="course_workModel.FK__Medicines__dog_i__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="course_workModel.FK__ParasiteT__dog_i__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="course_workModel.FK__PlannedEv__dog_i__73BA3083" ManuallyRouted="false" />
+        <AssociationConnector Association="course_workModel.FK__Vaccinati__dog_i__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="course_workModel.FK__WalkingSc__dog_i__76969D2E" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,579 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище course_workModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accounting">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="accounting_date" Type="date" Nullable="false" />
+          <Property Name="salary" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="utilities" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="taxes" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="medicine_expenses" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="food_expenses" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="other_expenses" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="voluntary_contributions" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="total" Type="decimal" Precision="16" Scale="2" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Dogs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nickname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="age" Type="int" Nullable="false" />
+          <Property Name="gender" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="additional_information" Type="text" />
+        </EntityType>
+        <EntityType Name="FoodProducts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_of_food" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="cost" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Medicines">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_of_medicine" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="dog_id" Type="int" />
+          <Property Name="cost" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ParasiteTreatmentSchedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="dog_id" Type="int" />
+          <Property Name="date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlannedEvents">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="dog_id" Type="int" />
+          <Property Name="date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShelterEmployees">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="passport" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="place_of_registration" Type="nvarchar" MaxLength="255" />
+          <Property Name="actual_address" Type="nvarchar" MaxLength="255" />
+          <Property Name="date_of_birth" Type="date" Nullable="false" />
+          <Property Name="SNILS" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="state_number_of_car" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ShelterNeeds">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="cost" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VaccinationSchedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="dog_id" Type="int" />
+          <Property Name="date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WalkingSchedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dog_id" Type="int" />
+          <Property Name="time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Medicines__dog_i__5EBF139D">
+          <End Role="Dogs" Type="Self.Dogs" Multiplicity="0..1" />
+          <End Role="Medicines" Type="Self.Medicines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dogs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Medicines">
+              <PropertyRef Name="dog_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ParasiteT__dog_i__70DDC3D8">
+          <End Role="Dogs" Type="Self.Dogs" Multiplicity="0..1" />
+          <End Role="ParasiteTreatmentSchedule" Type="Self.ParasiteTreatmentSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dogs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ParasiteTreatmentSchedule">
+              <PropertyRef Name="dog_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlannedEv__dog_i__73BA3083">
+          <End Role="Dogs" Type="Self.Dogs" Multiplicity="0..1" />
+          <End Role="PlannedEvents" Type="Self.PlannedEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dogs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PlannedEvents">
+              <PropertyRef Name="dog_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vaccinati__dog_i__6E01572D">
+          <End Role="Dogs" Type="Self.Dogs" Multiplicity="0..1" />
+          <End Role="VaccinationSchedule" Type="Self.VaccinationSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dogs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VaccinationSchedule">
+              <PropertyRef Name="dog_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WalkingSc__dog_i__76969D2E">
+          <End Role="Dogs" Type="Self.Dogs" Multiplicity="0..1" />
+          <End Role="WalkingSchedule" Type="Self.WalkingSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dogs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="WalkingSchedule">
+              <PropertyRef Name="dog_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище course_workModelContainer">
+          <EntitySet Name="Accounting" EntityType="Self.Accounting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dogs" EntityType="Self.Dogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FoodProducts" EntityType="Self.FoodProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medicines" EntityType="Self.Medicines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParasiteTreatmentSchedule" EntityType="Self.ParasiteTreatmentSchedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlannedEvents" EntityType="Self.PlannedEvents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShelterEmployees" EntityType="Self.ShelterEmployees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShelterNeeds" EntityType="Self.ShelterNeeds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VaccinationSchedule" EntityType="Self.VaccinationSchedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WalkingSchedule" EntityType="Self.WalkingSchedule" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Medicines__dog_i__5EBF139D" Association="Self.FK__Medicines__dog_i__5EBF139D">
+            <End Role="Dogs" EntitySet="Dogs" />
+            <End Role="Medicines" EntitySet="Medicines" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ParasiteT__dog_i__70DDC3D8" Association="Self.FK__ParasiteT__dog_i__70DDC3D8">
+            <End Role="Dogs" EntitySet="Dogs" />
+            <End Role="ParasiteTreatmentSchedule" EntitySet="ParasiteTreatmentSchedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlannedEv__dog_i__73BA3083" Association="Self.FK__PlannedEv__dog_i__73BA3083">
+            <End Role="Dogs" EntitySet="Dogs" />
+            <End Role="PlannedEvents" EntitySet="PlannedEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vaccinati__dog_i__6E01572D" Association="Self.FK__Vaccinati__dog_i__6E01572D">
+            <End Role="Dogs" EntitySet="Dogs" />
+            <End Role="VaccinationSchedule" EntitySet="VaccinationSchedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WalkingSc__dog_i__76969D2E" Association="Self.FK__WalkingSc__dog_i__76969D2E">
+            <End Role="Dogs" EntitySet="Dogs" />
+            <End Role="WalkingSchedule" EntitySet="WalkingSchedule" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="course_workModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Accounting">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="accounting_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="salary" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="utilities" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="taxes" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="medicine_expenses" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="food_expenses" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="other_expenses" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="voluntary_contributions" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="total" Type="Decimal" Precision="16" Scale="2" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Dogs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nickname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="age" Type="Int32" Nullable="false" />
+          <Property Name="gender" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="additional_information" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Medicines" Relationship="Self.FK__Medicines__dog_i__5EBF139D" FromRole="Dogs" ToRole="Medicines" />
+          <NavigationProperty Name="ParasiteTreatmentSchedule" Relationship="Self.FK__ParasiteT__dog_i__70DDC3D8" FromRole="Dogs" ToRole="ParasiteTreatmentSchedule" />
+          <NavigationProperty Name="PlannedEvents" Relationship="Self.FK__PlannedEv__dog_i__73BA3083" FromRole="Dogs" ToRole="PlannedEvents" />
+          <NavigationProperty Name="VaccinationSchedule" Relationship="Self.FK__Vaccinati__dog_i__6E01572D" FromRole="Dogs" ToRole="VaccinationSchedule" />
+          <NavigationProperty Name="WalkingSchedule" Relationship="Self.FK__WalkingSc__dog_i__76969D2E" FromRole="Dogs" ToRole="WalkingSchedule" />
+        </EntityType>
+        <EntityType Name="FoodProducts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_of_food" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cost" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Medicines">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_of_medicine" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dog_id" Type="Int32" />
+          <Property Name="cost" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Dogs" Relationship="Self.FK__Medicines__dog_i__5EBF139D" FromRole="Medicines" ToRole="Dogs" />
+        </EntityType>
+        <EntityType Name="ParasiteTreatmentSchedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dog_id" Type="Int32" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Dogs" Relationship="Self.FK__ParasiteT__dog_i__70DDC3D8" FromRole="ParasiteTreatmentSchedule" ToRole="Dogs" />
+        </EntityType>
+        <EntityType Name="PlannedEvents">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FIO" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dog_id" Type="Int32" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Dogs" Relationship="Self.FK__PlannedEv__dog_i__73BA3083" FromRole="PlannedEvents" ToRole="Dogs" />
+        </EntityType>
+        <EntityType Name="ShelterEmployees">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FIO" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="passport" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="place_of_registration" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="actual_address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="date_of_birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SNILS" Type="String" MaxLength="14" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="state_number_of_car" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ShelterNeeds">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cost" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VaccinationSchedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dog_id" Type="Int32" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Dogs" Relationship="Self.FK__Vaccinati__dog_i__6E01572D" FromRole="VaccinationSchedule" ToRole="Dogs" />
+        </EntityType>
+        <EntityType Name="WalkingSchedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dog_id" Type="Int32" />
+          <Property Name="time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="FIO" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Dogs" Relationship="Self.FK__WalkingSc__dog_i__76969D2E" FromRole="WalkingSchedule" ToRole="Dogs" />
+        </EntityType>
+        <Association Name="FK__Medicines__dog_i__5EBF139D">
+          <End Role="Dogs" Type="Self.Dogs" Multiplicity="0..1" />
+          <End Role="Medicines" Type="Self.Medicines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dogs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Medicines">
+              <PropertyRef Name="dog_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ParasiteT__dog_i__70DDC3D8">
+          <End Role="Dogs" Type="Self.Dogs" Multiplicity="0..1" />
+          <End Role="ParasiteTreatmentSchedule" Type="Self.ParasiteTreatmentSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dogs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ParasiteTreatmentSchedule">
+              <PropertyRef Name="dog_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlannedEv__dog_i__73BA3083">
+          <End Role="Dogs" Type="Self.Dogs" Multiplicity="0..1" />
+          <End Role="PlannedEvents" Type="Self.PlannedEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dogs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PlannedEvents">
+              <PropertyRef Name="dog_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vaccinati__dog_i__6E01572D">
+          <End Role="Dogs" Type="Self.Dogs" Multiplicity="0..1" />
+          <End Role="VaccinationSchedule" Type="Self.VaccinationSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dogs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VaccinationSchedule">
+              <PropertyRef Name="dog_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WalkingSc__dog_i__76969D2E">
+          <End Role="Dogs" Type="Self.Dogs" Multiplicity="0..1" />
+          <End Role="WalkingSchedule" Type="Self.WalkingSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dogs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="WalkingSchedule">
+              <PropertyRef Name="dog_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounting" EntityType="Self.Accounting" />
+          <EntitySet Name="Dogs" EntityType="Self.Dogs" />
+          <EntitySet Name="FoodProducts" EntityType="Self.FoodProducts" />
+          <EntitySet Name="Medicines" EntityType="Self.Medicines" />
+          <EntitySet Name="ParasiteTreatmentSchedule" EntityType="Self.ParasiteTreatmentSchedule" />
+          <EntitySet Name="PlannedEvents" EntityType="Self.PlannedEvents" />
+          <EntitySet Name="ShelterEmployees" EntityType="Self.ShelterEmployees" />
+          <EntitySet Name="ShelterNeeds" EntityType="Self.ShelterNeeds" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="VaccinationSchedule" EntityType="Self.VaccinationSchedule" />
+          <EntitySet Name="WalkingSchedule" EntityType="Self.WalkingSchedule" />
+          <AssociationSet Name="FK__Medicines__dog_i__5EBF139D" Association="Self.FK__Medicines__dog_i__5EBF139D">
+            <End Role="Dogs" EntitySet="Dogs" />
+            <End Role="Medicines" EntitySet="Medicines" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ParasiteT__dog_i__70DDC3D8" Association="Self.FK__ParasiteT__dog_i__70DDC3D8">
+            <End Role="Dogs" EntitySet="Dogs" />
+            <End Role="ParasiteTreatmentSchedule" EntitySet="ParasiteTreatmentSchedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlannedEv__dog_i__73BA3083" Association="Self.FK__PlannedEv__dog_i__73BA3083">
+            <End Role="Dogs" EntitySet="Dogs" />
+            <End Role="PlannedEvents" EntitySet="PlannedEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vaccinati__dog_i__6E01572D" Association="Self.FK__Vaccinati__dog_i__6E01572D">
+            <End Role="Dogs" EntitySet="Dogs" />
+            <End Role="VaccinationSchedule" EntitySet="VaccinationSchedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WalkingSc__dog_i__76969D2E" Association="Self.FK__WalkingSc__dog_i__76969D2E">
+            <End Role="Dogs" EntitySet="Dogs" />
+            <End Role="WalkingSchedule" EntitySet="WalkingSchedule" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище course_workModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Accounting">
+            <EntityTypeMapping TypeName="course_workModel.Accounting">
+              <MappingFragment StoreEntitySet="Accounting">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="accounting_date" ColumnName="accounting_date" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="utilities" ColumnName="utilities" />
+                <ScalarProperty Name="taxes" ColumnName="taxes" />
+                <ScalarProperty Name="medicine_expenses" ColumnName="medicine_expenses" />
+                <ScalarProperty Name="food_expenses" ColumnName="food_expenses" />
+                <ScalarProperty Name="other_expenses" ColumnName="other_expenses" />
+                <ScalarProperty Name="voluntary_contributions" ColumnName="voluntary_contributions" />
+                <ScalarProperty Name="total" ColumnName="total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dogs">
+            <EntityTypeMapping TypeName="course_workModel.Dogs">
+              <MappingFragment StoreEntitySet="Dogs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nickname" ColumnName="nickname" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="additional_information" ColumnName="additional_information" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FoodProducts">
+            <EntityTypeMapping TypeName="course_workModel.FoodProducts">
+              <MappingFragment StoreEntitySet="FoodProducts">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name_of_food" ColumnName="name_of_food" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Medicines">
+            <EntityTypeMapping TypeName="course_workModel.Medicines">
+              <MappingFragment StoreEntitySet="Medicines">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name_of_medicine" ColumnName="name_of_medicine" />
+                <ScalarProperty Name="dog_id" ColumnName="dog_id" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParasiteTreatmentSchedule">
+            <EntityTypeMapping TypeName="course_workModel.ParasiteTreatmentSchedule">
+              <MappingFragment StoreEntitySet="ParasiteTreatmentSchedule">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="dog_id" ColumnName="dog_id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlannedEvents">
+            <EntityTypeMapping TypeName="course_workModel.PlannedEvents">
+              <MappingFragment StoreEntitySet="PlannedEvents">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="dog_id" ColumnName="dog_id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShelterEmployees">
+            <EntityTypeMapping TypeName="course_workModel.ShelterEmployees">
+              <MappingFragment StoreEntitySet="ShelterEmployees">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="passport" ColumnName="passport" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="place_of_registration" ColumnName="place_of_registration" />
+                <ScalarProperty Name="actual_address" ColumnName="actual_address" />
+                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+                <ScalarProperty Name="SNILS" ColumnName="SNILS" />
+                <ScalarProperty Name="state_number_of_car" ColumnName="state_number_of_car" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShelterNeeds">
+            <EntityTypeMapping TypeName="course_workModel.ShelterNeeds">
+              <MappingFragment StoreEntitySet="ShelterNeeds">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="course_workModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VaccinationSchedule">
+            <EntityTypeMapping TypeName="course_workModel.VaccinationSchedule">
+              <MappingFragment StoreEntitySet="VaccinationSchedule">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="dog_id" ColumnName="dog_id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WalkingSchedule">
+            <EntityTypeMapping TypeName="course_workModel.WalkingSchedule">
+              <MappingFragment StoreEntitySet="WalkingSchedule">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="dog_id" ColumnName="dog_id" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
