@@ -25,9 +25,9 @@ namespace Course_project
         }
         private void DogButton_Click(object sender, RoutedEventArgs e)
         {
-            DogScreen dogScreen = new DogScreen(this); // Передаем текущее окно
-            dogScreen.Show();
-            this.Close();
+            DogScreen dogScreen = new DogScreen();
+            dogScreen.Show(); // Открывает новое окно
+            this.Close(); // Закрывает текущее окно, если это необходимо
         }
         private void EmployeesButton_Click(object sender, RoutedEventArgs e)
         {
@@ -42,7 +42,6 @@ namespace Course_project
             medicineScreen.Show(); // Открывает новое окно
             this.Close(); // Закрывает текущее окно, если это необходимо
         }
-
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();

@@ -69,6 +69,6 @@
                 <TextBlock Text="График мероприятий" />
             </StackPanel>
         </UniformGrid>
-        <Button Content="Назад" Click="Back_Click" Width="100" Height="" Margin="641,297,59,87"/>
+        <Button Content="Назад" Click="Back_Click" Width="100" Height="50" Margin="641,297,59,87"/>
     </Grid>
 </Window>

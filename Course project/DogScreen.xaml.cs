@@ -19,18 +19,15 @@ namespace Course_project
     /// </summary>
     public partial class DogScreen : Window
     {
-        private Window _previousWindow;
-
-        public DogScreen(Window previousWindow)
+        public DogScreen()
         {
             InitializeComponent();
-            _previousWindow = previousWindow;
         }
-
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            _previousWindow.Show(); // Показываем предыдущее окно
-            this.Close();           // Закрываем текущее окно
+            HomeScreen homeScreen= new HomeScreen();
+            homeScreen.Show();
+            this.Close();
         }
     }
 }
