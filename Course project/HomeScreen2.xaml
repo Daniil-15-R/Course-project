@@ -9,16 +9,16 @@
     <Grid Background="#d0e6a3">
         <UniformGrid Rows="3" Columns="3" VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel Margin="5">
-                <Button>
-                    <Image Source="C:\3 course\Course work\icon_dog.jpg" Width="137" Height="50" Stretch="Uniform" />
+                <Button Click="DogButton_Click">
+                    <Image Source="C:\3 course\Course work\icon_dog.jpg" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
-                <TextBlock Text="1. Собаки" />
+                <TextBlock Text="1.Собаки" />
             </StackPanel>
             <StackPanel Margin="5">
-                <Button>
+                <Button Click="EmployeesButton_Click">
                     <Image Source="C:\3 course\Course work\icon_employe.png" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
-                <TextBlock Text="2. Сотрудники" />
+                <TextBlock Text="2.Сотрудники" />
             </StackPanel>
             <StackPanel Margin="5">
                 <Button>
@@ -45,5 +45,6 @@
                 <TextBlock Text="6. График мероприятий" />
             </StackPanel>
         </UniformGrid>
+        <Button Content="Назад" Click="Back_Click" Width="100" Height="45" Margin="664,340,36,44"/>
     </Grid>
 </Window>
