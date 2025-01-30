@@ -12,9 +12,9 @@ namespace Course_project
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             // Проверяем, какую роль пользователя мы сохранили
-            if (App.Current.Properties["User  Role"] != null)
+            if (App.Current.Properties["UserRole"] != null)
             {
-                string userRole = App.Current.Properties["User  Role"].ToString();
+                string userRole = App.Current.Properties["UserRole"].ToString();
                 if (userRole == "admin")
                 {
                     HomeScreen homeScreen = new HomeScreen();

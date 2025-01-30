@@ -50,20 +50,21 @@ namespace Course_project
             // Проверка логина и пароля
             if (LoginTextBox.Text == "admin" && PasswordTextBox.Password == "admin")
             {
+                App.Current.Properties["UserRole"] = "admin"; // Сохранение роли пользователя
                 HomeScreen homeScreen = new HomeScreen();
                 homeScreen.Show();
                 this.Close(); // Закрыть текущее окно
             }
             else if (LoginTextBox.Text == "user" && PasswordTextBox.Password == "user")
             {
-                // Открытие другого окна, например, HomeScreen
+                App.Current.Properties["UserRole"] = "user"; // Сохранение роли пользователя
                 HomeScreen2 homeScreen2 = new HomeScreen2();
                 homeScreen2.Show();
                 this.Close(); // Закрыть текущее окно
             }
             else
             {
-                // Сообщение об ошибкеvc
+                // Сообщение об ошибке
                 ShowErrorMessage();
             }
         }

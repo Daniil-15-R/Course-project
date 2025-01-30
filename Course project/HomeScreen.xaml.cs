@@ -69,7 +69,7 @@ namespace Course_project
         private void ParasiteButton_Click(object sender, RoutedEventArgs e)
         {
             ParasiteScreen parasiteScreen = new ParasiteScreen();
-
+            parasiteScreen.Show();
             this.Close();
         }
         private void WalkingButton_Click(object sender, RoutedEventArgs e)
