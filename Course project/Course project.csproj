@@ -76,8 +76,17 @@
     <Compile Include="EmployeesScreen.xaml.cs">
       <DependentUpon>EmployeesScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EventScreen.xaml.cs">
+      <DependentUpon>EventScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FinanceScreen.xaml.cs">
+      <DependentUpon>FinanceScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FoodProducts.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FoodScreen.xaml.cs">
+      <DependentUpon>FoodScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Medicines.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -89,6 +98,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NeedScreen.xaml.cs">
+      <DependentUpon>NeedScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ParasiteScreen.xaml.cs">
+      <DependentUpon>ParasiteScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="ParasiteTreatmentSchedule.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -108,14 +123,32 @@
     <Compile Include="VaccinationSchedule.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="VacinationScreen.xaml.cs">
+      <DependentUpon>VacinationScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WalkingSchedule.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WalkingScreen.xaml.cs">
+      <DependentUpon>WalkingScreen.xaml</DependentUpon>
     </Compile>
     <Page Include="DogScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EmployeesScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EventScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FinanceScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FoodScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,6 +179,22 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MedicineScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NeedScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ParasiteScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VacinationScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WalkingScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

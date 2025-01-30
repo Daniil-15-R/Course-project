@@ -35,6 +35,30 @@ namespace Course_project
             employeesScreen.Show(); // Открывает новое окно
             this.Close(); // Закрывает текущее окно, если это необходимо
         }
+        private void VacinButton_Click(object sender, RoutedEventArgs e)
+        {
+            VacinationScreen vacinationScreen = new VacinationScreen();
+            vacinationScreen.Show();
+            this.Close();
+        }
+        private void ParasiteButton_Click(object sender, RoutedEventArgs e)
+        {
+            ParasiteScreen parasiteScreen = new ParasiteScreen();
+
+            this.Close();
+        }
+        private void WalkingButton_Click(object sender, RoutedEventArgs e)
+        {
+            WalkingScreen walkingScreen = new WalkingScreen();
+            walkingScreen.Show();
+            this.Close();
+        }
+        private void EventButton_Click(object sender, RoutedEventArgs e)
+        {
+            EventScreen eventScreen = new EventScreen();
+            eventScreen.Show();
+            this.Close();
+        }
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();

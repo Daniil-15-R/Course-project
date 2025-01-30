@@ -27,43 +27,43 @@
                 <TextBlock Text="Лекарства" />
             </StackPanel>
             <StackPanel Margin="5">
-                <Button>
+                <Button Click="FoodButton_Click">
                     <Image Source="C:\3 course\Course work\ikon_foot.png" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
                 <TextBlock Text="Еда для собак" />
             </StackPanel>
             <StackPanel Margin="5">
-                <Button>
+                <Button Click="NeedsButton_Click">
                     <Image Source="C:\3 course\Course work\icon_needs.jpg" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
                 <TextBlock Text="Нужды для приюта" />
             </StackPanel>
             <StackPanel Margin="5">
-                <Button>
+                <Button Click="FinanceButton_Click">
                     <Image Source="C:\3 course\Course work\icon_finance.jpg" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
                 <TextBlock Text="Финансовый учет" />
             </StackPanel>
             <StackPanel Margin="5">
-                <Button>
+                <Button Click="VacinButton_Click">
                     <Image Source="C:\3 course\Course work\icon_vaccination.png" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
                 <TextBlock Text="График вакцинаций" />
             </StackPanel>
             <StackPanel Margin="5">
-                <Button>
+                <Button Click="ParasiteButton_Click">
                     <Image Source="C:\3 course\Course work\icon_parasite.png" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
                 <TextBlock Text="Обработка от паразитов" />
             </StackPanel>
             <StackPanel Margin="5">
-                <Button>
+                <Button Click="WalkingButton_Click">
                     <Image Source="C:\3 course\Course work\icon_walking.jpg" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
                 <TextBlock Text="График выгулов" />
             </StackPanel>
             <StackPanel Margin="5">
-                <Button>
+                <Button Click="EventButton_Click">
                     <Image Source="C:\3 course\Course work\icon_event.jpg" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
                 <TextBlock Text="График мероприятий" />

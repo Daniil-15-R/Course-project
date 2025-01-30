@@ -63,7 +63,7 @@ namespace Course_project
             }
             else
             {
-                // Сообщение об ошибке
+                // Сообщение об ошибкеvc
                 ShowErrorMessage();
             }
         }

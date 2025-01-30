@@ -42,6 +42,48 @@ namespace Course_project
             medicineScreen.Show(); // Открывает новое окно
             this.Close(); // Закрывает текущее окно, если это необходимо
         }
+        private void FoodButton_Click(object sender, RoutedEventArgs e)
+        {
+            FoodScreen foodScreen = new FoodScreen();
+            foodScreen.Show();
+            this.Close();
+        }
+        private void NeedsButton_Click(object sender, RoutedEventArgs e)
+        {
+            NeedScreen needScreen = new NeedScreen();
+            needScreen.Show();
+            this.Close();
+        }
+        private void FinanceButton_Click(object sender, RoutedEventArgs e)
+        {
+            FinanceScreen financeScreen = new FinanceScreen();
+            financeScreen.Show();
+            this.Close();
+        }
+        private void VacinButton_Click(object sender, RoutedEventArgs e)
+        {
+            VacinationScreen vacinationScreen = new VacinationScreen();
+            vacinationScreen.Show();
+            this.Close();
+        }
+        private void ParasiteButton_Click(object sender, RoutedEventArgs e)
+        {
+            ParasiteScreen parasiteScreen = new ParasiteScreen();
+
+            this.Close();
+        }
+        private void WalkingButton_Click(object sender, RoutedEventArgs e)
+        {
+            WalkingScreen walkingScreen = new WalkingScreen();
+            walkingScreen.Show();
+            this.Close();
+        }
+        private void EventButton_Click(object sender, RoutedEventArgs e)
+        {
+            EventScreen eventScreen = new EventScreen();
+            eventScreen.Show();
+            this.Close();
+        }
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();

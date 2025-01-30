@@ -21,25 +21,25 @@
                 <TextBlock Text="2.Сотрудники" />
             </StackPanel>
             <StackPanel Margin="5">
-                <Button>
+                <Button Click="VacinButton_Click">
                     <Image Source="C:\3 course\Course work\icon_vaccination.png" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
                 <TextBlock Text="3. График вакцинаций" />
             </StackPanel>
             <StackPanel Margin="5">
-                <Button>
+                <Button Click="ParasiteButton_Click">
                     <Image Source="C:\3 course\Course work\icon_parasite.png" Width="127" Height="50" Stretch="Uniform" />
                 </Button>
                 <TextBlock Text="4. Обработка от паразитов" />
             </StackPanel>
             <StackPanel Margin="5">
-                <Button>
+                <Button Click="WalkingButton_Click">
                     <Image Source="C:\3 course\Course work\icon_walking.jpg" Width="135" Height="50" Stretch="Uniform" />
                 </Button>
                 <TextBlock Text="5. График выгулов" />
             </StackPanel>
             <StackPanel Margin="5">
-                <Button>
+                <Button Click="EventButton_Click">
                     <Image Source="C:\3 course\Course work\icon_event.jpg" Width="129" Height="50" Stretch="Uniform" />
                 </Button>
                 <TextBlock Text="6. График мероприятий" />
