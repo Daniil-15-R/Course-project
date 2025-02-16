@@ -25,8 +25,7 @@ namespace Course_project
         }
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            HomeScreen homeScreen = new HomeScreen();
-            homeScreen.Show();
+            // Здесь тоже нужно будет сохранить или получить текущего пользователя, если нужно
             this.Close();
         }
     }

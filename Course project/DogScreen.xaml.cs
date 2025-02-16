@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Linq;
+using System.Windows;
 
 namespace Course_project
 {
@@ -11,22 +13,42 @@ namespace Course_project
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            // Проверяем, какую роль пользователя мы сохранили
-            if (App.Current.Properties["UserRole"] != null)
+            var currentUser = GetCurrentUser(); // Получение текущего пользователя
+
+            if (currentUser != null)
             {
-                string userRole = App.Current.Properties["UserRole"].ToString();
-                if (userRole == "admin")
+                string userRole = currentUser.role; // Получение роли текущего пользователя
+
+                // Navigate based on user role
+                if (userRole.Equals("Admin", StringComparison.OrdinalIgnoreCase))
                 {
-                    HomeScreen homeScreen = new HomeScreen();
+                    HomeScreen homeScreen = new HomeScreen(currentUser);
                     homeScreen.Show();
                 }
-                else if (userRole == "user")
+                else // For all other roles
                 {
-                    HomeScreen2 homeScreen2 = new HomeScreen2();
+                    HomeScreen2 homeScreen2 = new HomeScreen2(currentUser);
                     homeScreen2.Show();
                 }
             }
+            else
+            {
+                MessageBox.Show("Пользователь не найден.");
+            }
+
             this.Close(); // Закрыть текущее окно
+        }
+
+        private Users GetCurrentUser()
+        {
+            string username = App.Current.Properties["Username"]?.ToString();
+            string password = App.Current.Properties["Password"]?.ToString();
+
+            using (var context = new Entities1())
+            {
+                return context.Users
+                              .FirstOrDefault(u => u.Login == username && u.password == password);
+            }
         }
     }
 }
