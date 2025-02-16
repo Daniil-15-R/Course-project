@@ -1,5 +1,10 @@
-﻿using System.Windows;
+﻿using System;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace Course_project
 {
@@ -18,78 +23,144 @@ namespace Course_project
                 switch (selectedLanguage)
                 {
                     case "Русский":
-                        TextBlockTitle.Text = "Авторизация";
-                        TextBlockLogin.Text = "Логин:";
-                        TextBlockPassword.Text = "Пароль:";
-                        TextBlocklanguage.Text = "Выберите язык";
-                        LoginButton.Content = "Войти"; // Изменение текста кнопки
+                        SetLanguageToRussian();
                         break;
                     case "English":
-                        TextBlockTitle.Text = "Authorization";
-                        TextBlockLogin.Text = "Login:";
-                        TextBlockPassword.Text = "Password:";
-                        TextBlocklanguage.Text = "Select a language";
-                        LoginButton.Content = "Login"; // Изменение текста кнопки
+                        SetLanguageToEnglish();
                         break;
                     case "Español":
-                        TextBlockTitle.Text = "Autorización";
-                        TextBlockLogin.Text = "Usuario:";
-                        TextBlockPassword.Text = "Contraseña:";
-                        TextBlocklanguage.Text = "Seleccione un idioma";
-                        LoginButton.Content = "Iniciar sesión"; // Изменение текста кнопки
+                        SetLanguageToSpanish();
                         break;
                 }
 
-                // Сброс текста сообщения об ошибках при смене языка
+                // Clear error message when changing language
                 ErrorMessageTextBlock.Text = string.Empty;
+            }
+        }
+
+        private void SetLanguageToRussian()
+        {
+            TextBlockTitle.Text = "Авторизация";
+            TextBlockLogin.Text = "Логин:";
+            TextBlockPassword.Text = "Пароль:";
+            TextBlocklanguage.Text = "Выберите язык";
+            LoginButton.Content = "Войти";
+            RegistrationButton.Content = "Регистрация";
+        }
+
+        private void SetLanguageToEnglish()
+        {
+            TextBlockTitle.Text = "Authorization";
+            TextBlockLogin.Text = "Login:";
+            TextBlockPassword.Text = "Password:";
+            TextBlocklanguage.Text = "Select a language";
+            LoginButton.Content = "Login";
+            RegistrationButton.Content = "Registration";
+        }
+
+        private void SetLanguageToSpanish()
+        {
+            TextBlockTitle.Text = "Autorización";
+            TextBlockLogin.Text = "Usuario:";
+            TextBlockPassword.Text = "Contraseña:";
+            TextBlocklanguage.Text = "Seleccione un idioma";
+            LoginButton.Content = "Iniciar sesión";
+            RegistrationButton.Content = "Registro";// Change button text
+        }
+
+        private string GetHash(string password)
+        {
+            using (var hash = SHA1.Create())
+            {
+                return string.Concat(hash.ComputeHash(Encoding.UTF8.GetBytes(password)).Select(x => x.ToString("X2")));
             }
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            // Проверка логина и пароля
-            if (LoginTextBox.Text == "admin" && PasswordTextBox.Password == "admin")
+            if (string.IsNullOrEmpty(LoginTextBox.Text) || string.IsNullOrEmpty(PasswordTextBox.Password))
             {
-                App.Current.Properties["UserRole"] = "admin"; // Сохранение роли пользователя
-                HomeScreen homeScreen = new HomeScreen();
-                homeScreen.Show();
-                this.Close(); // Закрыть текущее окно
+                ShowErrorMessage("Введите логин и пароль!");
+                return;
             }
-            else if (LoginTextBox.Text == "user" && PasswordTextBox.Password == "user")
+
+            string plainPassword = PasswordTextBox.Password; // Оригинальный пароль
+            string hashedPassword = GetHash(plainPassword); // Хэшированный пароль
+
+            try
             {
-                App.Current.Properties["UserRole"] = "user"; // Сохранение роли пользователя
-                HomeScreen2 homeScreen2 = new HomeScreen2();
-                homeScreen2.Show();
-                this.Close(); // Закрыть текущее окно
+                using (var db = new Entities1())
+                {
+                    // Попытка найти пользователя с оригинальным паролем
+                    var user = db.Users.AsNoTracking().FirstOrDefault(u =>
+                        u.Login == LoginTextBox.Text && u.password == plainPassword);
+
+                    if (user == null)
+                    {
+                        // Если не найден, попытаемся найти с хешированным паролем
+                        user = db.Users.AsNoTracking().FirstOrDefault(u =>
+                            u.Login == LoginTextBox.Text && u.password == hashedPassword);
+                    }
+
+                    if (user == null)
+                    {
+                        ShowErrorMessage("Пользователь с такими данными не найден!");
+                        return;
+                    }
+
+                    // Сохранение роли пользователя в свойствах приложения
+                    App.Current.Properties["UserRole"] = user.role;
+
+                    // Навигация в зависимости от роли пользователя
+                    if (user.role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+                    {
+                        var adminWindow = new HomeScreen(user);
+                        adminWindow.Show();
+                    }
+                    else // Для всех остальных ролей (User, Employee, Volunteer)
+                    {
+                        var userWindow = new HomeScreen2(user);
+                        userWindow.Show();
+                    }
+
+                    this.Close(); // Закрыть текущее окно
+                }
             }
-            else
+            catch (Exception ex)
             {
-                // Сообщение об ошибке
-                ShowErrorMessage();
+                ShowErrorMessage($"Произошла ошибка: {ex.Message}");
             }
         }
 
-        private void ShowErrorMessage()
+        
+
+
+        private void ShowErrorMessage(string message)
         {
-            // Получение текущего языка из ComboBox
             string selectedLanguage = (LanguageComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
             string errorMessage = string.Empty;
 
-            // Сообщение об ошибке в зависимости от выбранного языка
             switch (selectedLanguage)
             {
                 case "Русский":
-                    errorMessage = "Неверный логин или пароль!";
+                    errorMessage = message;
                     break;
                 case "English":
-                    errorMessage = "Incorrect login or password!";
+                    errorMessage = "Error: " + message;
                     break;
                 case "Español":
-                    errorMessage = "¡Usuario o contraseña incorrectos!";
+                    errorMessage = "Error: " + message;
                     break;
             }
 
             MessageBox.Show(errorMessage, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void RegistrationButton_Click(object sender, RoutedEventArgs e)
+        {
+            RegistrationScreen screen = new RegistrationScreen();
+            screen.Show();
+            this.Close();
         }
     }
 }

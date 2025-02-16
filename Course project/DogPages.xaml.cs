@@ -10,24 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Course_project
 {
     /// <summary>
-    /// Логика взаимодействия для NeedScreen.xaml
+    /// Логика взаимодействия для DogPages.xaml
     /// </summary>
-    public partial class NeedScreen : Window
+    public partial class DogPages : Page
     {
-        public NeedScreen()
+        public DogPages()
         {
             InitializeComponent();
-        }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            // Здесь тоже нужно будет сохранить или получить текущего пользователя, если нужно
-            this.Close();
         }
     }
 }
