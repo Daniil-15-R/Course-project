@@ -145,6 +145,10 @@
     <Compile Include="WalkingScreen.xaml.cs">
       <DependentUpon>WalkingScreen.xaml</DependentUpon>
     </Compile>
+    <Page Include="Dictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DogScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

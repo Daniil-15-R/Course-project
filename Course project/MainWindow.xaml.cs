@@ -43,7 +43,8 @@ namespace Course_project
             TextBlockLogin.Text = "Логин:";
             TextBlockPassword.Text = "Пароль:";
             TextBlocklanguage.Text = "Выберите язык";
-            LoginButton.Content = "Войти"; // Change button text
+            LoginButton.Content = "Войти";
+            RegistrationButton.Content = "Регистрация";// Change button text
         }
 
         private void SetLanguageToEnglish()
@@ -52,7 +53,8 @@ namespace Course_project
             TextBlockLogin.Text = "Login:";
             TextBlockPassword.Text = "Password:";
             TextBlocklanguage.Text = "Select a language";
-            LoginButton.Content = "Login"; // Change button text
+            LoginButton.Content = "Login";
+            RegistrationButton.Content = "Registration";// Change button text
         }
 
         private void SetLanguageToSpanish()
@@ -61,7 +63,8 @@ namespace Course_project
             TextBlockLogin.Text = "Usuario:";
             TextBlockPassword.Text = "Contraseña:";
             TextBlocklanguage.Text = "Seleccione un idioma";
-            LoginButton.Content = "Iniciar sesión"; // Change button text
+            LoginButton.Content = "Iniciar sesión";
+            RegistrationButton.Content = "Registro";// Change button text
         }
 
         private string GetHash(string password)
