@@ -95,8 +95,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="role" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="password" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="VaccinationSchedule">
           <Key>
@@ -312,8 +311,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="role" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="VaccinationSchedule">
           <Key>
@@ -395,7 +393,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounting" EntityType="Self.Accounting" />
           <EntitySet Name="Dogs" EntityType="Self.Dogs" />
           <EntitySet Name="FoodProducts" EntityType="Self.FoodProducts" />
@@ -433,7 +431,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище course_workModelContainer" CdmEntityContainer="Entities1">
+        <EntityContainerMapping StorageEntityContainer="Хранилище course_workModelContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="Accounting">
             <EntityTypeMapping TypeName="course_workModel.Accounting">
               <MappingFragment StoreEntitySet="Accounting">
@@ -532,7 +530,6 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="role" ColumnName="role" />
                 <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
