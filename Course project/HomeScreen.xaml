@@ -12,7 +12,7 @@
                 <Button Click="DogButton_Click">
                     <Image Source="Images\icon_dog.jpg" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
-                <TextBlock Text="Собаки" />
+                <TextBlock Text="1.Собаки" />
             </StackPanel>
             <StackPanel Margin="5">
                 <Button Click="EmployeesButton_Click">
