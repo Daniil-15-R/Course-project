@@ -23,7 +23,7 @@ namespace Course_project
             this.Close(); // Закрывает текущее окно
         }
 
-        private void EmployeesButton_Click(object sender, RoutedEventArgs e)
+        /*private void EmployeesButton_Click(object sender, RoutedEventArgs e)
         {
             EmployeesScreen employeesScreen = new EmployeesScreen();
             employeesScreen.Show();
@@ -84,7 +84,7 @@ namespace Course_project
             EventScreen eventScreen = new EventScreen();
             eventScreen.Show();
             this.Close();
-        }
+        }*/
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
