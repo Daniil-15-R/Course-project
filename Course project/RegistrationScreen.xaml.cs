@@ -14,6 +14,46 @@ namespace Course_project
         public RegistrationScreen()
         {
             InitializeComponent();
+            UpdateLanguage(); // Обновляем язык при загрузке
+        }
+
+        public void UpdateLanguage()
+        {
+            string selectedLanguage = LanguageManager.CurrentLanguage;
+
+            switch (selectedLanguage)
+            {
+                case "Русский":
+                    TextBlockTitle.Text = "Регистрация"; // Заголовок
+                    TextBlockLog.Text = "Логин:"; // Метка для логина
+                    TextBlockPas.Text = "Пароль:"; // Метка для пароля
+                    TextBlockEmail.Text = "Email:"; // Метка для email
+                    TextBlockPhone.Text = "Телефон:"; // Метка для телефона
+                    RegisterButton.Content = "Зарегистрироваться"; // Кнопка регистрации
+                    BackButton.Content = "Назад"; // Кнопка назад
+                                                  // Добавьте остальные поля и метки
+                    break;
+
+                case "English":
+                    TextBlockTitle.Text = "Registration"; // Заголовок
+                    TextBlockLog.Text = "Login:"; // Метка для логина
+                    TextBlockPas.Text = "Password:"; // Метка для пароля
+                    TextBlockEmail.Text = "Email:"; // Метка для email
+                    TextBlockPhone.Text = "Phone:"; // Метка для телефона
+                    RegisterButton.Content = "Register"; // Кнопка регистрации
+                    BackButton.Content = "Back"; // Кнопка назад
+                    break;
+
+                case "Español":
+                    TextBlockTitle.Text = "Registro"; // Заголовок
+                    TextBlockLog.Text = "Usuario:"; // Метка для логина
+                    TextBlockPas.Text = "Contraseña:"; // Метка для пароля
+                    TextBlockEmail.Text = "Correo electrónico:"; // Метка для email
+                    TextBlockPhone.Text = "Teléfono:"; // Метка для телефона
+                    RegisterButton.Content = "Registrarse"; // Кнопка регистрации
+                    BackButton.Content = "Atrás"; // Кнопка назад
+                    break;
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -23,32 +63,13 @@ namespace Course_project
             this.Close();
         }
 
-        // Обработчик для чекбокса полной регистрации
-        private void FullRegistrationCheckbox_Checked(object sender, RoutedEventArgs e)
-        {
-            DataPicker.IsEnabled = true;
-            TextSNILS.IsEnabled = true;
-            TextPassport.IsEnabled = true;
-            TextCar.IsEnabled = true;
-            TextAddress.IsEnabled = true;
-        }
-
-        private void FullRegistrationCheckbox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            DataPicker.IsEnabled = false;
-            TextSNILS.IsEnabled = false;
-            TextPassport.IsEnabled = false;
-            TextCar.IsEnabled = false;
-            TextAddress.IsEnabled = false;
-        }
-
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             if (LogText.Text.Length > 0)
             {
                 using (var db = new Entities1())
                 {
-                    var user = db.Users.AsNoTracking().FirstOrDefault(u => u.role == LogText.Text);
+                    var user = db.Users.AsNoTracking().FirstOrDefault(u => u.Login == LogText.Text);
                     if (user != null)
                     {
                         MessageBox.Show("Пользователь с таким логином уже существует!");
@@ -85,7 +106,7 @@ namespace Course_project
                     {
                         Login = LogText.Text,
                         password = GetHash(PasswordTextBox.Password),
-                        role = RoleText.Text,
+                        role = ((ComboBoxItem)RoleComboBox.SelectedItem).Content.ToString(), // Получаем выбранную роль
                     };
                     db.Users.Add(userObject);
                     db.SaveChanges();
@@ -93,26 +114,22 @@ namespace Course_project
                     // Получаем id только что добавленного пользователя
                     int userId = userObject.id;
 
-                    // Сохраняем данные в таблице ShelterEmployees, если чекбокс активен
-                    if (FullRegistrationCheckbox.IsChecked == true)
+                    ShelterEmployees shelterEmployee = new ShelterEmployees
                     {
-                        ShelterEmployees shelterEmployee = new ShelterEmployees
-                        {
-                            FIO = NameText.Text + " " + Surnametext.Text,
-                            email = EmailText.Text,
-                            phone = PhoneText.Text,
-                            SNILS = TextSNILS.Text,
-                            date_of_birth = DataPicker.SelectedDate ?? DateTime.Now, // Значение по умолчанию
-                            state_number_of_car = TextCar.Text,
-                            place_of_registration = TextAddress.Text,
-                            actual_address = TextAddress.Text,
-                            passport = TextPassport.Text,
-                            id = userId
-                        };
-                        db.ShelterEmployees.Add(shelterEmployee);
-                    }
-                    db.SaveChanges();
+                        FIO = NameText.Text + " " + Surnametext.Text,
+                        email = EmailText.Text,
+                        phone = PhoneText.Text,
+                        SNILS = TextSNILS.Text,
+                        date_of_birth = DataPicker.SelectedDate ?? DateTime.Now, // Значение по умолчанию
+                        state_number_of_car = TextCar.Text,
+                        place_of_registration = TextAddress.Text,
+                        actual_address = TextAddress.Text,
+                        passport = TextPassport.Text,
+                        id = userId
+                    };
+                    db.ShelterEmployees.Add(shelterEmployee);
 
+                    db.SaveChanges();
                     MessageBox.Show("Вы успешно зарегистрировались!", "Успешно!", MessageBoxButton.OK);
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.Show();
@@ -154,7 +171,7 @@ namespace Course_project
         {
             using (var hash = SHA1.Create())
             {
-                return string.Concat(hash.ComputeHash(Encoding.UTF8.GetBytes(password)).Select(x =>x.ToString("X2")));
+                return string.Concat(hash.ComputeHash(Encoding.UTF8.GetBytes(password)).Select(x => x.ToString("X2")));
             }
         }
     }

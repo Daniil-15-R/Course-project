@@ -10,23 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Course_project
 {
     /// <summary>
-    /// Логика взаимодействия для MedicineScreen.xaml
+    /// Логика взаимодействия для VacinationPage.xaml
     /// </summary>
-    public partial class MedicineScreen : Window
+    public partial class VacinationPage : Page
     {
-        public MedicineScreen()
+        private Users _currentUser;
+        private string _userRole;
+        public VacinationPage(Users currentUser, string userRole)
         {
             InitializeComponent();
-        }
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            // Здесь тоже нужно будет сохранить или получить текущего пользователя, если нужно
-            this.Close();
+            _currentUser = currentUser;
+            _userRole = userRole; // Сохранение роли
         }
     }
 }

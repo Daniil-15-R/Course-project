@@ -10,24 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Course_project
 {
     /// <summary>
-    /// Логика взаимодействия для NeedScreen.xaml
+    /// Логика взаимодействия для ParasitePage.xaml
     /// </summary>
-    public partial class NeedScreen : Window
+    public partial class ParasitePage : Page
     {
-        public NeedScreen()
+        private Users _currentUser;
+        private string _userRole;
+        public ParasitePage(Users currentUser, string userRole)
         {
             InitializeComponent();
-        }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            // Здесь тоже нужно будет сохранить или получить текущего пользователя, если нужно
-            this.Close();
+            _currentUser = currentUser;
+            _userRole = userRole; // Сохранение роли
         }
     }
 }

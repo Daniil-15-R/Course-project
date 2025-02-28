@@ -18,44 +18,44 @@ namespace Course_project
 
         private void DogButton_Click(object sender, RoutedEventArgs e)
         {
-            DogScreen dogScreen = new DogScreen();
+           /* DogScreen dogScreen = new DogScreen();
             dogScreen.Show();
-            this.Close();
+            this.Close();*/
         }
 
         private void EmployeesButton_Click(object sender, RoutedEventArgs e)
         {
-            EmployeesScreen employeesScreen = new EmployeesScreen();
+            /*EmployeesScreen employeesScreen = new EmployeesScreen();
             employeesScreen.Show();
-            this.Close();
+            this.Close();*/
         }
 
         private void VacinButton_Click(object sender, RoutedEventArgs e)
         {
-            VacinationScreen vacinationScreen = new VacinationScreen();
+            /*VacinationScreen vacinationScreen = new VacinationScreen();
             vacinationScreen.Show();
-            this.Close();
+            this.Close();*/
         }
 
         private void ParasiteButton_Click(object sender, RoutedEventArgs e)
         {
-            ParasiteScreen parasiteScreen = new ParasiteScreen();
+            /*ParasiteScreen parasiteScreen = new ParasiteScreen();
             parasiteScreen.Show();
-            this.Close();
+            this.Close();*/
         }
 
         private void WalkingButton_Click(object sender, RoutedEventArgs e)
         {
-            WalkingScreen walkingScreen = new WalkingScreen();
+            /*WalkingScreen walkingScreen = new WalkingScreen();
             walkingScreen.Show();
-            this.Close();
+            this.Close();*/
         }
 
         private void EventButton_Click(object sender, RoutedEventArgs e)
         {
-            EventScreen eventScreen = new EventScreen();
+            /*EventScreen eventScreen = new EventScreen();
             eventScreen.Show();
-            this.Close();
+            this.Close();*/
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)

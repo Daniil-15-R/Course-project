@@ -19,6 +19,8 @@ namespace Course_project
             if (LanguageComboBox.SelectedItem is ComboBoxItem selectedItem)
             {
                 string selectedLanguage = selectedItem.Content.ToString();
+                LanguageManager.SetLanguage(selectedLanguage); // Устанавливаем текущий язык
+
                 switch (selectedLanguage)
                 {
                     case "Русский":
@@ -32,7 +34,7 @@ namespace Course_project
                         break;
                 }
 
-                // Clear error message when changing language
+                // Очистка сообщения об ошибке при изменении языка
                 ErrorMessageTextBlock.Text = string.Empty;
             }
         }

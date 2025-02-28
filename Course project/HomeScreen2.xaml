@@ -13,7 +13,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid Style="{StaticResource MyCustomGrig}">
+    <Grid Style="{StaticResource MyCustomGrid}">
         <UniformGrid Rows="3" Columns="3" VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel Margin="5">
                 <Button Style="{StaticResource MyCustomButton}" Click="DogButton_Click">

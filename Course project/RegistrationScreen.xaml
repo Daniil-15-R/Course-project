@@ -6,14 +6,7 @@
         xmlns:local="clr-namespace:Course_project"
         mc:Ignorable="d"
         Title="RegistrationScreen" Height="450" Width="800">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Dictionary.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
-    <Grid Style="{StaticResource MyCustomGrig}">
+    <Grid Style="{StaticResource MyCustomGrid}">
         <Grid Margin="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -50,10 +43,14 @@
             <TextBox Style="{StaticResource MyCustomTextBox}" Name="LogText" Width="300" Grid.Row="3" Grid.Column="1"/>
 
             <TextBlock Style="{StaticResource MyCustomTextBlock}" x:Name="TextBlockRole" Text="Роль: " HorizontalAlignment="Left" Grid.Row="4"/>
-            <TextBox Style="{StaticResource MyCustomTextBox}" Name="RoleText" Width="300" Grid.Row="4" Grid.Column="1"/>
+            <ComboBox Style="{StaticResource MyCustomComboBox}" Name="RoleComboBox" Width="300" Grid.Row="4" Grid.Column="1">
+                <ComboBoxItem Content="Admin"/>
+                <ComboBoxItem Content="Employee"/>
+                <ComboBoxItem Content="Volunteer"/>
+            </ComboBox>
 
             <TextBlock Style="{StaticResource MyCustomTextBlock}" x:Name="TextBlockPas" Text="Пароль: " HorizontalAlignment="Left" Grid.Row="5"/>
-            <PasswordBox Name="PasswordTextBox" Width="300" Grid.Row="5" Grid.Column="1"/>
+            <PasswordBox Style="{StaticResource MyCustomPassword}" Name="PasswordTextBox" Width="300" Grid.Row="5" Grid.Column="1"/>
 
             <TextBlock Style="{StaticResource MyCustomTextBlock}" x:Name="TextBlockEmail" Text="Email: " HorizontalAlignment="Left" Grid.Row="6"/>
             <TextBox Style="{StaticResource MyCustomTextBox}" Name="EmailText" Width="300" Grid.Row="6" Grid.Column="1"/>
@@ -62,29 +59,21 @@
             <TextBox Style="{StaticResource MyCustomTextBox}" Name="PhoneText" Width="300" Grid.Row="7" Grid.Column="1"/>
 
             <TextBlock Style="{StaticResource MyCustomTextBlock}" x:Name="TextBlockData" Text="Дата рождения: " HorizontalAlignment="Left" Grid.Row="8"/>
-            <DatePicker Name="DataPicker" Width="300" Grid.Row="8" Grid.Column="1" IsEnabled="False"/>
+            <DatePicker Name="DataPicker" Width="300" Grid.Row="8" Grid.Column="1"/>
 
             <TextBlock Style="{StaticResource MyCustomTextBlock}" x:Name="TextBlockSNILS" Text="Паспорт: " HorizontalAlignment="Left" Grid.Row="9"/>
-            <TextBox Style="{StaticResource MyCustomTextBox}" Name="TextSNILS" Width="300" Grid.Row="9" Grid.Column="1" IsEnabled="False"/>
+            <TextBox Style="{StaticResource MyCustomTextBox}" Name="TextSNILS" Width="300" Grid.Row="9" Grid.Column="1"/>
 
             <TextBlock Style="{StaticResource MyCustomTextBlock}" x:Name="TextBlockPassport" Text="СНИЛС: " HorizontalAlignment="Left" Grid.Row="10"/>
-            <TextBox Style="{StaticResource MyCustomTextBox}" Name="TextPassport" Width="300" Grid.Row="10" Grid.Column="1" IsEnabled="False"/>
+            <TextBox Style="{StaticResource MyCustomTextBox}" Name="TextPassport" Width="300" Grid.Row="10" Grid.Column="1"/>
 
             <TextBlock Style="{StaticResource MyCustomTextBlock}" x:Name="TextBlockCar" Text="Номерной знак автомобиля: " HorizontalAlignment="Left" Grid.Row="11"/>
-            <TextBox Style="{StaticResource MyCustomTextBox}" Name="TextCar" Width="300" Grid.Row="11" Grid.Column="1" IsEnabled="False"/>
+            <TextBox Style="{StaticResource MyCustomTextBox}" Name="TextCar" Width="300" Grid.Row="11" Grid.Column="1"/>
 
             <TextBlock Style="{StaticResource MyCustomTextBlock}" x:Name="TextBlockAddress" Text="Адрес проживания: " HorizontalAlignment="Left" Grid.Row="12"/>
-            <TextBox Style="{StaticResource MyCustomTextBox}" Name="TextAddress" Width="300" Grid.Row="12" Grid.Column="1" IsEnabled="False"/>
+            <TextBox Style="{StaticResource MyCustomTextBox}" Name="TextAddress" Width="300" Grid.Row="12" Grid.Column="1"/>
 
-            <!-- Чек бокс для полной регистрации -->
-            <CheckBox Style="{StaticResource MyCustomCheckBox}" x:Name="FullRegistrationCheckbox" Content="Полная регистрация" 
-                      Grid.Row="13" Grid.ColumnSpan="2" HorizontalAlignment="Center" 
-                      Margin="0,20,0,0"
-                      ToolTip="Если вы хотите зарегистрироваться, чтобы работать в приюте, активируйте данную кнопку"
-                      Checked="FullRegistrationCheckbox_Checked" Unchecked="FullRegistrationCheckbox_Unchecked"/>
-
-            <!-- StackPanel для кнопок -->
-            <StackPanel Orientation="Horizontal" Grid.Row="14" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <StackPanel Style="{StaticResource MyCustomStack2}" Orientation="Horizontal" Grid.Row="14" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,20,0,0">
                 <Button Style="{StaticResource MyCustomButton}" x:Name="RegisterButton" Content="Зарегистрировать" Width="100" Margin="0,0,10,0" Click="RegisterButton_Click"/>
                 <Button Style="{StaticResource MyCustomButton}" x:Name="BackButton" Content="Назад" Width="100" Click="BackButton_Click"/>
             </StackPanel>
