@@ -27,6 +27,41 @@ namespace Course_project
             InitializeComponent();
             _currentUser = currentUser;
             _userRole = userRole; // Сохранение роли
+
+            var walkList = Entities1.GetContext().WalkingSchedule.ToList();
+            DataGridWalk.ItemsSource = walkList;
+        }
+
+        private void ButtonEdit_OnClick(object sender, RoutedEventArgs e)
+        {
+            // Логика для редактирования выбранной собаки
+        }
+
+        private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
+        {
+            // Навигация на страницу для добавления новой собаки
+
+        }
+
+        private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
+        {
+            // Логика для удаления выбранной собаки
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Проверяем, есть ли предыдущие страницы в стеке навигации
+            if (NavigationService != null && NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
+            else
+            {
+                // Если нет страниц для возврата, переходим на HomeScreen
+                HomeScreen homeScreen = new HomeScreen(_currentUser);
+                homeScreen.Show();
+                Window.GetWindow(this)?.Close();
+            }
         }
     }
 }

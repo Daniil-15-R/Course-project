@@ -9,6 +9,42 @@
       Title="EmployeesPage">
 
     <Grid>
-        <Button Content="Назад" Click="BackButton_Click" Width="100" Height="30" Margin="553,275,147,145"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="377*" />
+            <RowDefinition Height="73*" />
+        </Grid.RowDefinitions>
+
+        <DataGrid Style="{StaticResource MyCustomDataGrid}" Grid.Row="0" Name="DataGridEmployees" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ФИО" Binding="{Binding FIO}" />
+                <DataGridTextColumn Header="Паспорт" Binding="{Binding passport}" />
+                <DataGridTextColumn Header="Телефон" Binding="{Binding phone}" />
+                <DataGridTextColumn Header="Email" Binding="{Binding email}" />
+                <DataGridTextColumn Header="Место регистрации" Binding="{Binding place_of_registration}" />
+                <DataGridTextColumn Header="Фактический адрес" Binding="{Binding actual_address }" />
+                <DataGridTextColumn Header="Дата рождения" Binding="{Binding date_of_birth }" />
+                <DataGridTextColumn Header="СНИЛС" Binding="{Binding SNILS}" />
+                <DataGridTextColumn Header="Номерной знак авто" Binding="{Binding state_number_of_car }" />
+                <DataGridTemplateColumn Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="ButtonEdit" Content="Редактировать" 
+                                Click="ButtonEdit_OnClick" Background="White" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="1" Name="ButtonAdd" Content="Добавить" 
+            HorizontalAlignment="Left" Click="ButtonAdd_OnClick" 
+            Width="133" Background="White" />
+        <Button Grid.Row="1" Name="ButtonDel" Content="Удалить" 
+            HorizontalAlignment="Right" Click="ButtonDel_OnClick" 
+            Width="133" Background="White" />
+        <Button Grid.Row="1" Content="Назад" Click="BackButton_Click" 
+            HorizontalAlignment="Center" Width="100" Height="30" />
+        <Button Style="{StaticResource ArrowButtonLeftStyle}" Grid.Row="1" Click="LastButton_Cick" HorizontalAlignment="Left" Width="100" Height="20"/>
+        <Button Style="{StaticResource ArrowButtonStyle}" Grid.Row="1" Click="NextButton_Cick" HorizontalAlignment="Right" Width="100" Height="20"/>
     </Grid>
 </Page>

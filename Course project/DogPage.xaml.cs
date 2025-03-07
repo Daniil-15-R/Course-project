@@ -18,7 +18,6 @@ namespace Course_project
             InitializeComponent();
             _currentUser = currentUser;
             _userRole = userRole; // Сохранение роли
-            MessageBox.Show("Конструктор DogPage выполнен.");
 
             var dogsList = Entities1.GetContext().Dogs.ToList();
             DataGridDogs.ItemsSource = dogsList;
@@ -54,6 +53,11 @@ namespace Course_project
                 homeScreen.Show();
                 Window.GetWindow(this)?.Close();
             }
+        }
+        private void NextButton_Cick(object sender, RoutedEventArgs e)
+        {
+            EmployeesPage employeesPage = new EmployeesPage(_currentUser, _userRole);
+            NavigationService.Navigate(employeesPage);
         }
     }
 }

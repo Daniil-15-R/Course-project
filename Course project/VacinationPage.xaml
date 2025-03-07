@@ -9,6 +9,35 @@
       Title="VacinationPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="377*" />
+            <RowDefinition Height="73*" />
+        </Grid.RowDefinitions>
+
+        <DataGrid Style="{StaticResource MyCustomDataGrid}" Grid.Row="0" Name="DataGridVac" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding id}" />
+                <DataGridTextColumn Header="Название" Binding="{Binding title}" />
+                <DataGridTextColumn Header="Id собаки" Binding="{Binding dog_id}" />
+                <DataGridTextColumn Header="Дата вакцинации" Binding="{Binding date}" />
+                <DataGridTemplateColumn Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="ButtonEdit" Content="Редактировать" 
+                                Click="ButtonEdit_OnClick" Background="White" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="1" Name="ButtonAdd" Content="Добавить" 
+            HorizontalAlignment="Left" Click="ButtonAdd_OnClick" 
+            Width="133" Background="White" />
+        <Button Grid.Row="1" Name="ButtonDel" Content="Удалить" 
+            HorizontalAlignment="Right" Click="ButtonDel_OnClick" 
+            Width="133" Background="White" />
+        <Button Grid.Row="1" Content="Назад" Click="BackButton_Click" 
+            HorizontalAlignment="Center" Width="100" Height="30" />
     </Grid>
 </Page>
