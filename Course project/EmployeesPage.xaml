@@ -36,15 +36,15 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Grid.Row="1" Name="ButtonAdd" Content="Добавить" 
+        <Button Style="{StaticResource MyCustomButton}" Grid.Row="1" Name="ButtonAdd" Content="Добавить" 
             HorizontalAlignment="Left" Click="ButtonAdd_OnClick" 
-            Width="133" Background="White" />
-        <Button Grid.Row="1" Name="ButtonDel" Content="Удалить" 
+            Width="133" />
+        <Button Style="{StaticResource MyCustomButton}" Grid.Row="1" Name="ButtonDel" Content="Удалить" 
             HorizontalAlignment="Right" Click="ButtonDel_OnClick" 
-            Width="133" Background="White" />
-        <Button Grid.Row="1" Content="Назад" Click="BackButton_Click" 
+            Width="133" />
+        <Button Style="{StaticResource MyCustomButton}" Grid.Row="1" Content="Назад" Click="BackButton_Click" 
             HorizontalAlignment="Center" Width="100" Height="30" />
-        <Button Style="{StaticResource ArrowButtonLeftStyle}" Grid.Row="1" Click="LastButton_Cick" HorizontalAlignment="Left" Width="100" Height="20"/>
-        <Button Style="{StaticResource ArrowButtonStyle}" Grid.Row="1" Click="NextButton_Cick" HorizontalAlignment="Right" Width="100" Height="20"/>
+        <Button Style="{StaticResource ArrowButtonLeftStyle}" Grid.Row="1" Click="LastButton_Cick" HorizontalAlignment="Left" Width="100" Height="20" Margin="133,27,0,26"/>
+        <Button Style="{StaticResource ArrowButtonStyle}" Grid.Row="1" Click="NextButton_Cick" HorizontalAlignment="Left" Width="100" Height="20" Margin="567,27,0,26"/>
     </Grid>
 </Page>

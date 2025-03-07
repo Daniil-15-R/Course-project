@@ -39,6 +39,6 @@
                 Width="133" />
         <Button Style="{StaticResource MyCustomButton}" Grid.Row="1" Content="Назад" Click="BackButton_Click" 
                 HorizontalAlignment="Center" Width="100" Height="30" />
-        <Button Style="{StaticResource ArrowButtonStyle}" Grid.Row="1" Click="NextButton_Cick" HorizontalAlignment="Right" Width="100" Height="20" Margin="567,27,0,26"/>
+        <Button Style="{StaticResource ArrowButtonStyle}" Grid.Row="1" Click="NextButton_Cick" HorizontalAlignment="Left" Width="100" Height="20" Margin="567,27,0,26"/>
     </Grid>
 </Page>
