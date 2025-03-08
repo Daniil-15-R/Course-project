@@ -25,10 +25,18 @@ namespace Course_project
             {
                 case "Русский":
                     TextBlockTitle.Text = "Регистрация"; // Заголовок
+                    TextBlockLogin.Text = "Имя";
+                    TextBlockSurname.Text = "Фамилия";
                     TextBlockLog.Text = "Логин:"; // Метка для логина
+                    TextBlockRole.Text = "Роль";
                     TextBlockPas.Text = "Пароль:"; // Метка для пароля
                     TextBlockEmail.Text = "Email:"; // Метка для email
                     TextBlockPhone.Text = "Телефон:"; // Метка для телефона
+                    TextBlockData.Text = "Дата рождения";
+                    TextBlockSNILS.Text = "СНИЛС";
+                    TextBlockPassport.Text = "Паспорт";
+                    TextBlockCar.Text = "Номерной знак";
+                    TextBlockAddress.Text = "Адрес проживания";
                     RegisterButton.Content = "Зарегистрироваться"; // Кнопка регистрации
                     BackButton.Content = "Назад"; // Кнопка назад
                                                   // Добавьте остальные поля и метки
@@ -36,10 +44,18 @@ namespace Course_project
 
                 case "English":
                     TextBlockTitle.Text = "Registration"; // Заголовок
+                    TextBlockLogin.Text = "Name";
+                    TextBlockSurname.Text = "Surname";
                     TextBlockLog.Text = "Login:"; // Метка для логина
+                    TextBlockRole.Text = "Role";
                     TextBlockPas.Text = "Password:"; // Метка для пароля
                     TextBlockEmail.Text = "Email:"; // Метка для email
                     TextBlockPhone.Text = "Phone:"; // Метка для телефона
+                    TextBlockData.Text = "Date of birth";
+                    TextBlockSNILS.Text = "SNILS";
+                    TextBlockPassport.Text = "Passport";
+                    TextBlockCar.Text = "Car license plate";
+                    TextBlockAddress.Text = "Residential address";
                     RegisterButton.Content = "Register"; // Кнопка регистрации
                     BackButton.Content = "Back"; // Кнопка назад
                     break;

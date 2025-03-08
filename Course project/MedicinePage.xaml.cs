@@ -49,5 +49,16 @@ namespace Course_project
                 Window.GetWindow(this)?.Close();
             }
         }
+        private void LastButton_Cick(object sender, RoutedEventArgs e)
+        {
+            EmployeesPage employeesPage = new EmployeesPage(_currentUser, _userRole);
+            NavigationService.Navigate(employeesPage);
+        }
+
+        private void NextButton_Cick(object sender, RoutedEventArgs e)
+        {
+            FoodPage foodPage = new FoodPage(_currentUser, _userRole);
+            NavigationService.Navigate(foodPage);
+        }
     }
 }

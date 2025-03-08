@@ -59,5 +59,10 @@ namespace Course_project
             EmployeesPage employeesPage = new EmployeesPage(_currentUser, _userRole);
             NavigationService.Navigate(employeesPage);
         }
+        private void LastButton_Cick(object sender, RoutedEventArgs e)
+        {
+            EventPage eventPage = new EventPage(_currentUser, _userRole);
+            NavigationService.Navigate(eventPage);
+        }
     }
 }

@@ -63,5 +63,16 @@ namespace Course_project
                 Window.GetWindow(this)?.Close();
             }
         }
+        private void LastButton_Cick(object sender, RoutedEventArgs e)
+        {
+            VacinationPage vacPage = new VacinationPage(_currentUser, _userRole);
+            NavigationService.Navigate(vacPage);
+        }
+
+        private void NextButton_Cick(object sender, RoutedEventArgs e)
+        {
+            WalkingPage walkingPage = new WalkingPage(_currentUser, _userRole);
+            NavigationService.Navigate(walkingPage);
+        }
     }
 }

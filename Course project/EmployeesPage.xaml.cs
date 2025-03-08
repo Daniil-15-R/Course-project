@@ -73,7 +73,8 @@ namespace Course_project
 
         private void NextButton_Cick(object sender, RoutedEventArgs e)
         {
-
+            MedicinePage medicinePage = new MedicinePage(_currentUser, _userRole);
+            NavigationService.Navigate(medicinePage);
         }
     }
 }

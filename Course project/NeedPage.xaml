@@ -30,13 +30,26 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Grid.Row="1" Name="ButtonAdd" Content="Добавить" 
-            HorizontalAlignment="Left" Click="ButtonAdd_OnClick" 
-            Width="133" Background="White" />
-        <Button Grid.Row="1" Name="ButtonDel" Content="Удалить" 
-            HorizontalAlignment="Right" Click="ButtonDel_OnClick" 
-            Width="133" Background="White" />
-        <Button Grid.Row="1" Content="Назад" Click="BackButton_Click" 
-            HorizontalAlignment="Center" Width="100" Height="30" />
+        <!-- Кнопка "Добавить" -->
+        <Button Style="{StaticResource MyCustomButton}" Grid.Row="1" Name="ButtonAdd" Content="Добавить" 
+    HorizontalAlignment="Left" Click="ButtonAdd_OnClick" 
+    Width="133" />
+
+        <!-- Кнопка "Last" справа от кнопки "Добавить" -->
+        <Button Style="{StaticResource ArrowButtonLeftStyle}" Grid.Row="1" Click="LastButton_Cick" 
+    HorizontalAlignment="Left" Width="100" Height="20" Margin="140,27,0,26"/>
+
+        <!-- Кнопка "Next" слева от кнопки "Удалить" -->
+        <Button Style="{StaticResource ArrowButtonStyle}" Grid.Row="1" Click="NextButton_Cick" 
+    HorizontalAlignment="Right" Width="100" Height="20" Margin="0,27,140,26"/>
+
+        <!-- Кнопка "Удалить" -->
+        <Button Style="{StaticResource MyCustomButton}" Grid.Row="1" Name="ButtonDel" Content="Удалить" 
+    HorizontalAlignment="Right" Click="ButtonDel_OnClick" 
+    Width="133" />
+
+        <!-- Кнопка "Назад" -->
+        <Button Style="{StaticResource MyCustomButton}" Grid.Row="1" Content="Назад" Click="BackButton_Click" 
+    HorizontalAlignment="Center" Width="100" Height="30" />
     </Grid>
 </Page>
