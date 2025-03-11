@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -25,18 +26,33 @@ namespace Course_project
 
         private void ButtonEdit_OnClick(object sender, RoutedEventArgs e)
         {
-            // Логика для редактирования выбранной собаки
+            NavigationService.Navigate(new AddPageDog((sender as Button).DataContext as Dogs));
         }
 
         private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
-            // Навигация на страницу для добавления новой собаки
-
+            NavigationService.Navigate(new AddPageDog(null));
         }
 
         private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
         {
-            // Логика для удаления выбранной собаки
+            var dogsForRemoving = DataGridDogs.SelectedItems.Cast<Dogs>().ToList();
+            if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {dogsForRemoving.Count()} элементов?",
+                "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    Entities1.GetContext().Dogs.RemoveRange(dogsForRemoving);
+                    Entities1.GetContext().SaveChanges();
+                    MessageBox.Show("Данные успешно удалены!");
+
+                    DataGridDogs.ItemsSource = Entities1.GetContext().Dogs.ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -54,15 +70,26 @@ namespace Course_project
                 Window.GetWindow(this)?.Close();
             }
         }
+
         private void NextButton_Cick(object sender, RoutedEventArgs e)
         {
             EmployeesPage employeesPage = new EmployeesPage(_currentUser, _userRole);
             NavigationService.Navigate(employeesPage);
         }
+
         private void LastButton_Cick(object sender, RoutedEventArgs e)
         {
             EventPage eventPage = new EventPage(_currentUser, _userRole);
             NavigationService.Navigate(eventPage);
+        }
+
+        private void DogPage_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                Entities1.GetContext().ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
+                DataGridDogs.ItemsSource = Entities1.GetContext().Dogs.ToList();
+            }
         }
     }
 }

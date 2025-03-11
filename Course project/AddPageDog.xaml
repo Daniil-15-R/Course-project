@@ -1,0 +1,39 @@
+﻿<Page x:Class="Course_project.AddPageDog"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Course_project"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddPageDpg">
+
+    <Grid Style="{StaticResource MyCustomGrid}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Кличка" Grid.Row="0" Grid.Column="0" />
+        <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Возраст" Grid.Row="1" Grid.Column="0"/>
+        <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Пол" Grid.Row="2" Grid.Column="0"/>
+        <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Дополнительная информация" Grid.Row="3" Grid.Column="0"/>
+        <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="0" Grid.Column="1" Text="{Binding nickname}"/>
+        <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="1" Grid.Column="1" Text="{Binding age}"/>
+        <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="2" Grid.Column="1" Text="{Binding gender}"/>
+        <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="3" Grid.Column="1" Text="{Binding additional_information}"/>
+        <Button Style="{StaticResource MyCustomButton}" Name="ButtonSave" Content="Сохранить" Grid.Row="4" Grid.Column="1" Width="133"
+                Click="ButtonSave_OnClick"/>
+    </Grid>
+</Page>

@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" 
       d:DesignWidth="800"
-      Title="Dog Page" Background="AliceBlue">
+      Title="DogPage" IsVisibleChanged="DogPage_IsVisibleChanged">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="377*" />
