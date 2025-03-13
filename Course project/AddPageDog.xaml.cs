@@ -45,12 +45,12 @@ namespace Course_project
 
             // Если id собаки равен 0, добавляем новую запись
             if (_dogs.id == 0)
-                Entities1.GetContext().Dogs.Add(_dogs);
+                Entities.GetContext().Dogs.Add(_dogs);
 
             try
             {
                 // Сохраняем изменения в базе данных
-                Entities1.GetContext().SaveChanges();
+                Entities.GetContext().SaveChanges();
                 MessageBox.Show("Данные успешно сохранены");
 
                 // Возвращаемся на предыдущую страницу

@@ -25,6 +25,7 @@
                 <DataGridTextColumn Header="Дата рождения" Binding="{Binding date_of_birth }" />
                 <DataGridTextColumn Header="СНИЛС" Binding="{Binding SNILS}" />
                 <DataGridTextColumn Header="Номерной знак авто" Binding="{Binding state_number_of_car }" />
+                <DataGridTextColumn Header="Изображение" Binding="{Binding image}"/>
                 <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

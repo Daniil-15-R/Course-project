@@ -13,22 +13,21 @@ namespace Course_project
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities1 : DbContext
+    public partial class Entities : DbContext
     {
-        public Entities1()
-            : base("name=Entities1")
+        public Entities()
+            : base("name=Entities")
         {
         }
-        private static Entities1 _context;
-        public static Entities1 GetContext()
+        private static Entities _context;
+        public static Entities GetContext()
         {
             if (_context == null)
             {
-                _context = new Entities1();
+                _context = new Entities();
             }
             return _context;
         }
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -42,6 +41,7 @@ namespace Course_project
         public virtual DbSet<PlannedEvents> PlannedEvents { get; set; }
         public virtual DbSet<ShelterEmployees> ShelterEmployees { get; set; }
         public virtual DbSet<ShelterNeeds> ShelterNeeds { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<VaccinationSchedule> VaccinationSchedule { get; set; }
         public virtual DbSet<WalkingSchedule> WalkingSchedule { get; set; }

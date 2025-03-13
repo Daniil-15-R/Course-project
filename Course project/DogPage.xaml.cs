@@ -20,7 +20,7 @@ namespace Course_project
             _currentUser = currentUser;
             _userRole = userRole; // Сохранение роли
 
-            var dogsList = Entities1.GetContext().Dogs.ToList();
+            var dogsList = Entities.GetContext().Dogs.ToList();
             DataGridDogs.ItemsSource = dogsList;
         }
 
@@ -42,11 +42,11 @@ namespace Course_project
             {
                 try
                 {
-                    Entities1.GetContext().Dogs.RemoveRange(dogsForRemoving);
-                    Entities1.GetContext().SaveChanges();
+                    Entities.GetContext().Dogs.RemoveRange(dogsForRemoving);
+                    Entities.GetContext().SaveChanges();
                     MessageBox.Show("Данные успешно удалены!");
 
-                    DataGridDogs.ItemsSource = Entities1.GetContext().Dogs.ToList();
+                    DataGridDogs.ItemsSource = Entities.GetContext().Dogs.ToList();
                 }
                 catch (Exception ex)
                 {
@@ -87,8 +87,8 @@ namespace Course_project
         {
             if (Visibility == Visibility.Visible)
             {
-                Entities1.GetContext().ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
-                DataGridDogs.ItemsSource = Entities1.GetContext().Dogs.ToList();
+                Entities.GetContext().ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
+                DataGridDogs.ItemsSource = Entities.GetContext().Dogs.ToList();
             }
         }
     }

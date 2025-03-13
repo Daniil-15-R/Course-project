@@ -83,7 +83,7 @@ namespace Course_project
         {
             if (LogText.Text.Length > 0)
             {
-                using (var db = new Entities1())
+                using (var db = new Entities())
                 {
                     var user = db.Users.AsNoTracking().FirstOrDefault(u => u.Login == LogText.Text);
                     if (user != null)
@@ -115,7 +115,7 @@ namespace Course_project
 
             try
             {
-                using (Entities1 db = new Entities1())
+                using (Entities db = new Entities())
                 {
                     // Сохраняем пользователя в таблице Users
                     Users userObject = new Users

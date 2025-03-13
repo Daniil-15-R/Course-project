@@ -91,7 +91,7 @@ namespace Course_project
 
             try
             {
-                using (var db = new Entities1())
+                using (var db = new Entities())
                 {
                     // Попытка найти пользователя с оригинальным паролем
                     var user = db.Users.AsNoTracking().FirstOrDefault(u =>

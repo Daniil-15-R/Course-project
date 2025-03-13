@@ -28,7 +28,7 @@ namespace Course_project
             _currentUser = currentUser;
             _userRole = userRole; // Сохранение роли
 
-            var dogsList = Entities1.GetContext().FoodProducts.ToList();
+            var dogsList = Entities.GetContext().FoodProducts.ToList();
             DataGridFood.ItemsSource = dogsList;
         }
 

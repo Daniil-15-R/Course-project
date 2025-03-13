@@ -14,7 +14,7 @@ namespace Course_project
             _currentUser = currentUser;
             _userRole = userRole; // Сохранение роли
 
-            var medicinesList = Entities1.GetContext().Medicines.ToList();
+            var medicinesList = Entities.GetContext().Medicines.ToList();
             DataGridMedicines.ItemsSource = medicinesList;
         }
 

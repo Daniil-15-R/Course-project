@@ -28,7 +28,7 @@ namespace Course_project
             _currentUser = currentUser;
             _userRole = userRole; // Сохранение роли
 
-            var vacList = Entities1.GetContext().VaccinationSchedule.ToList();
+            var vacList = Entities.GetContext().VaccinationSchedule.ToList();
             DataGridVac.ItemsSource = vacList;
         }
 

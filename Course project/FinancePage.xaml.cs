@@ -28,7 +28,7 @@ namespace Course_project
             _currentUser = currentUser;
             _userRole = userRole; // Сохранение роли
 
-            var financeList = Entities1.GetContext().Accounting.ToList();
+            var financeList = Entities.GetContext().Accounting.ToList();
             DataGridFinance.ItemsSource = financeList;
         }
 

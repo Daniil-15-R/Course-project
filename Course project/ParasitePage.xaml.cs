@@ -28,7 +28,7 @@ namespace Course_project
             _currentUser = currentUser;
             _userRole = userRole; // Сохранение роли
 
-            var parasiteList = Entities1.GetContext().ParasiteTreatmentSchedule.ToList();
+            var parasiteList = Entities.GetContext().ParasiteTreatmentSchedule.ToList();
             DataGridParasite.ItemsSource = parasiteList;
         }
 

@@ -20,6 +20,7 @@
                 <DataGridTextColumn Header="Возраст" Binding="{Binding age}" />
                 <DataGridTextColumn Header="Пол" Binding="{Binding gender}" />
                 <DataGridTextColumn Header="Дополнительная информация" Binding="{Binding additional_information}" />
+                <DataGridTextColumn Header="Фотография" Binding="{Binding image}"/>
                 <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

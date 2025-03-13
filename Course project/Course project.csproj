@@ -70,6 +70,9 @@
     <Compile Include="AddPageDog.xaml.cs">
       <DependentUpon>AddPageDog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddPageEmployees.xaml.cs">
+      <DependentUpon>AddPageEmployees.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DogPage.xaml.cs">
       <DependentUpon>DogPage.xaml</DependentUpon>
     </Compile>
@@ -134,6 +137,9 @@
     <Compile Include="ShelterNeeds.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Users.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -150,6 +156,10 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Page Include="AddPageDog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddPageEmployees.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -278,6 +288,8 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\icon_medicines.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

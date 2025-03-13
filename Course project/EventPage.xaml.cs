@@ -28,7 +28,7 @@ namespace Course_project
             _currentUser = currentUser;
             _userRole = userRole; // Сохранение роли
 
-            var eventList = Entities1.GetContext().PlannedEvents.ToList();
+            var eventList = Entities.GetContext().PlannedEvents.ToList();
             DataGridEvent.ItemsSource = eventList;
         }
 

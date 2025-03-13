@@ -28,7 +28,7 @@ namespace Course_project
             _currentUser = currentUser;
             _userRole = userRole; // Сохранение роли
 
-            var needList = Entities1.GetContext().ShelterNeeds.ToList();
+            var needList = Entities.GetContext().ShelterNeeds.ToList();
             DataGridNeeds.ItemsSource = needList;
         }
 

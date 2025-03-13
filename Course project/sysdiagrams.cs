@@ -12,18 +12,12 @@ namespace Course_project
     using System;
     using System.Collections.Generic;
     
-    public partial class ShelterEmployees
+    public partial class sysdiagrams
     {
-        public int id { get; set; }
-        public string FIO { get; set; }
-        public string passport { get; set; }
-        public string phone { get; set; }
-        public string email { get; set; }
-        public string place_of_registration { get; set; }
-        public string actual_address { get; set; }
-        public System.DateTime date_of_birth { get; set; }
-        public string SNILS { get; set; }
-        public string state_number_of_car { get; set; }
-        public byte[] image { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

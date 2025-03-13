@@ -29,6 +29,7 @@ namespace Course_project
         public int age { get; set; }
         public string gender { get; set; }
         public string additional_information { get; set; }
+        public byte[] image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Medicines> Medicines { get; set; }

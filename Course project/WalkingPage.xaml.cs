@@ -28,7 +28,7 @@ namespace Course_project
             _currentUser = currentUser;
             _userRole = userRole; // Сохранение роли
 
-            var walkList = Entities1.GetContext().WalkingSchedule.ToList();
+            var walkList = Entities.GetContext().WalkingSchedule.ToList();
             DataGridWalk.ItemsSource = walkList;
         }
 
