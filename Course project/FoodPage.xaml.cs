@@ -34,18 +34,34 @@ namespace Course_project
 
         private void ButtonEdit_OnClick(object sender, RoutedEventArgs e)
         {
-            // Логика для редактирования выбранной собаки
+            NavigationService.Navigate(new AddPageFood((sender as Button).DataContext as FoodProducts));
         }
 
         private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
-            // Навигация на страницу для добавления новой собаки
+            NavigationService.Navigate(new AddPageFood(null)); 
 
         }
 
         private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
         {
-            // Логика для удаления выбранной собаки
+            var foodForRemoving = DataGridFood.SelectedItems.Cast<FoodProducts>().ToList();
+            if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {foodForRemoving.Count()} элементов?",
+                "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    Entities.GetContext().FoodProducts.RemoveRange(foodForRemoving);
+                    Entities.GetContext().SaveChanges();
+                    MessageBox.Show("Данные успешно удалены!");
+
+                    DataGridFood.ItemsSource = Entities.GetContext().FoodProducts.ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -73,6 +89,14 @@ namespace Course_project
         {
             NeedPage needPage = new NeedPage(_currentUser, _userRole);
             NavigationService.Navigate(needPage);
+        }
+        private void FoodPage_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                Entities.GetContext().ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
+                DataGridFood.ItemsSource = Entities.GetContext().FoodProducts.ToList();
+            }
         }
     }
 }

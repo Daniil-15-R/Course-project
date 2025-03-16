@@ -34,18 +34,34 @@ namespace Course_project
 
         private void ButtonEdit_OnClick(object sender, RoutedEventArgs e)
         {
-            // Логика для редактирования выбранной собаки
+            NavigationService.Navigate(new AddPageFinance((sender as Button).DataContext as Accounting));
         }
 
         private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
-            // Навигация на страницу для добавления новой собаки
+            NavigationService.Navigate(new AddPageFinance(null));
 
         }
 
         private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
         {
-            // Логика для удаления выбранной собаки
+            var financeForRemoving = DataGridFinance.SelectedItems.Cast<Dogs>().ToList();
+            if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {financeForRemoving.Count()} элементов?",
+                "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    Entities.GetContext().Dogs.RemoveRange(financeForRemoving);
+                    Entities.GetContext().SaveChanges();
+                    MessageBox.Show("Данные успешно удалены!");
+
+                    DataGridFinance.ItemsSource = Entities.GetContext().Accounting.ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -73,6 +89,14 @@ namespace Course_project
         {
             VacinationPage vacPage = new VacinationPage(_currentUser, _userRole);
             NavigationService.Navigate(vacPage);
+        }
+        private void FinancePage_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                Entities.GetContext().ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
+                DataGridFinance.ItemsSource = Entities.GetContext().Accounting.ToList();
+            }
         }
     }
 }

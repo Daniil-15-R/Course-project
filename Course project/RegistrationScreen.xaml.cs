@@ -11,11 +11,14 @@ namespace Course_project
 {
     public partial class RegistrationScreen : Window
     {
+
         public RegistrationScreen()
         {
             InitializeComponent();
             UpdateLanguage(); // Обновляем язык при загрузке
         }
+
+        public string ErrorMessage { get; private set; }
 
         public void UpdateLanguage()
         {
@@ -79,8 +82,11 @@ namespace Course_project
             this.Close();
         }
 
-        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        public void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
+            ErrorMessage = ""; // Сбрасываем сообщение об ошибке
+
+            // В существующем коде заменяем MessageBox.Show на сохранение ошибки
             if (LogText.Text.Length > 0)
             {
                 using (var db = new Entities())
@@ -88,11 +94,15 @@ namespace Course_project
                     var user = db.Users.AsNoTracking().FirstOrDefault(u => u.Login == LogText.Text);
                     if (user != null)
                     {
-                        MessageBox.Show("Пользователь с таким логином уже существует!");
+                        ErrorMessage = "Пользователь с таким логином уже существует!";
                         return;
                     }
                 }
             }
+
+            // Аналогично для других проверок...
+            if (PasswordTextBox.Password.Length < 6)
+                ErrorMessage += "Пароль должен быть больше 6 символов\n";
 
             bool en = true;
             bool number = false;

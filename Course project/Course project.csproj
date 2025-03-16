@@ -67,11 +67,23 @@
     <Compile Include="Accounting.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="AddMedicinePage.xaml.cs">
+      <DependentUpon>AddMedicinePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddPageDog.xaml.cs">
       <DependentUpon>AddPageDog.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddPageEmployees.xaml.cs">
       <DependentUpon>AddPageEmployees.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddPageFinance.xaml.cs">
+      <DependentUpon>AddPageFinance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddPageFood.xaml.cs">
+      <DependentUpon>AddPageFood.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddPageNeeds.xaml.cs">
+      <DependentUpon>AddPageNeeds.xaml</DependentUpon>
     </Compile>
     <Compile Include="DogPage.xaml.cs">
       <DependentUpon>DogPage.xaml</DependentUpon>
@@ -155,11 +167,27 @@
     <Compile Include="WalkingSchedule.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Page Include="AddMedicinePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddPageDog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddPageEmployees.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddPageFinance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddPageFood.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddPageNeeds.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -300,6 +328,9 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

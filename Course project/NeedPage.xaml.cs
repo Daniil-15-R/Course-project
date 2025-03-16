@@ -34,18 +34,34 @@ namespace Course_project
 
         private void ButtonEdit_OnClick(object sender, RoutedEventArgs e)
         {
-            // Логика для редактирования выбранной собаки
+            NavigationService.Navigate(new AddPageNeeds((sender as Button).DataContext as ShelterNeeds));
         }
 
         private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
-            // Навигация на страницу для добавления новой собаки
+            NavigationService.Navigate(new AddPageNeeds(null));
 
         }
 
         private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
         {
-            // Логика для удаления выбранной собаки
+            var needForRemoving = DataGridNeeds.SelectedItems.Cast<ShelterNeeds>().ToList();
+            if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {needForRemoving.Count()} элементов?",
+                "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    Entities.GetContext().ShelterNeeds.RemoveRange(needForRemoving);
+                    Entities.GetContext().SaveChanges();
+                    MessageBox.Show("Данные успешно удалены!");
+
+                    DataGridNeeds.ItemsSource = Entities.GetContext().ShelterNeeds.ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -73,6 +89,14 @@ namespace Course_project
         {
             FinancePage financePage = new FinancePage(_currentUser, _userRole);
             NavigationService.Navigate(financePage);
+        }
+        private void NeedPage_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                Entities.GetContext().ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
+                DataGridNeeds.ItemsSource = Entities.GetContext().ShelterNeeds.ToList();
+            }
         }
     }
 }

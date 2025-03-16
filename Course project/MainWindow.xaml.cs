@@ -9,6 +9,7 @@ namespace Course_project
 {
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
@@ -79,58 +80,48 @@ namespace Course_project
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            // Проверка на наличие логина и пароля
-            if (string.IsNullOrEmpty(LoginTextBox.Text) || string.IsNullOrEmpty(PasswordTextBox.Password))
-            {
-                ShowErrorMessage("Введите логин и пароль!");
-                return;
-            }
+            string login = LoginTextBox.Text;
+            string password = PasswordTextBox.Password;
 
-            string plainPassword = PasswordTextBox.Password; // Оригинальный пароль
-            string hashedPassword = GetHash(plainPassword); // Хэшированный пароль
-
-            try
+            if (Auth(login, password))
             {
-                using (var db = new Entities())
+                // Успешная авторизация
+                try
                 {
-                    // Попытка найти пользователя с оригинальным паролем
-                    var user = db.Users.AsNoTracking().FirstOrDefault(u =>
-                        u.Login == LoginTextBox.Text && u.password == plainPassword);
-
-                    if (user == null)
+                    using (var db = new Entities())
                     {
-                        // Если не найден, попытаемся найти с хешированным паролем
-                        user = db.Users.AsNoTracking().FirstOrDefault(u =>
-                            u.Login == LoginTextBox.Text && u.password == hashedPassword);
-                    }
+                        var user = db.Users.AsNoTracking().FirstOrDefault(u =>
+                            u.Login == login && (u.password == password || u.password == GetHash(password)));
 
-                    if (user == null)
-                    {
-                        ShowErrorMessage("Пользователь с такими данными не найден!");
-                        return;
-                    }
+                        if (user != null)
+                        {
+                            // Сохранение роли пользователя
+                            App.Current.Properties["UserRole"] = user.role;
 
-                    // Сохранение роли пользователя в свойствах приложения
-                    App.Current.Properties["UserRole"] = user.role;
+                            // Навигация в зависимости от роли
+                            if (user.role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+                            {
+                                var adminWindow = new HomeScreen(user);
+                                adminWindow.Show();
+                            }
+                            else
+                            {
+                                var userWindow = new HomeScreen2(user);
+                                userWindow.Show();
+                            }
 
-                    // Навигация в зависимости от роли пользователя
-                    if (user.role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
-                    {
-                        var adminWindow = new HomeScreen(user);
-                        adminWindow.Show();
+                            this.Close();
+                        }
                     }
-                    else // Для всех остальных ролей (User, Employee, Volunteer)
-                    {
-                        var userWindow = new HomeScreen2(user);
-                        userWindow.Show();
-                    }
-
-                    this.Close(); // Закрыть текущее окно
+                }
+                catch (Exception ex)
+                {
+                    ShowErrorMessage($"Произошла ошибка: {ex.Message}");
                 }
             }
-            catch (Exception ex)
+            else
             {
-                ShowErrorMessage($"Произошла ошибка: {ex.Message}");
+                ShowErrorMessage("Неверный логин или пароль");
             }
         }
 
@@ -160,6 +151,23 @@ namespace Course_project
             RegistrationScreen screen = new RegistrationScreen();
             screen.Show();
             this.Close();
+        }
+        public bool Auth(string login, string password)
+        {
+            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
+            {
+                return false;
+            }
+
+            string hashedPassword = GetHash(password);
+
+            using (var db = new Entities())
+            {
+                var user = db.Users.AsNoTracking().FirstOrDefault(u =>
+                    u.Login == login && (u.password == password || u.password == hashedPassword));
+
+                return user != null;
+            }
         }
     }
 }

@@ -14,44 +14,47 @@
             <RowDefinition Height="73*" />
         </Grid.RowDefinitions>
 
-        <DataGrid Style="{StaticResource MyCustomDataGrid}" Grid.Row="0" Name="DataGridDogs" AutoGenerateColumns="False" IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Кличка" Binding="{Binding nickname}" />
-                <DataGridTextColumn Header="Возраст" Binding="{Binding age}" />
-                <DataGridTextColumn Header="Пол" Binding="{Binding gender}" />
-                <DataGridTextColumn Header="Дополнительная информация" Binding="{Binding additional_information}" />
-                <DataGridTextColumn Header="Фотография" Binding="{Binding image}"/>
-                <DataGridTemplateColumn Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Style="{StaticResource MyCustomButton}" Name="ButtonEdit" Content="Редактировать" 
-                                    Click="ButtonEdit_OnClick" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        <!-- ListView вместо DataGrid -->
+        <ListView Style="{StaticResource MyCustomListView}" Grid.Row="0" Name="ListViewDogs">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Кличка" DisplayMemberBinding="{Binding nickname}" />
+                    <GridViewColumn Header="Возраст" DisplayMemberBinding="{Binding age}" />
+                    <GridViewColumn Header="Пол" DisplayMemberBinding="{Binding gender}" />
+                    <GridViewColumn Header="Дополнительная информация" DisplayMemberBinding="{Binding additional_information}" />
+                    <GridViewColumn Header="Фотография" DisplayMemberBinding="{Binding image}" />
+                    <GridViewColumn Header="Действия">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource MyCustomButton}" Name="ButtonEdit" Content="Редактировать" 
+                                        Click="ButtonEdit_OnClick" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
         <!-- Кнопка "Добавить" -->
         <Button Style="{StaticResource MyCustomButton}" Grid.Row="1" Name="ButtonAdd" Content="Добавить" 
-    HorizontalAlignment="Left" Click="ButtonAdd_OnClick" 
-    Width="133" />
+                HorizontalAlignment="Left" Click="ButtonAdd_OnClick" 
+                Width="133" />
 
         <!-- Кнопка "Last" справа от кнопки "Добавить" -->
         <Button Style="{StaticResource ArrowButtonLeftStyle}" Grid.Row="1" Click="LastButton_Cick" 
-    HorizontalAlignment="Left" Width="100" Height="20" Margin="140,27,0,26"/>
+                HorizontalAlignment="Left" Width="100" Height="20" Margin="140,27,0,26"/>
 
         <!-- Кнопка "Next" слева от кнопки "Удалить" -->
         <Button Style="{StaticResource ArrowButtonStyle}" Grid.Row="1" Click="NextButton_Cick" 
-    HorizontalAlignment="Right" Width="100" Height="20" Margin="0,27,140,26"/>
+                HorizontalAlignment="Right" Width="100" Height="20" Margin="0,27,140,26"/>
 
         <!-- Кнопка "Удалить" -->
         <Button Style="{StaticResource MyCustomButton}" Grid.Row="1" Name="ButtonDel" Content="Удалить" 
-    HorizontalAlignment="Right" Click="ButtonDel_OnClick" 
-    Width="133" />
+                HorizontalAlignment="Right" Click="ButtonDel_OnClick" 
+                Width="133" />
 
         <!-- Кнопка "Назад" -->
         <Button Style="{StaticResource MyCustomButton}" Grid.Row="1" Content="Назад" Click="BackButton_Click" 
-    HorizontalAlignment="Center" Width="100" Height="30" />
+                HorizontalAlignment="Center" Width="100" Height="30" />
     </Grid>
 </Page>

@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Course_project"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="FoodPage">
+      Title="FoodPage" IsVisibleChanged="FoodPage_IsVisibleChanged">
 
     <Grid>
         <Grid.RowDefinitions>

@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Course_project
 {
@@ -29,24 +19,34 @@ namespace Course_project
             _currentUser = currentUser;
             _userRole = userRole; // Сохранение роли
 
-            var employesList = Entities1.GetContext().ShelterEmployees.ToList();
-            DataGridEmployees.ItemsSource = employesList;
+            var employeesList = Entities.GetContext().ShelterEmployees.ToList();
+            ListViewEmployees.ItemsSource = employeesList;
         }
 
         private void ButtonEdit_OnClick(object sender, RoutedEventArgs e)
         {
-            // Логика для редактирования выбранной собаки
-        }
-
-        private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
-        {
-            // Навигация на страницу для добавления новой собаки
-
+            NavigationService.Navigate(new AddPageEmployees((sender as Button).DataContext as ShelterEmployees));
         }
 
         private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
         {
-            // Логика для удаления выбранной собаки
+            var employeesForRemoving = ListViewEmployees.SelectedItems.Cast<ShelterEmployees>().ToList();
+            if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {employeesForRemoving.Count()} элементов?",
+                "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    Entities.GetContext().ShelterEmployees.RemoveRange(employeesForRemoving);
+                    Entities.GetContext().SaveChanges();
+                    MessageBox.Show("Данные успешно удалены!");
+
+                    ListViewEmployees.ItemsSource = Entities.GetContext().ShelterEmployees.ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -75,6 +75,14 @@ namespace Course_project
         {
             MedicinePage medicinePage = new MedicinePage(_currentUser, _userRole);
             NavigationService.Navigate(medicinePage);
+        }
+        private void EmployeesPage_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                Entities.GetContext().ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
+                ListViewEmployees.ItemsSource = Entities.GetContext().ShelterEmployees.ToList();
+            }
         }
     }
 }
