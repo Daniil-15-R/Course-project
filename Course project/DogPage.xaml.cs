@@ -21,7 +21,7 @@ namespace Course_project
             _userRole = userRole; // Сохранение роли
 
             var dogsList = Entities.GetContext().Dogs.ToList();
-            DataGridDogs.ItemsSource = dogsList;
+            ListViewDogs.ItemsSource = dogsList;
         }
 
         private void ButtonEdit_OnClick(object sender, RoutedEventArgs e)
@@ -36,7 +36,7 @@ namespace Course_project
 
         private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
         {
-            var dogsForRemoving = DataGridDogs.SelectedItems.Cast<Dogs>().ToList();
+            var dogsForRemoving = ListViewDogs.SelectedItems.Cast<Dogs>().ToList();
             if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {dogsForRemoving.Count()} элементов?",
                 "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
@@ -46,7 +46,7 @@ namespace Course_project
                     Entities.GetContext().SaveChanges();
                     MessageBox.Show("Данные успешно удалены!");
 
-                    DataGridDogs.ItemsSource = Entities.GetContext().Dogs.ToList();
+                    ListViewDogs.ItemsSource = Entities.GetContext().Dogs.ToList();
                 }
                 catch (Exception ex)
                 {
@@ -88,7 +88,7 @@ namespace Course_project
             if (Visibility == Visibility.Visible)
             {
                 Entities.GetContext().ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
-                DataGridDogs.ItemsSource = Entities.GetContext().Dogs.ToList();
+                ListViewDogs.ItemsSource = Entities.GetContext().Dogs.ToList();
             }
         }
     }

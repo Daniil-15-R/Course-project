@@ -66,6 +66,12 @@
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="FontFamily" Value="TildaSans"/>
     </Style>
+    <Style x:Key="MyCustomListView" TargetType="ListView">
+        <Setter Property="Background" Value="#d0e6a3"/>
+        <Setter Property="Foreground" Value="#e6a3d0"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontFamily" Value="TildaSans"/>
+    </Style>
     <Style x:Key="ArrowButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="White"/>
         <Setter Property="BorderBrush" Value="White"/>

@@ -2,6 +2,8 @@
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Win32; // Для работы с диалоговым окном выбора файла
+using System.IO; // Для работы с файлами
 
 namespace Course_project
 {
@@ -59,6 +61,26 @@ namespace Course_project
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message); // Выводим сообщение об ошибке
+            }
+        }
+
+        // Обработчик для кнопки выбора фотографии
+        private void ButtonSelectImage_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                // Получаем путь к выбранному файлу
+                string filePath = openFileDialog.FileName;
+
+                // Загружаем изображение в объект Dogs
+                _dogs.image = File.ReadAllBytes(filePath);
+
+                // Обновляем привязку изображения
+                var imageBinding = image.GetBindingExpression(Image.SourceProperty);
+                imageBinding?.UpdateTarget();
             }
         }
     }

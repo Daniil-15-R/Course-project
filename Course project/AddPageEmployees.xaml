@@ -20,6 +20,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
@@ -29,12 +31,31 @@
         <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Паспорт" Grid.Row="1" Grid.Column="0"/>
         <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Телефон" Grid.Row="2" Grid.Column="0"/>
         <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Email" Grid.Row="3" Grid.Column="0"/>
-        <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Email" Grid.Row="3" Grid.Column="0"/>
-        <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="0" Grid.Column="1" Text="{Binding nickname}"/>
-        <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="1" Grid.Column="1" Text="{Binding age}"/>
-        <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="2" Grid.Column="1" Text="{Binding gender}"/>
-        <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="3" Grid.Column="1" Text="{Binding additional_information}"/>
-        <Button Style="{StaticResource MyCustomButton}" Name="ButtonSave" Content="Сохранить" Grid.Row="10" Grid.Column="1" Width="133"
-            Click="ButtonSave_OnClick"/>
+        <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Место регистрации" Grid.Row="4" Grid.Column="0"/>
+        <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Фактический адрес проживания" Grid.Row="5" Grid.Column="0"/>
+        <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Дата рождения" Grid.Row="6" Grid.Column="0"/>
+        <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="СНИЛС" Grid.Row="7" Grid.Column="0"/>
+        <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Государственный номер" Grid.Row="8" Grid.Column="0"/>
+        <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Изображение" Grid.Row="9" Grid.Column="0"/>
+        <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="0" Grid.Column="1" Text="{Binding FIO}"/>
+        <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="1" Grid.Column="1" Text="{Binding passport}"/>
+        <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="2" Grid.Column="1" Text="{Binding phone}"/>
+        <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="3" Grid.Column="1" Text="{Binding email}"/>
+        <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="4" Grid.Column="1" Text="{Binding place_of_registration}"/>
+        <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="5" Grid.Column="1" Text="{Binding actual_address}"/>
+        <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="6" Grid.Column="1" Text="{Binding date_of_birth}"/>
+        <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="7" Grid.Column="1" Text="{Binding SNILS}"/>
+        <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="8" Grid.Column="1" Text="{Binding state_number_of_car}"/>
+
+        <!-- Элемент Image для отображения фотографии -->
+        <Image Grid.Row="9" Grid.Column="1" Source="{Binding image}" Stretch="Uniform" Name="EmployeeImage"/>
+
+        <!-- Кнопка для выбора фотографии -->
+        <Button Style="{StaticResource MyCustomButton}" Content="Выбрать фото" Grid.Row="10" Grid.Column="1" 
+                Click="ButtonSelectImage_Click" Width="133" HorizontalAlignment="Left" Margin="0,10,0,0"/>
+
+        <!-- Кнопка "Сохранить" -->
+        <Button Style="{StaticResource MyCustomButton}" Name="ButtonSave" Content="Сохранить" Grid.Row="11" Grid.Column="1" 
+                Width="133" Click="ButtonSave_OnClick" HorizontalAlignment="Left" Margin="0,10,0,0"/>
     </Grid>
 </Page>
