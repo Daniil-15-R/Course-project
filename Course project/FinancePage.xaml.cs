@@ -1,35 +1,71 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Course_project
 {
-    /// <summary>
-    /// Логика взаимодействия для FinancePage.xaml
-    /// </summary>
     public partial class FinancePage : Page
     {
         private Users _currentUser;
         private string _userRole;
+
         public FinancePage(Users currentUser, string userRole)
         {
             InitializeComponent();
             _currentUser = currentUser;
-            _userRole = userRole; // Сохранение роли
+            _userRole = userRole;
 
-            var financeList = Entities.GetContext().Accounting.ToList();
-            DataGridFinance.ItemsSource = financeList;
+            UpdateFinances();
+        }
+
+        private void UpdateFinances()
+        {
+            var currentFinances = Entities.GetContext().Accounting.ToList();
+
+            // Фильтрация по поиску (по дате)
+            if (!string.IsNullOrWhiteSpace(SearchFinance.Text))
+            {
+                currentFinances = currentFinances.Where(x =>
+                    x.accounting_date.ToString().Contains(SearchFinance.Text)).ToList();
+            }
+
+            // Сортировка
+            if (SortFinance.SelectedIndex == 0)
+            {
+                currentFinances = currentFinances.OrderByDescending(x => x.accounting_date).ToList();
+            }
+            else if (SortFinance.SelectedIndex == 1)
+            {
+                currentFinances = currentFinances.OrderBy(x => x.accounting_date).ToList();
+            }
+            else if (SortFinance.SelectedIndex == 2)
+            {
+                currentFinances = currentFinances.OrderBy(x => x.total).ToList();
+            }
+            else if (SortFinance.SelectedIndex == 3)
+            {
+                currentFinances = currentFinances.OrderByDescending(x => x.total).ToList();
+            }
+
+            DataGridFinance.ItemsSource = currentFinances;
+        }
+
+        private void SearchFinance_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateFinances();
+        }
+
+        private void SortFinance_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateFinances();
+        }
+
+        private void CleanFilter_OnClick(object sender, RoutedEventArgs e)
+        {
+            SearchFinance.Text = "";
+            SortFinance.SelectedIndex = -1;
+            UpdateFinances();
         }
 
         private void ButtonEdit_OnClick(object sender, RoutedEventArgs e)
@@ -40,22 +76,20 @@ namespace Course_project
         private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AddPageFinance(null));
-
         }
 
         private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
         {
-            var financeForRemoving = DataGridFinance.SelectedItems.Cast<Dogs>().ToList();
-            if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {financeForRemoving.Count()} элементов?",
+            var financesForRemoving = DataGridFinance.SelectedItems.Cast<Accounting>().ToList();
+            if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {financesForRemoving.Count()} элементов?",
                 "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 try
                 {
-                    Entities.GetContext().Dogs.RemoveRange(financeForRemoving);
+                    Entities.GetContext().Accounting.RemoveRange(financesForRemoving);
                     Entities.GetContext().SaveChanges();
                     MessageBox.Show("Данные успешно удалены!");
-
-                    DataGridFinance.ItemsSource = Entities.GetContext().Accounting.ToList();
+                    UpdateFinances();
                 }
                 catch (Exception ex)
                 {
@@ -66,23 +100,16 @@ namespace Course_project
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            // Проверяем, есть ли предыдущие страницы в стеке навигации
             if (NavigationService != null && NavigationService.CanGoBack)
             {
                 NavigationService.GoBack();
             }
             else
             {
-                // Если нет страниц для возврата, переходим на HomeScreen
                 HomeScreen homeScreen = new HomeScreen(_currentUser);
                 homeScreen.Show();
                 Window.GetWindow(this)?.Close();
             }
-        }
-        private void LastButton_Cick(object sender, RoutedEventArgs e)
-        {
-            NeedPage needPage = new NeedPage(_currentUser, _userRole);
-            NavigationService.Navigate(needPage);
         }
 
         private void NextButton_Cick(object sender, RoutedEventArgs e)
@@ -90,12 +117,19 @@ namespace Course_project
             VacinationPage vacPage = new VacinationPage(_currentUser, _userRole);
             NavigationService.Navigate(vacPage);
         }
+
+        private void LastButton_Cick(object sender, RoutedEventArgs e)
+        {
+            NeedPage needPage = new NeedPage(_currentUser, _userRole);
+            NavigationService.Navigate(needPage);
+        }
+
         private void FinancePage_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (Visibility == Visibility.Visible)
             {
                 Entities.GetContext().ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
-                DataGridFinance.ItemsSource = Entities.GetContext().Accounting.ToList();
+                UpdateFinances();
             }
         }
     }

@@ -10,12 +10,37 @@
       Title="DogPage" IsVisibleChanged="DogPage_IsVisibleChanged">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="377*" />
-            <RowDefinition Height="73*" />
+            <RowDefinition Height="auto"/>
+            <!-- Для панели фильтров -->
+            <RowDefinition Height="*"/>
+            <!-- Для ListView -->
+            <RowDefinition Height="73"/>
+            <!-- Для кнопок -->
         </Grid.RowDefinitions>
 
-        <!-- ListView вместо DataGrid -->
-        <ListView Style="{StaticResource MyCustomListView}" Grid.Row="0" Name="ListViewDogs">
+        <!-- Панель фильтров -->
+        <WrapPanel Grid.Row="0" HorizontalAlignment="Center">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="350"/>
+                    <ColumnDefinition Width="165"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="SearchDog" Grid.Column="0" HorizontalAlignment="Right" TextChanged="SearchDog_TextChanged" Width="135"/>
+                <TextBlock Text="Введите кличку" Grid.Column="0" HorizontalAlignment="Left" FontSize="14"/>
+                <ComboBox Name="SortAge" Grid.Column="1" HorizontalAlignment="Right" 
+                 SelectedItem="{Binding age}" 
+                 SelectionChanged="SortAge_SelectionChanged" Width="265">
+                    <ComboBoxItem>По возрастанию</ComboBoxItem>
+                    <ComboBoxItem>По убыванию</ComboBoxItem>
+                </ComboBox>
+                <TextBlock Text="Сортировать по возрасту" Grid.Column="1" HorizontalAlignment="Left" FontSize="14"/>
+                <Button x:Name="CleanFilter" Grid.Column="2" Content="Очистить фильтр" FontSize="10" Click="CleanFilter_OnClick"/>
+            </Grid>
+        </WrapPanel>
+
+        <!-- ListView -->
+        <ListView Style="{StaticResource MyCustomListView}" Grid.Row="1" Name="ListViewDogs">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Кличка" DisplayMemberBinding="{Binding nickname}" />
@@ -35,26 +60,29 @@
             </ListView.View>
         </ListView>
 
-        <!-- Кнопка "Добавить" -->
-        <Button Style="{StaticResource MyCustomButton}" Grid.Row="1" Name="ButtonAdd" Content="Добавить" 
-                HorizontalAlignment="Left" Click="ButtonAdd_OnClick" 
-                Width="133" />
+        <!-- Кнопки внизу -->
+        <Grid Grid.Row="2">
+            <!-- Кнопка "Добавить" -->
+            <Button Style="{StaticResource MyCustomButton}" Name="ButtonAdd" Content="Добавить" 
+                    HorizontalAlignment="Left" Click="ButtonAdd_OnClick" 
+                    Width="133" />
 
-        <!-- Кнопка "Last" справа от кнопки "Добавить" -->
-        <Button Style="{StaticResource ArrowButtonLeftStyle}" Grid.Row="1" Click="LastButton_Cick" 
-                HorizontalAlignment="Left" Width="100" Height="20" Margin="140,27,0,26"/>
+            <!-- Кнопка "Last" справа от кнопки "Добавить" -->
+            <Button Style="{StaticResource ArrowButtonLeftStyle}" Click="LastButton_Cick" 
+                    HorizontalAlignment="Left" Width="100" Height="20" Margin="140,27,0,26"/>
 
-        <!-- Кнопка "Next" слева от кнопки "Удалить" -->
-        <Button Style="{StaticResource ArrowButtonStyle}" Grid.Row="1" Click="NextButton_Cick" 
-                HorizontalAlignment="Right" Width="100" Height="20" Margin="0,27,140,26"/>
+            <!-- Кнопка "Next" слева от кнопки "Удалить" -->
+            <Button Style="{StaticResource ArrowButtonStyle}" Click="NextButton_Cick" 
+                    HorizontalAlignment="Right" Width="100" Height="20" Margin="0,27,140,26"/>
 
-        <!-- Кнопка "Удалить" -->
-        <Button Style="{StaticResource MyCustomButton}" Grid.Row="1" Name="ButtonDel" Content="Удалить" 
-                HorizontalAlignment="Right" Click="ButtonDel_OnClick" 
-                Width="133" />
+            <!-- Кнопка "Удалить" -->
+            <Button Style="{StaticResource MyCustomButton}" Name="ButtonDel" Content="Удалить" 
+                    HorizontalAlignment="Right" Click="ButtonDel_OnClick" 
+                    Width="133" />
 
-        <!-- Кнопка "Назад" -->
-        <Button Style="{StaticResource MyCustomButton}" Grid.Row="1" Content="Назад" Click="BackButton_Click" 
-                HorizontalAlignment="Center" Width="100" Height="30" />
+            <!-- Кнопка "Назад" -->
+            <Button Style="{StaticResource MyCustomButton}" Content="Назад" Click="BackButton_Click" 
+                    HorizontalAlignment="Center" Width="100" Height="30" />
+        </Grid>
     </Grid>
 </Page>

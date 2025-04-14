@@ -9,7 +9,6 @@ namespace Course_project
 {
     public partial class MainWindow : Window
     {
-
         public MainWindow()
         {
             InitializeComponent();
@@ -20,8 +19,6 @@ namespace Course_project
             if (LanguageComboBox.SelectedItem is ComboBoxItem selectedItem)
             {
                 string selectedLanguage = selectedItem.Content.ToString();
-                LanguageManager.SetLanguage(selectedLanguage); // Устанавливаем текущий язык
-
                 switch (selectedLanguage)
                 {
                     case "Русский":
@@ -35,7 +32,7 @@ namespace Course_project
                         break;
                 }
 
-                // Очистка сообщения об ошибке при изменении языка
+                // Clear error message when changing language
                 ErrorMessageTextBlock.Text = string.Empty;
             }
         }
@@ -46,8 +43,7 @@ namespace Course_project
             TextBlockLogin.Text = "Логин:";
             TextBlockPassword.Text = "Пароль:";
             TextBlocklanguage.Text = "Выберите язык";
-            LoginButton.Content = "Войти";
-            RegistrationButton.Content = "Регистрация";// Change button text
+            LoginButton.Content = "Войти"; // Change button text
         }
 
         private void SetLanguageToEnglish()
@@ -56,8 +52,7 @@ namespace Course_project
             TextBlockLogin.Text = "Login:";
             TextBlockPassword.Text = "Password:";
             TextBlocklanguage.Text = "Select a language";
-            LoginButton.Content = "Login";
-            RegistrationButton.Content = "Registration";// Change button text
+            LoginButton.Content = "Login"; // Change button text
         }
 
         private void SetLanguageToSpanish()
@@ -66,8 +61,7 @@ namespace Course_project
             TextBlockLogin.Text = "Usuario:";
             TextBlockPassword.Text = "Contraseña:";
             TextBlocklanguage.Text = "Seleccione un idioma";
-            LoginButton.Content = "Iniciar sesión";
-            RegistrationButton.Content = "Registro";// Change button text
+            LoginButton.Content = "Iniciar sesión"; // Change button text
         }
 
         private string GetHash(string password)
@@ -80,48 +74,58 @@ namespace Course_project
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            string login = LoginTextBox.Text;
-            string password = PasswordTextBox.Password;
-
-            if (Auth(login, password))
+            // Проверка на наличие логина и пароля
+            if (string.IsNullOrEmpty(LoginTextBox.Text) || string.IsNullOrEmpty(PasswordTextBox.Password))
             {
-                // Успешная авторизация
-                try
+                ShowErrorMessage("Введите логин и пароль!");
+                return;
+            }
+
+            string plainPassword = PasswordTextBox.Password; // Оригинальный пароль
+            string hashedPassword = GetHash(plainPassword); // Хэшированный пароль
+
+            try
+            {
+                using (var db = new Entities())
                 {
-                    using (var db = new Entities())
+                    // Попытка найти пользователя с оригинальным паролем
+                    var user = db.Users.AsNoTracking().FirstOrDefault(u =>
+                        u.Login == LoginTextBox.Text && u.password == plainPassword);
+
+                    if (user == null)
                     {
-                        var user = db.Users.AsNoTracking().FirstOrDefault(u =>
-                            u.Login == login && (u.password == password || u.password == GetHash(password)));
-
-                        if (user != null)
-                        {
-                            // Сохранение роли пользователя
-                            App.Current.Properties["UserRole"] = user.role;
-
-                            // Навигация в зависимости от роли
-                            if (user.role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
-                            {
-                                var adminWindow = new HomeScreen(user);
-                                adminWindow.Show();
-                            }
-                            else
-                            {
-                                var userWindow = new HomeScreen2(user);
-                                userWindow.Show();
-                            }
-
-                            this.Close();
-                        }
+                        // Если не найден, попытаемся найти с хешированным паролем
+                        user = db.Users.AsNoTracking().FirstOrDefault(u =>
+                            u.Login == LoginTextBox.Text && u.password == hashedPassword);
                     }
-                }
-                catch (Exception ex)
-                {
-                    ShowErrorMessage($"Произошла ошибка: {ex.Message}");
+
+                    if (user == null)
+                    {
+                        ShowErrorMessage("Пользователь с такими данными не найден!");
+                        return;
+                    }
+
+                    // Сохранение роли пользователя в свойствах приложения
+                    App.Current.Properties["UserRole"] = user.role;
+
+                    // Навигация в зависимости от роли пользователя
+                    if (user.role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+                    {
+                        var adminWindow = new HomeScreen(user);
+                        adminWindow.Show();
+                    }
+                    else // Для всех остальных ролей (User, Employee, Volunteer)
+                    {
+                        var userWindow = new HomeScreen2(user);
+                        userWindow.Show();
+                    }
+
+                    this.Close(); // Закрыть текущее окно
                 }
             }
-            else
+            catch (Exception ex)
             {
-                ShowErrorMessage("Неверный логин или пароль");
+                ShowErrorMessage($"Произошла ошибка: {ex.Message}");
             }
         }
 
@@ -151,23 +155,6 @@ namespace Course_project
             RegistrationScreen screen = new RegistrationScreen();
             screen.Show();
             this.Close();
-        }
-        public bool Auth(string login, string password)
-        {
-            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
-            {
-                return false;
-            }
-
-            string hashedPassword = GetHash(password);
-
-            using (var db = new Entities())
-            {
-                var user = db.Users.AsNoTracking().FirstOrDefault(u =>
-                    u.Login == login && (u.password == password || u.password == hashedPassword));
-
-                return user != null;
-            }
         }
     }
 }

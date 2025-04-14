@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Course_project"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="VacinationPage">
+      Title="VacinationPage" IsVisibleChanged="VacinPage_IsVisibleChanged">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -23,7 +23,7 @@
                 <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="ButtonEdit" Content="Редактировать" 
+                            <Button Style="{StaticResource MyCustomButton}" Name="ButtonEdit" Content="Редактировать" 
                                 Click="ButtonEdit_OnClick" Background="White" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

@@ -16,31 +16,29 @@ using System.Windows.Shapes;
 namespace Course_project
 {
     /// <summary>
-    /// Логика взаимодействия для AddPageFood.xaml
+    /// Логика взаимодействия для AddPageVac.xaml
     /// </summary>
-    public partial class AddPageFood : Page
+    public partial class AddPageVac : Page
     {
-        private FoodProducts _food = new FoodProducts();
-        public AddPageFood(FoodProducts selectedFood)
+        private VaccinationSchedule _vacin = new VaccinationSchedule();
+        public AddPageVac(VaccinationSchedule selectedVacin)
         {
-
             InitializeComponent();
-
-            if (selectedFood != null)
-                _food = selectedFood;
-
-            DataContext = _food;
+            if (selectedVacin != null)
+                _vacin = selectedVacin;
+            DataContext = _vacin;
         }
-
         private void ButtonSave_OnClick(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
+            if (string.IsNullOrWhiteSpace(_vacin.title))
+                errors.AppendLine("введите название обработки!");
 
-            // Проверка на корректность данных
-            if (string.IsNullOrWhiteSpace(_food.name_of_food))
-                errors.AppendLine("Введите название еды!");
-            if (_food.cost <= 0) // Проверка, что цена больше 0
-                errors.AppendLine("Введите корректную цену!");
+            if (_vacin.dog_id <= 0)
+                errors.AppendLine("Введите корректный id собаки!");
+
+            if (_vacin.id <= 0)
+                errors.AppendLine("Введите корректный id собаки!");
 
             // Если есть ошибки, показываем их и прерываем выполнение
             if (errors.Length > 0)

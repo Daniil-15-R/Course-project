@@ -34,18 +34,34 @@ namespace Course_project
 
         private void ButtonEdit_OnClick(object sender, RoutedEventArgs e)
         {
-            // Логика для редактирования выбранной собаки
+            NavigationService.Navigate(new AddPageVac((sender as Button).DataContext as VaccinationSchedule));
         }
 
         private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
-            // Навигация на страницу для добавления новой собаки
+            NavigationService.Navigate(new AddPageVac(null));
 
         }
 
         private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
         {
-            // Логика для удаления выбранной собаки
+            var vacForRemoving = DataGridVac.SelectedItems.Cast<VaccinationSchedule>().ToList();
+            if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {vacForRemoving.Count()} элементов?",
+                "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    Entities.GetContext().VaccinationSchedule.RemoveRange(vacForRemoving);
+                    Entities.GetContext().SaveChanges();
+                    MessageBox.Show("Данные успешно удалены!");
+
+                    DataGridVac.ItemsSource = Entities.GetContext().VaccinationSchedule.ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -73,6 +89,14 @@ namespace Course_project
         {
             ParasitePage parasitePage = new ParasitePage(_currentUser, _userRole);
             NavigationService.Navigate(parasitePage);
+        }
+        private void VacinPage_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                Entities.GetContext().ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
+                DataGridVac.ItemsSource = Entities.GetContext().VaccinationSchedule.ToList();
+            }
         }
     }
 }

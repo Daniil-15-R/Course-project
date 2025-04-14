@@ -9,14 +9,63 @@ namespace Course_project
     {
         private Users _currentUser;
         private string _userRole;
+
         public MedicinePage(Users currentUser, string userRole)
         {
             InitializeComponent();
             _currentUser = currentUser;
-            _userRole = userRole; // Сохранение роли
+            _userRole = userRole;
 
-            var medicinesList = Entities.GetContext().Medicines.ToList();
-            DataGridMedicines.ItemsSource = medicinesList;
+            UpdateMedicines();
+        }
+
+        private void UpdateMedicines()
+        {
+            var currentMedicines = Entities.GetContext().Medicines.ToList();
+
+            // Фильтрация по поиску
+            if (!string.IsNullOrWhiteSpace(SearchMedicine.Text))
+            {
+                currentMedicines = currentMedicines.Where(x =>
+                    x.name_of_medicine.ToLower().Contains(SearchMedicine.Text.ToLower())).ToList();
+            }
+
+            // Сортировка
+            if (SortMedicine.SelectedIndex == 0)
+            {
+                currentMedicines = currentMedicines.OrderBy(x => x.name_of_medicine).ToList();
+            }
+            else if (SortMedicine.SelectedIndex == 1)
+            {
+                currentMedicines = currentMedicines.OrderByDescending(x => x.name_of_medicine).ToList();
+            }
+            else if (SortMedicine.SelectedIndex == 2)
+            {
+                currentMedicines = currentMedicines.OrderBy(x => x.cost).ToList();
+            }
+            else if (SortMedicine.SelectedIndex == 3)
+            {
+                currentMedicines = currentMedicines.OrderByDescending(x => x.cost).ToList();
+            }
+
+            DataGridMedicines.ItemsSource = currentMedicines;
+        }
+
+        private void SearchMedicine_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateMedicines();
+        }
+
+        private void SortMedicine_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateMedicines();
+        }
+
+        private void CleanFilter_OnClick(object sender, RoutedEventArgs e)
+        {
+            SearchMedicine.Text = "";
+            SortMedicine.SelectedIndex = -1;
+            UpdateMedicines();
         }
 
         private void ButtonEdit_OnClick(object sender, RoutedEventArgs e)
@@ -27,7 +76,6 @@ namespace Course_project
         private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AddMedicinePage(null));
-
         }
 
         private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
@@ -41,8 +89,7 @@ namespace Course_project
                     Entities.GetContext().Medicines.RemoveRange(medicinesForRemoving);
                     Entities.GetContext().SaveChanges();
                     MessageBox.Show("Данные успешно удалены!");
-
-                    DataGridMedicines.ItemsSource = Entities.GetContext().Medicines.ToList();
+                    UpdateMedicines();
                 }
                 catch (Exception ex)
                 {
@@ -53,23 +100,16 @@ namespace Course_project
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            // Проверяем, есть ли предыдущие страницы в стеке навигации
             if (NavigationService != null && NavigationService.CanGoBack)
             {
                 NavigationService.GoBack();
             }
             else
             {
-                // Если нет страниц для возврата, переходим на HomeScreen
                 HomeScreen homeScreen = new HomeScreen(_currentUser);
                 homeScreen.Show();
                 Window.GetWindow(this)?.Close();
             }
-        }
-        private void LastButton_Cick(object sender, RoutedEventArgs e)
-        {
-            EmployeesPage employeesPage = new EmployeesPage(_currentUser, _userRole);
-            NavigationService.Navigate(employeesPage);
         }
 
         private void NextButton_Cick(object sender, RoutedEventArgs e)
@@ -77,12 +117,19 @@ namespace Course_project
             FoodPage foodPage = new FoodPage(_currentUser, _userRole);
             NavigationService.Navigate(foodPage);
         }
+
+        private void LastButton_Cick(object sender, RoutedEventArgs e)
+        {
+            EmployeesPage employeesPage = new EmployeesPage(_currentUser, _userRole);
+            NavigationService.Navigate(employeesPage);
+        }
+
         private void MedicinePage_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (Visibility == Visibility.Visible)
             {
                 Entities.GetContext().ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
-                DataGridMedicines.ItemsSource = Entities.GetContext().Medicines.ToList();
+                UpdateMedicines();
             }
         }
     }

@@ -16,31 +16,29 @@ using System.Windows.Shapes;
 namespace Course_project
 {
     /// <summary>
-    /// Логика взаимодействия для AddPageFood.xaml
+    /// Логика взаимодействия для AddPageWalking.xaml
     /// </summary>
-    public partial class AddPageFood : Page
+    public partial class AddPageWalking : Page
     {
-        private FoodProducts _food = new FoodProducts();
-        public AddPageFood(FoodProducts selectedFood)
+        private WalkingSchedule _walking = new WalkingSchedule();
+        public AddPageWalking(WalkingSchedule selectedWalk)
         {
-
             InitializeComponent();
-
-            if (selectedFood != null)
-                _food = selectedFood;
-
-            DataContext = _food;
+            if (selectedWalk != null)
+                _walking = selectedWalk;
+            DataContext = _walking;
         }
-
         private void ButtonSave_OnClick(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
+            if (string.IsNullOrWhiteSpace(_walking.FIO))
+                errors.AppendLine("введите ФИО выгулящего!");
 
-            // Проверка на корректность данных
-            if (string.IsNullOrWhiteSpace(_food.name_of_food))
-                errors.AppendLine("Введите название еды!");
-            if (_food.cost <= 0) // Проверка, что цена больше 0
-                errors.AppendLine("Введите корректную цену!");
+            if (_walking.dog_id <= 0)
+                errors.AppendLine("Введите корректный id собаки!");
+
+            if (_walking.id <= 0)
+                errors.AppendLine("Введите корректный id!");
 
             // Если есть ошибки, показываем их и прерываем выполнение
             if (errors.Length > 0)

@@ -34,12 +34,12 @@ namespace Course_project
 
         private void ButtonEdit_OnClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddPageNeeds((sender as Button).DataContext as ShelterNeeds));
+            //NavigationService.Navigate(new AddPageNeeds((sender as Button).DataContext as ShelterNeeds));
         }
 
         private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddPageNeeds(null));
+            //NavigationService.Navigate(new AddPageNeeds(null));
 
         }
 

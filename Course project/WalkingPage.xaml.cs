@@ -34,18 +34,34 @@ namespace Course_project
 
         private void ButtonEdit_OnClick(object sender, RoutedEventArgs e)
         {
-            // Логика для редактирования выбранной собаки
+            NavigationService.Navigate(new AddPageWalking((sender as Button).DataContext as WalkingSchedule));
         }
 
         private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
-            // Навигация на страницу для добавления новой собаки
+            NavigationService.Navigate(new AddPageWalking(null));
 
         }
 
         private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
         {
-            // Логика для удаления выбранной собаки
+            var walkForRemoving = DataGridWalk.SelectedItems.Cast<WalkingSchedule>().ToList();
+            if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {walkForRemoving.Count()} элементов?",
+                "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    Entities.GetContext().WalkingSchedule.RemoveRange(walkForRemoving);
+                    Entities.GetContext().SaveChanges();
+                    MessageBox.Show("Данные успешно удалены!");
+
+                    DataGridWalk.ItemsSource = Entities.GetContext().WalkingSchedule.ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -73,6 +89,14 @@ namespace Course_project
         {
             EventPage eventPage = new EventPage(_currentUser, _userRole);
             NavigationService.Navigate(eventPage);
+        }
+        private void WalkPage_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                Entities.GetContext().ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
+                DataGridWalk.ItemsSource = Entities.GetContext().VaccinationSchedule.ToList();
+            }
         }
     }
 }

@@ -91,5 +91,42 @@ namespace Course_project
                 ListViewDogs.ItemsSource = Entities.GetContext().Dogs.ToList();
             }
         }
+        private void UpdateDogs()
+        {
+            var currentDog = Entities.GetContext().Dogs.ToList();
+
+            // Фильтрация по поиску
+            if (!string.IsNullOrWhiteSpace(SearchDog.Text))
+            {
+                currentDog = currentDog.Where(x =>
+                    x.nickname.ToLower().Contains(SearchDog.Text.ToLower())).ToList();
+            }
+
+            // Сортировка по возрасту
+            if (SortAge.SelectedIndex == 0)
+            {
+                currentDog = currentDog.OrderBy(x => x.age).ToList();
+            }
+            else if (SortAge.SelectedIndex == 1)
+            {
+                currentDog = currentDog.OrderByDescending(x => x.age).ToList();
+            }
+
+            ListViewDogs.ItemsSource = currentDog;
+        }
+        private void SearchDog_TextChanged (object sender, TextChangedEventArgs e)
+        {
+            UpdateDogs();
+        }
+        private void SortAge_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateDogs();
+        }
+        private void CleanFilter_OnClick(object sender, RoutedEventArgs e)
+        {
+            SearchDog.Text = "";
+            SortAge.SelectedIndex = -1;
+            UpdateDogs();
+        }
     }
 }

@@ -34,18 +34,34 @@ namespace Course_project
 
         private void ButtonEdit_OnClick(object sender, RoutedEventArgs e)
         {
-            // Логика для редактирования выбранной собаки
+            NavigationService.Navigate(new AddPageParasite((sender as Button).DataContext as ParasiteTreatmentSchedule));
         }
 
         private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
-            // Навигация на страницу для добавления новой собаки
+            NavigationService.Navigate(new AddPageParasite(null));
 
         }
 
         private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
         {
-            // Логика для удаления выбранной собаки
+            var parasiteForRemoving = DataGridParasite.SelectedItems.Cast<ParasiteTreatmentSchedule>().ToList();
+            if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {parasiteForRemoving.Count()} элементов?",
+                "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    Entities.GetContext().ParasiteTreatmentSchedule.RemoveRange(parasiteForRemoving);
+                    Entities.GetContext().SaveChanges();
+                    MessageBox.Show("Данные успешно удалены!");
+
+                    DataGridParasite.ItemsSource = Entities.GetContext().ParasiteTreatmentSchedule.ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -73,6 +89,14 @@ namespace Course_project
         {
             WalkingPage walkingPage = new WalkingPage(_currentUser, _userRole);
             NavigationService.Navigate(walkingPage);
+        }
+        private void ParasitePage_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                Entities.GetContext().ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
+                DataGridParasite.ItemsSource = Entities.GetContext().Dogs.ToList();
+            }
         }
     }
 }

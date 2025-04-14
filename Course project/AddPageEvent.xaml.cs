@@ -16,31 +16,32 @@ using System.Windows.Shapes;
 namespace Course_project
 {
     /// <summary>
-    /// Логика взаимодействия для AddPageFood.xaml
+    /// Логика взаимодействия для AddPageEvent.xaml
     /// </summary>
-    public partial class AddPageFood : Page
+    public partial class AddPageEvent : Page
     {
-        private FoodProducts _food = new FoodProducts();
-        public AddPageFood(FoodProducts selectedFood)
+        private PlannedEvents _events = new PlannedEvents();
+        public AddPageEvent(PlannedEvents selectedEvents)
         {
-
             InitializeComponent();
-
-            if (selectedFood != null)
-                _food = selectedFood;
-
-            DataContext = _food;
+            if (selectedEvents != null)
+                _events = selectedEvents;
+            DataContext = _events;
         }
-
         private void ButtonSave_OnClick(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
+            if (string.IsNullOrWhiteSpace(_events.FIO))
+                errors.AppendLine("Введите ФИО!");
 
-            // Проверка на корректность данных
-            if (string.IsNullOrWhiteSpace(_food.name_of_food))
-                errors.AppendLine("Введите название еды!");
-            if (_food.cost <= 0) // Проверка, что цена больше 0
-                errors.AppendLine("Введите корректную цену!");
+            if (string.IsNullOrWhiteSpace(_events.title))
+                errors.AppendLine("Введите название мероприятия!");
+
+            if (_events.dog_id <= 0)
+                errors.AppendLine("Введите корректный id собаки!");
+
+            if (_events.date < DateTime.Today)
+                errors.AppendLine("Дата мероприятия не может быть в прошлом!");
 
             // Если есть ошибки, показываем их и прерываем выполнение
             if (errors.Length > 0)

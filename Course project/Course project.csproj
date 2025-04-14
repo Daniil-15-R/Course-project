@@ -76,6 +76,9 @@
     <Compile Include="AddPageEmployees.xaml.cs">
       <DependentUpon>AddPageEmployees.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddPageEvent.xaml.cs">
+      <DependentUpon>AddPageEvent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddPageFinance.xaml.cs">
       <DependentUpon>AddPageFinance.xaml</DependentUpon>
     </Compile>
@@ -84,6 +87,15 @@
     </Compile>
     <Compile Include="AddPageNeeds.xaml.cs">
       <DependentUpon>AddPageNeeds.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddPageParasite.xaml.cs">
+      <DependentUpon>AddPageParasite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddPageVac.xaml.cs">
+      <DependentUpon>AddPageVac.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddPageWalking.xaml.cs">
+      <DependentUpon>AddPageWalking.xaml</DependentUpon>
     </Compile>
     <Compile Include="DogPage.xaml.cs">
       <DependentUpon>DogPage.xaml</DependentUpon>
@@ -176,6 +188,34 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddPageEmployees.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddPageEvent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddPageFinance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddPageFood.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddPageNeeds.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddPageParasite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddPageVac.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddPageWalking.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -306,6 +346,7 @@
     <Resource Include="Images\icon_medicines.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Dudusik_Dog_logo_Fin.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

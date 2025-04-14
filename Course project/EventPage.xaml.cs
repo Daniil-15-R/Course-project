@@ -1,78 +1,136 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Course_project
 {
-    /// <summary>
-    /// Логика взаимодействия для EventPage.xaml
-    /// </summary>
     public partial class EventPage : Page
     {
         private Users _currentUser;
         private string _userRole;
+
         public EventPage(Users currentUser, string userRole)
         {
             InitializeComponent();
             _currentUser = currentUser;
-            _userRole = userRole; // Сохранение роли
+            _userRole = userRole;
 
-            var eventList = Entities.GetContext().PlannedEvents.ToList();
-            DataGridEvent.ItemsSource = eventList;
+            UpdateEvents();
+        }
+
+        private void UpdateEvents()
+        {
+            var currentEvents = Entities.GetContext().PlannedEvents.ToList();
+
+            // Фильтрация по поиску
+            if (!string.IsNullOrWhiteSpace(SearchEvent.Text))
+            {
+                currentEvents = currentEvents.Where(x =>
+                    x.title.ToLower().Contains(SearchEvent.Text.ToLower())).ToList();
+            }
+
+            // Сортировка
+            if (SortEvent.SelectedIndex == 0)
+            {
+                currentEvents = currentEvents.OrderBy(x => x.title).ToList();
+            }
+            else if (SortEvent.SelectedIndex == 1)
+            {
+                currentEvents = currentEvents.OrderByDescending(x => x.title).ToList();
+            }
+            else if (SortEvent.SelectedIndex == 2)
+            {
+                currentEvents = currentEvents.OrderByDescending(x => x.date).ToList();
+            }
+            else if (SortEvent.SelectedIndex == 3)
+            {
+                currentEvents = currentEvents.OrderBy(x => x.date).ToList();
+            }
+
+            DataGridEvent.ItemsSource = currentEvents;
+        }
+
+        private void SearchEvent_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateEvents();
+        }
+
+        private void SortEvent_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateEvents();
+        }
+
+        private void CleanFilter_OnClick(object sender, RoutedEventArgs e)
+        {
+            SearchEvent.Text = "";
+            SortEvent.SelectedIndex = -1;
+            UpdateEvents();
         }
 
         private void ButtonEdit_OnClick(object sender, RoutedEventArgs e)
         {
-            // Логика для редактирования выбранной собаки
+            NavigationService.Navigate(new AddPageEvent((sender as Button).DataContext as PlannedEvents));
         }
 
         private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
-            // Навигация на страницу для добавления новой собаки
-
+            NavigationService.Navigate(new AddPageEvent(null));
         }
 
         private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
         {
-            // Логика для удаления выбранной собаки
+            var eventsForRemoving = DataGridEvent.SelectedItems.Cast<PlannedEvents>().ToList();
+            if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {eventsForRemoving.Count()} элементов?",
+                "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    Entities.GetContext().PlannedEvents.RemoveRange(eventsForRemoving);
+                    Entities.GetContext().SaveChanges();
+                    MessageBox.Show("Данные успешно удалены!");
+                    UpdateEvents();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            // Проверяем, есть ли предыдущие страницы в стеке навигации
             if (NavigationService != null && NavigationService.CanGoBack)
             {
                 NavigationService.GoBack();
             }
             else
             {
-                // Если нет страниц для возврата, переходим на HomeScreen
                 HomeScreen homeScreen = new HomeScreen(_currentUser);
                 homeScreen.Show();
                 Window.GetWindow(this)?.Close();
             }
-        }
-        private void LastButton_Cick(object sender, RoutedEventArgs e)
-        {
-            WalkingPage walkingPage = new WalkingPage(_currentUser, _userRole);
-            NavigationService.Navigate(walkingPage);
         }
 
         private void NextButton_Cick(object sender, RoutedEventArgs e)
         {
             DogPage dogPage = new DogPage(_currentUser, _userRole);
             NavigationService.Navigate(dogPage);
+        }
+
+        private void LastButton_Cick(object sender, RoutedEventArgs e)
+        {
+            WalkingPage walkingPage = new WalkingPage(_currentUser, _userRole);
+            NavigationService.Navigate(walkingPage);
+        }
+
+        private void EventPage_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                Entities.GetContext().ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
+                UpdateEvents();
+            }
         }
     }
 }
