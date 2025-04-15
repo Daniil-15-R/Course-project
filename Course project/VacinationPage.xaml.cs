@@ -1,35 +1,71 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Course_project
 {
-    /// <summary>
-    /// Логика взаимодействия для VacinationPage.xaml
-    /// </summary>
     public partial class VacinationPage : Page
     {
         private Users _currentUser;
         private string _userRole;
-        public VacinationPage(Users currentUser, string userRole)
+        private bool _fromHomeScreen2;
+
+        public VacinationPage(Users currentUser, string userRole, bool fromHomeScreen2 = false)
         {
             InitializeComponent();
             _currentUser = currentUser;
-            _userRole = userRole; // Сохранение роли
+            _userRole = userRole;
+            _fromHomeScreen2 = fromHomeScreen2;
 
-            var vacList = Entities.GetContext().VaccinationSchedule.ToList();
-            DataGridVac.ItemsSource = vacList;
+            UpdateVaccinations();
+        }
+
+        private void UpdateVaccinations()
+        {
+            var currentVaccinations = Entities.GetContext().VaccinationSchedule.ToList();
+
+            if (!string.IsNullOrWhiteSpace(SearchVacination.Text))
+            {
+                currentVaccinations = currentVaccinations.Where(x =>
+                    x.title.ToLower().Contains(SearchVacination.Text.ToLower())).ToList();
+            }
+
+            if (SortVacination.SelectedIndex == 0)
+            {
+                currentVaccinations = currentVaccinations.OrderBy(x => x.title).ToList();
+            }
+            else if (SortVacination.SelectedIndex == 1)
+            {
+                currentVaccinations = currentVaccinations.OrderByDescending(x => x.title).ToList();
+            }
+            else if (SortVacination.SelectedIndex == 2)
+            {
+                currentVaccinations = currentVaccinations.OrderByDescending(x => x.date).ToList();
+            }
+            else if (SortVacination.SelectedIndex == 3)
+            {
+                currentVaccinations = currentVaccinations.OrderBy(x => x.date).ToList();
+            }
+
+            DataGridVac.ItemsSource = currentVaccinations;
+        }
+
+        private void SearchVacination_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateVaccinations();
+        }
+
+        private void SortVacination_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateVaccinations();
+        }
+
+        private void CleanFilter_OnClick(object sender, RoutedEventArgs e)
+        {
+            SearchVacination.Text = "";
+            SortVacination.SelectedIndex = -1;
+            UpdateVaccinations();
         }
 
         private void ButtonEdit_OnClick(object sender, RoutedEventArgs e)
@@ -40,22 +76,20 @@ namespace Course_project
         private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AddPageVac(null));
-
         }
 
         private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
         {
-            var vacForRemoving = DataGridVac.SelectedItems.Cast<VaccinationSchedule>().ToList();
-            if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {vacForRemoving.Count()} элементов?",
+            var vaccinationsForRemoving = DataGridVac.SelectedItems.Cast<VaccinationSchedule>().ToList();
+            if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {vaccinationsForRemoving.Count()} элементов?",
                 "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 try
                 {
-                    Entities.GetContext().VaccinationSchedule.RemoveRange(vacForRemoving);
+                    Entities.GetContext().VaccinationSchedule.RemoveRange(vaccinationsForRemoving);
                     Entities.GetContext().SaveChanges();
                     MessageBox.Show("Данные успешно удалены!");
-
-                    DataGridVac.ItemsSource = Entities.GetContext().VaccinationSchedule.ToList();
+                    UpdateVaccinations();
                 }
                 catch (Exception ex)
                 {
@@ -66,36 +100,58 @@ namespace Course_project
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            // Проверяем, есть ли предыдущие страницы в стеке навигации
             if (NavigationService != null && NavigationService.CanGoBack)
             {
                 NavigationService.GoBack();
             }
             else
             {
-                // Если нет страниц для возврата, переходим на HomeScreen
-                HomeScreen homeScreen = new HomeScreen(_currentUser);
-                homeScreen.Show();
+                if (_userRole.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+                {
+                    new HomeScreen(_currentUser).Show();
+                }
+                else
+                {
+                    new HomeScreen2(_currentUser).Show();
+                }
                 Window.GetWindow(this)?.Close();
             }
         }
-        private void LastButton_Cick(object sender, RoutedEventArgs e)
+
+        private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            FinancePage financePage = new FinancePage(_currentUser, _userRole);
-            NavigationService.Navigate(financePage);
+            if (_fromHomeScreen2)
+            {
+                ParasitePage parasitePage = new ParasitePage(_currentUser, _userRole, true);
+                NavigationService.Navigate(parasitePage);
+            }
+            else
+            {
+                FinancePage financePage = new FinancePage(_currentUser, _userRole);
+                NavigationService.Navigate(financePage);
+            }
         }
 
-        private void NextButton_Cick(object sender, RoutedEventArgs e)
+        private void LastButton_Click(object sender, RoutedEventArgs e)
         {
-            ParasitePage parasitePage = new ParasitePage(_currentUser, _userRole);
-            NavigationService.Navigate(parasitePage);
+            if (_fromHomeScreen2)
+            {
+                EmployeesPage employeesPage = new EmployeesPage(_currentUser, _userRole, true);
+                NavigationService.Navigate(employeesPage);
+            }
+            else
+            {
+                MedicinePage medicinePage = new MedicinePage(_currentUser, _userRole);
+                NavigationService.Navigate(medicinePage);
+            }
         }
+
         private void VacinPage_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (Visibility == Visibility.Visible)
             {
                 Entities.GetContext().ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
-                DataGridVac.ItemsSource = Entities.GetContext().VaccinationSchedule.ToList();
+                UpdateVaccinations();
             }
         }
     }

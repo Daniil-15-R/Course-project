@@ -9,12 +9,14 @@ namespace Course_project
     {
         private Users _currentUser;
         private string _userRole;
+        private bool _fromHomeScreen2;
 
-        public EventPage(Users currentUser, string userRole)
+        public EventPage(Users currentUser, string userRole, bool fromHomeScreen2 = false)
         {
             InitializeComponent();
             _currentUser = currentUser;
             _userRole = userRole;
+            _fromHomeScreen2 = fromHomeScreen2;
 
             UpdateEvents();
         }
@@ -23,14 +25,12 @@ namespace Course_project
         {
             var currentEvents = Entities.GetContext().PlannedEvents.ToList();
 
-            // Фильтрация по поиску
             if (!string.IsNullOrWhiteSpace(SearchEvent.Text))
             {
                 currentEvents = currentEvents.Where(x =>
                     x.title.ToLower().Contains(SearchEvent.Text.ToLower())).ToList();
             }
 
-            // Сортировка
             if (SortEvent.SelectedIndex == 0)
             {
                 currentEvents = currentEvents.OrderBy(x => x.title).ToList();
@@ -106,22 +106,46 @@ namespace Course_project
             }
             else
             {
-                HomeScreen homeScreen = new HomeScreen(_currentUser);
-                homeScreen.Show();
+                if (_userRole.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+                {
+                    new HomeScreen(_currentUser).Show();
+                }
+                else
+                {
+                    new HomeScreen2(_currentUser).Show();
+                }
                 Window.GetWindow(this)?.Close();
             }
         }
 
-        private void NextButton_Cick(object sender, RoutedEventArgs e)
+        private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            DogPage dogPage = new DogPage(_currentUser, _userRole);
-            NavigationService.Navigate(dogPage);
+            if (_fromHomeScreen2)
+            {
+                DogPage dogPage = new DogPage(_currentUser, _userRole, true);
+                NavigationService.Navigate(dogPage);
+            }
+            else
+            {
+                // Укажите страницу для перехода из HomeScreen (если нужно)
+                EmployeesPage employeesPage = new EmployeesPage(_currentUser, _userRole);
+                NavigationService.Navigate(employeesPage);
+            }
         }
 
-        private void LastButton_Cick(object sender, RoutedEventArgs e)
+        private void LastButton_Click(object sender, RoutedEventArgs e)
         {
-            WalkingPage walkingPage = new WalkingPage(_currentUser, _userRole);
-            NavigationService.Navigate(walkingPage);
+            if (_fromHomeScreen2)
+            {
+                WalkingPage walkingPage = new WalkingPage(_currentUser, _userRole, true);
+                NavigationService.Navigate(walkingPage);
+            }
+            else
+            {
+                // Укажите страницу для перехода из HomeScreen (если нужно)
+                ParasitePage parasitePage = new ParasitePage(_currentUser, _userRole);
+                NavigationService.Navigate(parasitePage);
+            }
         }
 
         private void EventPage_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)

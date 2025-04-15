@@ -1,35 +1,71 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Course_project
 {
-    /// <summary>
-    /// Логика взаимодействия для ParasitePage.xaml
-    /// </summary>
     public partial class ParasitePage : Page
     {
         private Users _currentUser;
         private string _userRole;
-        public ParasitePage(Users currentUser, string userRole)
+        private bool _fromHomeScreen2;
+
+        public ParasitePage(Users currentUser, string userRole, bool fromHomeScreen2 = false)
         {
             InitializeComponent();
             _currentUser = currentUser;
-            _userRole = userRole; // Сохранение роли
+            _userRole = userRole;
+            _fromHomeScreen2 = fromHomeScreen2;
 
-            var parasiteList = Entities.GetContext().ParasiteTreatmentSchedule.ToList();
-            DataGridParasite.ItemsSource = parasiteList;
+            UpdateParasiteTreatments();
+        }
+
+        private void UpdateParasiteTreatments()
+        {
+            var currentTreatments = Entities.GetContext().ParasiteTreatmentSchedule.ToList();
+
+            if (!string.IsNullOrWhiteSpace(SearchParasite.Text))
+            {
+                currentTreatments = currentTreatments.Where(x =>
+                    x.title.ToLower().Contains(SearchParasite.Text.ToLower())).ToList();
+            }
+
+            if (SortParasite.SelectedIndex == 0)
+            {
+                currentTreatments = currentTreatments.OrderBy(x => x.title).ToList();
+            }
+            else if (SortParasite.SelectedIndex == 1)
+            {
+                currentTreatments = currentTreatments.OrderByDescending(x => x.title).ToList();
+            }
+            else if (SortParasite.SelectedIndex == 2)
+            {
+                currentTreatments = currentTreatments.OrderByDescending(x => x.date).ToList();
+            }
+            else if (SortParasite.SelectedIndex == 3)
+            {
+                currentTreatments = currentTreatments.OrderBy(x => x.date).ToList();
+            }
+
+            DataGridParasite.ItemsSource = currentTreatments;
+        }
+
+        private void SearchParasite_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateParasiteTreatments();
+        }
+
+        private void SortParasite_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateParasiteTreatments();
+        }
+
+        private void CleanFilter_OnClick(object sender, RoutedEventArgs e)
+        {
+            SearchParasite.Text = "";
+            SortParasite.SelectedIndex = -1;
+            UpdateParasiteTreatments();
         }
 
         private void ButtonEdit_OnClick(object sender, RoutedEventArgs e)
@@ -40,22 +76,20 @@ namespace Course_project
         private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AddPageParasite(null));
-
         }
 
         private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
         {
-            var parasiteForRemoving = DataGridParasite.SelectedItems.Cast<ParasiteTreatmentSchedule>().ToList();
-            if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {parasiteForRemoving.Count()} элементов?",
+            var treatmentsForRemoving = DataGridParasite.SelectedItems.Cast<ParasiteTreatmentSchedule>().ToList();
+            if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {treatmentsForRemoving.Count()} элементов?",
                 "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 try
                 {
-                    Entities.GetContext().ParasiteTreatmentSchedule.RemoveRange(parasiteForRemoving);
+                    Entities.GetContext().ParasiteTreatmentSchedule.RemoveRange(treatmentsForRemoving);
                     Entities.GetContext().SaveChanges();
                     MessageBox.Show("Данные успешно удалены!");
-
-                    DataGridParasite.ItemsSource = Entities.GetContext().ParasiteTreatmentSchedule.ToList();
+                    UpdateParasiteTreatments();
                 }
                 catch (Exception ex)
                 {
@@ -66,36 +100,60 @@ namespace Course_project
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            // Проверяем, есть ли предыдущие страницы в стеке навигации
             if (NavigationService != null && NavigationService.CanGoBack)
             {
                 NavigationService.GoBack();
             }
             else
             {
-                // Если нет страниц для возврата, переходим на HomeScreen
-                HomeScreen homeScreen = new HomeScreen(_currentUser);
-                homeScreen.Show();
+                if (_userRole.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+                {
+                    new HomeScreen(_currentUser).Show();
+                }
+                else
+                {
+                    new HomeScreen2(_currentUser).Show();
+                }
                 Window.GetWindow(this)?.Close();
             }
         }
-        private void LastButton_Cick(object sender, RoutedEventArgs e)
+
+        private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            VacinationPage vacPage = new VacinationPage(_currentUser, _userRole);
-            NavigationService.Navigate(vacPage);
+            if (_fromHomeScreen2)
+            {
+                WalkingPage walkingPage = new WalkingPage(_currentUser, _userRole, true);
+                NavigationService.Navigate(walkingPage);
+            }
+            else
+            {
+                // Укажите страницу для перехода из HomeScreen (если нужно)
+                MedicinePage medicinePage = new MedicinePage(_currentUser, _userRole);
+                NavigationService.Navigate(medicinePage);
+            }
         }
 
-        private void NextButton_Cick(object sender, RoutedEventArgs e)
+        private void LastButton_Click(object sender, RoutedEventArgs e)
         {
-            WalkingPage walkingPage = new WalkingPage(_currentUser, _userRole);
-            NavigationService.Navigate(walkingPage);
+            if (_fromHomeScreen2)
+            {
+                VacinationPage vacPage = new VacinationPage(_currentUser, _userRole, true);
+                NavigationService.Navigate(vacPage);
+            }
+            else
+            {
+                // Укажите страницу для перехода из HomeScreen (если нужно)
+                EmployeesPage employeesPage = new EmployeesPage(_currentUser, _userRole);
+                NavigationService.Navigate(employeesPage);
+            }
         }
+
         private void ParasitePage_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (Visibility == Visibility.Visible)
             {
                 Entities.GetContext().ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
-                DataGridParasite.ItemsSource = Entities.GetContext().Dogs.ToList();
+                UpdateParasiteTreatments();
             }
         }
     }

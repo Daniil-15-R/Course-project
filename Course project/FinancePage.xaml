@@ -26,18 +26,18 @@
                     <ColumnDefinition Width="350"/>
                     <ColumnDefinition Width="165"/>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="SearchFinance" Grid.Column="0" HorizontalAlignment="Right" 
+                <TextBox Style="{StaticResource MyCustomTextBox}" x:Name="SearchFinance" Grid.Column="0" HorizontalAlignment="Right" 
                          TextChanged="SearchFinance_TextChanged" Width="135"/>
-                <TextBlock Text="Поиск по дате" Grid.Column="0" HorizontalAlignment="Left" FontSize="14"/>
-                <ComboBox Name="SortFinance" Grid.Column="1" HorizontalAlignment="Right" 
+                <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Поиск по дате" Grid.Column="0" HorizontalAlignment="Left" FontSize="14"/>
+                <ComboBox Style="{StaticResource MyCustomComboBox}" Name="SortFinance" Grid.Column="1" HorizontalAlignment="Right" 
                           SelectionChanged="SortFinance_SelectionChanged" Width="265">
                     <ComboBoxItem>По дате (новые)</ComboBoxItem>
                     <ComboBoxItem>По дате (старые)</ComboBoxItem>
                     <ComboBoxItem>По сумме (возрастание)</ComboBoxItem>
                     <ComboBoxItem>По сумме (убывание)</ComboBoxItem>
                 </ComboBox>
-                <TextBlock Text="Сортировать" Grid.Column="1" HorizontalAlignment="Left" FontSize="14"/>
-                <Button x:Name="CleanFilter" Grid.Column="2" Content="Очистить фильтр" FontSize="10" 
+                <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Сортировать" Grid.Column="1" HorizontalAlignment="Left" FontSize="14"/>
+                <Button Style="{StaticResource MyCustomButton}" x:Name="CleanFilter" Grid.Column="2" Content="Очистить фильтр" FontSize="10" 
                         Click="CleanFilter_OnClick"/>
             </Grid>
         </WrapPanel>

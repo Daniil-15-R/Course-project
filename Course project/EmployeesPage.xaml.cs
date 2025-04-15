@@ -9,12 +9,14 @@ namespace Course_project
     {
         private Users _currentUser;
         private string _userRole;
+        private bool _fromHomeScreen2;
 
-        public EmployeesPage(Users currentUser, string userRole)
+        public EmployeesPage(Users currentUser, string userRole, bool fromHomeScreen2 = false)
         {
             InitializeComponent();
             _currentUser = currentUser;
             _userRole = userRole;
+            _fromHomeScreen2 = fromHomeScreen2;
 
             UpdateEmployees();
         }
@@ -23,14 +25,12 @@ namespace Course_project
         {
             var currentEmployees = Entities.GetContext().ShelterEmployees.ToList();
 
-            // Фильтрация по поиску
             if (!string.IsNullOrWhiteSpace(SearchEmployee.Text))
             {
                 currentEmployees = currentEmployees.Where(x =>
                     x.FIO.ToLower().Contains(SearchEmployee.Text.ToLower())).ToList();
             }
 
-            // Сортировка
             if (SortEmployee.SelectedIndex == 0)
             {
                 currentEmployees = currentEmployees.OrderBy(x => x.FIO).ToList();
@@ -106,21 +106,35 @@ namespace Course_project
             }
             else
             {
-                HomeScreen homeScreen = new HomeScreen(_currentUser);
-                homeScreen.Show();
+                if (_userRole.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+                {
+                    new HomeScreen(_currentUser).Show();
+                }
+                else
+                {
+                    new HomeScreen2(_currentUser).Show();
+                }
                 Window.GetWindow(this)?.Close();
             }
         }
 
-        private void NextButton_Cick(object sender, RoutedEventArgs e)
+        private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            MedicinePage medicinePage = new MedicinePage(_currentUser, _userRole);
-            NavigationService.Navigate(medicinePage);
+            if (_fromHomeScreen2)
+            {
+                VacinationPage vacinationPage = new VacinationPage(_currentUser, _userRole, true);
+                NavigationService.Navigate(vacinationPage);
+            }
+            else
+            {
+                MedicinePage medicinePage = new MedicinePage(_currentUser, _userRole);
+                NavigationService.Navigate(medicinePage);
+            }
         }
 
-        private void LastButton_Cick(object sender, RoutedEventArgs e)
+        private void LastButton_Click(object sender, RoutedEventArgs e)
         {
-            DogPage dogPage = new DogPage(_currentUser, _userRole);
+            DogPage dogPage = new DogPage(_currentUser, _userRole, _fromHomeScreen2);
             NavigationService.Navigate(dogPage);
         }
 

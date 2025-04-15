@@ -1,35 +1,71 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Course_project
 {
-    /// <summary>
-    /// Логика взаимодействия для WalkingPage.xaml
-    /// </summary>
     public partial class WalkingPage : Page
     {
         private Users _currentUser;
         private string _userRole;
-        public WalkingPage(Users currentUser, string userRole)
+        private bool _fromHomeScreen2;
+
+        public WalkingPage(Users currentUser, string userRole, bool fromHomeScreen2 = false)
         {
             InitializeComponent();
             _currentUser = currentUser;
-            _userRole = userRole; // Сохранение роли
+            _userRole = userRole;
+            _fromHomeScreen2 = fromHomeScreen2;
 
-            var walkList = Entities.GetContext().WalkingSchedule.ToList();
-            DataGridWalk.ItemsSource = walkList;
+            UpdateWalks();
+        }
+
+        private void UpdateWalks()
+        {
+            var currentWalks = Entities.GetContext().WalkingSchedule.ToList();
+
+            if (!string.IsNullOrWhiteSpace(SearchWalk.Text))
+            {
+                currentWalks = currentWalks.Where(x =>
+                    x.FIO.ToLower().Contains(SearchWalk.Text.ToLower())).ToList();
+            }
+
+            if (SortWalk.SelectedIndex == 0)
+            {
+                currentWalks = currentWalks.OrderBy(x => x.FIO).ToList();
+            }
+            else if (SortWalk.SelectedIndex == 1)
+            {
+                currentWalks = currentWalks.OrderByDescending(x => x.FIO).ToList();
+            }
+            else if (SortWalk.SelectedIndex == 2)
+            {
+                currentWalks = currentWalks.OrderBy(x => x.time).ToList();
+            }
+            else if (SortWalk.SelectedIndex == 3)
+            {
+                currentWalks = currentWalks.OrderByDescending(x => x.time).ToList();
+            }
+
+            DataGridWalk.ItemsSource = currentWalks;
+        }
+
+        private void SearchWalk_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateWalks();
+        }
+
+        private void SortWalk_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateWalks();
+        }
+
+        private void CleanFilter_OnClick(object sender, RoutedEventArgs e)
+        {
+            SearchWalk.Text = "";
+            SortWalk.SelectedIndex = -1;
+            UpdateWalks();
         }
 
         private void ButtonEdit_OnClick(object sender, RoutedEventArgs e)
@@ -40,22 +76,20 @@ namespace Course_project
         private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AddPageWalking(null));
-
         }
 
         private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
         {
-            var walkForRemoving = DataGridWalk.SelectedItems.Cast<WalkingSchedule>().ToList();
-            if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {walkForRemoving.Count()} элементов?",
+            var walksForRemoving = DataGridWalk.SelectedItems.Cast<WalkingSchedule>().ToList();
+            if (MessageBox.Show($"Вы точно хотите удалить записи в количестве {walksForRemoving.Count()} элементов?",
                 "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 try
                 {
-                    Entities.GetContext().WalkingSchedule.RemoveRange(walkForRemoving);
+                    Entities.GetContext().WalkingSchedule.RemoveRange(walksForRemoving);
                     Entities.GetContext().SaveChanges();
                     MessageBox.Show("Данные успешно удалены!");
-
-                    DataGridWalk.ItemsSource = Entities.GetContext().WalkingSchedule.ToList();
+                    UpdateWalks();
                 }
                 catch (Exception ex)
                 {
@@ -66,36 +100,60 @@ namespace Course_project
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            // Проверяем, есть ли предыдущие страницы в стеке навигации
             if (NavigationService != null && NavigationService.CanGoBack)
             {
                 NavigationService.GoBack();
             }
             else
             {
-                // Если нет страниц для возврата, переходим на HomeScreen
-                HomeScreen homeScreen = new HomeScreen(_currentUser);
-                homeScreen.Show();
+                if (_userRole.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+                {
+                    new HomeScreen(_currentUser).Show();
+                }
+                else
+                {
+                    new HomeScreen2(_currentUser).Show();
+                }
                 Window.GetWindow(this)?.Close();
             }
         }
-        private void LastButton_Cick(object sender, RoutedEventArgs e)
+
+        private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            ParasitePage parasitePage = new ParasitePage(_currentUser, _userRole);
-            NavigationService.Navigate(parasitePage);
+            if (_fromHomeScreen2)
+            {
+                EventPage eventPage = new EventPage(_currentUser, _userRole, true);
+                NavigationService.Navigate(eventPage);
+            }
+            else
+            {
+                // Укажите страницу для перехода из HomeScreen (если нужно)
+                DogPage dogPage = new DogPage(_currentUser, _userRole);
+                NavigationService.Navigate(dogPage);
+            }
         }
 
-        private void NextButton_Cick(object sender, RoutedEventArgs e)
+        private void LastButton_Click(object sender, RoutedEventArgs e)
         {
-            EventPage eventPage = new EventPage(_currentUser, _userRole);
-            NavigationService.Navigate(eventPage);
+            if (_fromHomeScreen2)
+            {
+                ParasitePage parasitePage = new ParasitePage(_currentUser, _userRole, true);
+                NavigationService.Navigate(parasitePage);
+            }
+            else
+            {
+                // Укажите страницу для перехода из HomeScreen (если нужно)
+                VacinationPage vacinationPage = new VacinationPage(_currentUser, _userRole);
+                NavigationService.Navigate(vacinationPage);
+            }
         }
+
         private void WalkPage_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (Visibility == Visibility.Visible)
             {
                 Entities.GetContext().ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
-                DataGridWalk.ItemsSource = Entities.GetContext().VaccinationSchedule.ToList();
+                UpdateWalks();
             }
         }
     }

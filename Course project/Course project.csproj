@@ -346,7 +346,7 @@
     <Resource Include="Images\icon_medicines.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Dudusik_Dog_logo_Fin.png" />
+    <Resource Include="Images\log.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

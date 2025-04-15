@@ -5,23 +5,42 @@ using System.Windows.Controls;
 
 namespace Course_project
 {
-    /// <summary>
-    /// Логика взаимодействия для DogPage.xaml
-    /// </summary>
     public partial class DogPage : Page
     {
         private Users _currentUser;
         private string _userRole;
+        private bool _fromHomeScreen2;
 
-        // Конструктор, принимающий Users и роль
-        public DogPage(Users currentUser, string userRole)
+        public DogPage(Users currentUser, string userRole, bool fromHomeScreen2 = false)
         {
             InitializeComponent();
             _currentUser = currentUser;
-            _userRole = userRole; // Сохранение роли
+            _userRole = userRole;
+            _fromHomeScreen2 = fromHomeScreen2;
 
-            var dogsList = Entities.GetContext().Dogs.ToList();
-            ListViewDogs.ItemsSource = dogsList;
+            UpdateDogs();
+        }
+
+        private void UpdateDogs()
+        {
+            var currentDog = Entities.GetContext().Dogs.ToList();
+
+            if (!string.IsNullOrWhiteSpace(SearchDog.Text))
+            {
+                currentDog = currentDog.Where(x =>
+                    x.nickname.ToLower().Contains(SearchDog.Text.ToLower())).ToList();
+            }
+
+            if (SortAge.SelectedIndex == 0)
+            {
+                currentDog = currentDog.OrderBy(x => x.age).ToList();
+            }
+            else if (SortAge.SelectedIndex == 1)
+            {
+                currentDog = currentDog.OrderByDescending(x => x.age).ToList();
+            }
+
+            ListViewDogs.ItemsSource = currentDog;
         }
 
         private void ButtonEdit_OnClick(object sender, RoutedEventArgs e)
@@ -45,8 +64,7 @@ namespace Course_project
                     Entities.GetContext().Dogs.RemoveRange(dogsForRemoving);
                     Entities.GetContext().SaveChanges();
                     MessageBox.Show("Данные успешно удалены!");
-
-                    ListViewDogs.ItemsSource = Entities.GetContext().Dogs.ToList();
+                    UpdateDogs();
                 }
                 catch (Exception ex)
                 {
@@ -57,30 +75,52 @@ namespace Course_project
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            // Проверяем, есть ли предыдущие страницы в стеке навигации
             if (NavigationService != null && NavigationService.CanGoBack)
             {
                 NavigationService.GoBack();
             }
             else
             {
-                // Если нет страниц для возврата, переходим на HomeScreen
-                HomeScreen homeScreen = new HomeScreen(_currentUser);
-                homeScreen.Show();
+                if (_userRole.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+                {
+                    new HomeScreen(_currentUser).Show();
+                }
+                else
+                {
+                    new HomeScreen2(_currentUser).Show();
+                }
                 Window.GetWindow(this)?.Close();
             }
         }
 
-        private void NextButton_Cick(object sender, RoutedEventArgs e)
+        private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            EmployeesPage employeesPage = new EmployeesPage(_currentUser, _userRole);
-            NavigationService.Navigate(employeesPage);
+            if (_fromHomeScreen2)
+            {
+                EmployeesPage employeesPage = new EmployeesPage(_currentUser, _userRole, true);
+                NavigationService.Navigate(employeesPage);
+            }
+            else
+            {
+                // Укажите страницу для перехода из HomeScreen (если нужно)
+                MedicinePage medicinePage = new MedicinePage(_currentUser, _userRole);
+                NavigationService.Navigate(medicinePage);
+            }
         }
 
-        private void LastButton_Cick(object sender, RoutedEventArgs e)
+        private void LastButton_Click(object sender, RoutedEventArgs e)
         {
-            EventPage eventPage = new EventPage(_currentUser, _userRole);
-            NavigationService.Navigate(eventPage);
+            if (_fromHomeScreen2)
+            {
+                EventPage eventPage = new EventPage(_currentUser, _userRole, true);
+                NavigationService.Navigate(eventPage);
+            }
+            else
+            {
+                // Укажите страницу для перехода из HomeScreen (если нужно)
+                FinancePage financePage = new FinancePage(_currentUser, _userRole);
+                NavigationService.Navigate(financePage);
+            }
         }
 
         private void DogPage_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -88,40 +128,20 @@ namespace Course_project
             if (Visibility == Visibility.Visible)
             {
                 Entities.GetContext().ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
-                ListViewDogs.ItemsSource = Entities.GetContext().Dogs.ToList();
+                UpdateDogs();
             }
         }
-        private void UpdateDogs()
-        {
-            var currentDog = Entities.GetContext().Dogs.ToList();
 
-            // Фильтрация по поиску
-            if (!string.IsNullOrWhiteSpace(SearchDog.Text))
-            {
-                currentDog = currentDog.Where(x =>
-                    x.nickname.ToLower().Contains(SearchDog.Text.ToLower())).ToList();
-            }
-
-            // Сортировка по возрасту
-            if (SortAge.SelectedIndex == 0)
-            {
-                currentDog = currentDog.OrderBy(x => x.age).ToList();
-            }
-            else if (SortAge.SelectedIndex == 1)
-            {
-                currentDog = currentDog.OrderByDescending(x => x.age).ToList();
-            }
-
-            ListViewDogs.ItemsSource = currentDog;
-        }
-        private void SearchDog_TextChanged (object sender, TextChangedEventArgs e)
+        private void SearchDog_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateDogs();
         }
+
         private void SortAge_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateDogs();
         }
+
         private void CleanFilter_OnClick(object sender, RoutedEventArgs e)
         {
             SearchDog.Text = "";

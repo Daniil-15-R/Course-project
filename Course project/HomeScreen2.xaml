@@ -14,44 +14,45 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid Style="{StaticResource MyCustomGrid}">
+        <Frame x:Name="MainFrame" Navigated="MainFrame_Navigated"/>
         <UniformGrid Rows="3" Columns="3" VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel Margin="5">
-                <Button Style="{StaticResource MyCustomButton}" Click="DogButton_Click">
+                <Button x:Name="DogButton" Style="{StaticResource MyCustomButton}" Click="DogButton_Click">
                     <Image Source="Images\icon_dog.jpg" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
-                <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="1.Собаки" />
+                <TextBlock x:Name="DogBlock" Style="{StaticResource MyCustomTextBlock}" Text="1.Собаки" />
             </StackPanel>
             <StackPanel Margin="5">
-                <Button Style="{StaticResource MyCustomButton}" Click="EmployeesButton_Click">
+                <Button x:Name="EmployeesButton" Style="{StaticResource MyCustomButton}" Click="EmployeesButton_Click">
                     <Image Source="Images\icon_employe.png" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
-                <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="2.Сотрудники" />
+                <TextBlock x:Name="EmployeesBlock" Style="{StaticResource MyCustomTextBlock}" Text="2.Сотрудники" />
             </StackPanel>
             <StackPanel Margin="5">
-                <Button Style="{StaticResource MyCustomButton}" Click="VacinButton_Click">
+                <Button x:Name="VacinButton" Style="{StaticResource MyCustomButton}" Click="VacinButton_Click">
                     <Image Source="Images\icon_vaccination.png" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
-                <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="3. График вакцинаций" />
+                <TextBlock x:Name="VacinBlock" Style="{StaticResource MyCustomTextBlock}" Text="3. График вакцинаций" />
             </StackPanel>
             <StackPanel Margin="5">
-                <Button Style="{StaticResource MyCustomButton}" Click="ParasiteButton_Click">
+                <Button x:Name="ParasiteButton" Style="{StaticResource MyCustomButton}" Click="ParasiteButton_Click">
                     <Image Source="Images\icon_parasite.png" Width="127" Height="50" Stretch="Uniform" />
                 </Button>
-                <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="4. Обработка от паразитов" />
+                <TextBlock x:Name="ParasiteBlock" Style="{StaticResource MyCustomTextBlock}" Text="4. Обработка от паразитов" />
             </StackPanel>
             <StackPanel Margin="5">
-                <Button Style="{StaticResource MyCustomButton}" Click="WalkingButton_Click">
+                <Button x:Name="WalkingButton" Style="{StaticResource MyCustomButton}" Click="WalkingButton_Click">
                     <Image Source="Images\icon_walking.jpg" Width="135" Height="50" Stretch="Uniform" />
                 </Button>
-                <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="5. График выгулов" />
+                <TextBlock x:Name="WalkingBlock" Style="{StaticResource MyCustomTextBlock}" Text="5. График выгулов" />
             </StackPanel>
             <StackPanel Margin="5">
-                <Button Style="{StaticResource MyCustomButton}" Click="EventButton_Click">
+                <Button x:Name="EventButton" Style="{StaticResource MyCustomButton}" Click="EventButton_Click">
                     <Image Source="Images\icon_event.jpg" Width="129" Height="50" Stretch="Uniform" />
                 </Button>
-                <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="6. График мероприятий" />
+                <TextBlock x:Name="EventBlock" Style="{StaticResource MyCustomTextBlock}" Text="6. График мероприятий" />
             </StackPanel>
         </UniformGrid>
-        <Button Style="{StaticResource MyCustomButton}" Content="Назад" Click="Back_Click" Width="100" Height="45" Margin="664,340,36,44"/>
+        <Button x:Name="BackButton" Style="{StaticResource MyCustomButton}" Content="Назад" Click="Back_Click" Width="100" Height="45" Margin="664,340,36,44"/>
     </Grid>
 </Window>

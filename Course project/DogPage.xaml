@@ -26,16 +26,16 @@
                     <ColumnDefinition Width="350"/>
                     <ColumnDefinition Width="165"/>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="SearchDog" Grid.Column="0" HorizontalAlignment="Right" TextChanged="SearchDog_TextChanged" Width="135"/>
-                <TextBlock Text="Введите кличку" Grid.Column="0" HorizontalAlignment="Left" FontSize="14"/>
-                <ComboBox Name="SortAge" Grid.Column="1" HorizontalAlignment="Right" 
+                <TextBox Style="{StaticResource MyCustomTextBox}" x:Name="SearchDog" Grid.Column="0" HorizontalAlignment="Right" TextChanged="SearchDog_TextChanged" Width="135"/>
+                <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Введите кличку" Grid.Column="0" HorizontalAlignment="Left" FontSize="14"/>
+                <ComboBox Style="{StaticResource MyCustomComboBox}" Name="SortAge" Grid.Column="1" HorizontalAlignment="Right" 
                  SelectedItem="{Binding age}" 
                  SelectionChanged="SortAge_SelectionChanged" Width="265">
                     <ComboBoxItem>По возрастанию</ComboBoxItem>
                     <ComboBoxItem>По убыванию</ComboBoxItem>
                 </ComboBox>
-                <TextBlock Text="Сортировать по возрасту" Grid.Column="1" HorizontalAlignment="Left" FontSize="14"/>
-                <Button x:Name="CleanFilter" Grid.Column="2" Content="Очистить фильтр" FontSize="10" Click="CleanFilter_OnClick"/>
+                <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Сортировать по возрасту" Grid.Column="1" HorizontalAlignment="Left" FontSize="14"/>
+                <Button Style="{StaticResource MyCustomButton}" x:Name="CleanFilter" Grid.Column="2" Content="Очистить фильтр" FontSize="10" Click="CleanFilter_OnClick"/>
             </Grid>
         </WrapPanel>
 
@@ -68,11 +68,11 @@
                     Width="133" />
 
             <!-- Кнопка "Last" справа от кнопки "Добавить" -->
-            <Button Style="{StaticResource ArrowButtonLeftStyle}" Click="LastButton_Cick" 
+            <Button Style="{StaticResource ArrowButtonLeftStyle}" Click="LastButton_Click" 
                     HorizontalAlignment="Left" Width="100" Height="20" Margin="140,27,0,26"/>
 
             <!-- Кнопка "Next" слева от кнопки "Удалить" -->
-            <Button Style="{StaticResource ArrowButtonStyle}" Click="NextButton_Cick" 
+            <Button Style="{StaticResource ArrowButtonStyle}" Click="NextButton_Click" 
                     HorizontalAlignment="Right" Width="100" Height="20" Margin="0,27,140,26"/>
 
             <!-- Кнопка "Удалить" -->
