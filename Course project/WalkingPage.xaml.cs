@@ -120,31 +120,25 @@ namespace Course_project
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_fromHomeScreen2)
+            if (_userRole.Equals("Admin", StringComparison.OrdinalIgnoreCase))
             {
-                EventPage eventPage = new EventPage(_currentUser, _userRole, true);
-                NavigationService.Navigate(eventPage);
+                NavigationService.Navigate(new DogPage(_currentUser, _userRole));
             }
             else
             {
-                // Укажите страницу для перехода из HomeScreen (если нужно)
-                DogPage dogPage = new DogPage(_currentUser, _userRole);
-                NavigationService.Navigate(dogPage);
+                NavigationService.Navigate(new EventPage(_currentUser, _userRole, true));
             }
         }
 
         private void LastButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_fromHomeScreen2)
+            if (_userRole.Equals("Admin", StringComparison.OrdinalIgnoreCase))
             {
-                ParasitePage parasitePage = new ParasitePage(_currentUser, _userRole, true);
-                NavigationService.Navigate(parasitePage);
+                NavigationService.Navigate(new VacinationPage(_currentUser, _userRole));
             }
             else
             {
-                // Укажите страницу для перехода из HomeScreen (если нужно)
-                VacinationPage vacinationPage = new VacinationPage(_currentUser, _userRole);
-                NavigationService.Navigate(vacinationPage);
+                NavigationService.Navigate(new ParasitePage(_currentUser, _userRole, true));
             }
         }
 

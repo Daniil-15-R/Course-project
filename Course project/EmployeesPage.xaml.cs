@@ -120,22 +120,26 @@ namespace Course_project
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_fromHomeScreen2)
+            if (_userRole.Equals("Admin", StringComparison.OrdinalIgnoreCase))
             {
-                VacinationPage vacinationPage = new VacinationPage(_currentUser, _userRole, true);
-                NavigationService.Navigate(vacinationPage);
+                NavigationService.Navigate(new MedicinePage(_currentUser, _userRole));
             }
             else
             {
-                MedicinePage medicinePage = new MedicinePage(_currentUser, _userRole);
-                NavigationService.Navigate(medicinePage);
+                NavigationService.Navigate(new VacinationPage(_currentUser, _userRole, true));
             }
         }
 
         private void LastButton_Click(object sender, RoutedEventArgs e)
         {
-            DogPage dogPage = new DogPage(_currentUser, _userRole, _fromHomeScreen2);
-            NavigationService.Navigate(dogPage);
+            if (_userRole.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+            {
+                NavigationService.Navigate(new DogPage(_currentUser, _userRole));
+            }
+            else
+            {
+                NavigationService.Navigate(new DogPage(_currentUser, _userRole, true));
+            }
         }
 
         private void EmployeesPage_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)

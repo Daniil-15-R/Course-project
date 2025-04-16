@@ -26,18 +26,18 @@
                     <ColumnDefinition Width="350"/>
                     <ColumnDefinition Width="165"/>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="SearchVacination" Grid.Column="0" HorizontalAlignment="Right" 
+                <TextBox Style="{StaticResource MyCustomTextBox}" x:Name="SearchVacination" Grid.Column="0" HorizontalAlignment="Right" 
                          TextChanged="SearchVacination_TextChanged" Width="135"/>
-                <TextBlock Text="Поиск по названию" Grid.Column="0" HorizontalAlignment="Left" FontSize="14"/>
-                <ComboBox Name="SortVacination" Grid.Column="1" HorizontalAlignment="Right" 
+                <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Поиск по названию" Grid.Column="0" HorizontalAlignment="Left" FontSize="14"/>
+                <ComboBox Style="{StaticResource MyCustomComboBox}" Name="SortVacination" Grid.Column="1" HorizontalAlignment="Right" 
                           SelectionChanged="SortVacination_SelectionChanged" Width="265">
                     <ComboBoxItem>По названию (А-Я)</ComboBoxItem>
                     <ComboBoxItem>По названию (Я-А)</ComboBoxItem>
                     <ComboBoxItem>По дате (новые)</ComboBoxItem>
                     <ComboBoxItem>По дате (старые)</ComboBoxItem>
                 </ComboBox>
-                <TextBlock Text="Сортировать" Grid.Column="1" HorizontalAlignment="Left" FontSize="14"/>
-                <Button x:Name="CleanFilter" Grid.Column="2" Content="Очистить фильтр" FontSize="10" 
+                <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Сортировать" Grid.Column="1" HorizontalAlignment="Left" FontSize="14"/>
+                <Button Style="{StaticResource MyCustomButton}" x:Name="CleanFilter" Grid.Column="2" Content="Очистить фильтр" FontSize="10" 
                         Click="CleanFilter_OnClick"/>
             </Grid>
         </WrapPanel>

@@ -120,29 +120,25 @@ namespace Course_project
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_fromHomeScreen2)
+            if (_userRole.Equals("Admin", StringComparison.OrdinalIgnoreCase))
             {
-                ParasitePage parasitePage = new ParasitePage(_currentUser, _userRole, true);
-                NavigationService.Navigate(parasitePage);
+                NavigationService.Navigate(new FinancePage(_currentUser, _userRole));
             }
             else
             {
-                FinancePage financePage = new FinancePage(_currentUser, _userRole);
-                NavigationService.Navigate(financePage);
+                NavigationService.Navigate(new ParasitePage(_currentUser, _userRole, true));
             }
         }
 
         private void LastButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_fromHomeScreen2)
+            if (_userRole.Equals("Admin", StringComparison.OrdinalIgnoreCase))
             {
-                EmployeesPage employeesPage = new EmployeesPage(_currentUser, _userRole, true);
-                NavigationService.Navigate(employeesPage);
+                NavigationService.Navigate(new MedicinePage(_currentUser, _userRole));
             }
             else
             {
-                MedicinePage medicinePage = new MedicinePage(_currentUser, _userRole);
-                NavigationService.Navigate(medicinePage);
+                NavigationService.Navigate(new EmployeesPage(_currentUser, _userRole, true));
             }
         }
 
