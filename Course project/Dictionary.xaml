@@ -5,7 +5,7 @@
     </Style>
     <Style x:Key="MyCustomButton" TargetType="Button">
         <Setter Property="Background" Value="White"/>
-        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontSize" Value="15"/>
         <Setter Property="FontFamily" Value="TildaSans"/>
         <Setter Property="Foreground" Value="#e6a3d0"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -31,27 +31,27 @@
     </Style>
     <Style x:Key="MyCustomComboBox" TargetType="ComboBox">
         <Setter Property="Foreground" Value="#e6a3d0"/>
-        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontFamily" Value="TildaSans"/>
     </Style>
     <Style x:Key="MyCustomTextBlock" TargetType="TextBlock">
         <Setter Property="Foreground" Value="#e6a3d0"/>
-        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontFamily" Value="TildaSans"/>
     </Style>
     <Style x:Key="MyCustomTextBox" TargetType="TextBox">
         <Setter Property="Foreground" Value="#e6a3d0"/>
-        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontFamily" Value="TildaSans"/>
     </Style>
     <Style x:Key="MyCustomCheckBox" TargetType="CheckBox">
         <Setter Property="Foreground" Value="#e6a3d0"/>
-        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontFamily" Value="TildaSans"/>
     </Style>
     <Style x:Key="MyCustomPassword" TargetType="PasswordBox">
         <Setter Property="Foreground" Value="#e6a3d0"/>
-        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontFamily" Value="TildaSans"/>
     </Style>
     <Style x:Key="MyCustomStack1" TargetType="StackPanel">
@@ -63,13 +63,13 @@
     <Style x:Key="MyCustomDataGrid" TargetType="DataGrid">
         <Setter Property="Background" Value="#d0e6a3"/>
         <Setter Property="Foreground" Value="#e6a3d0"/>
-        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontFamily" Value="TildaSans"/>
     </Style>
     <Style x:Key="MyCustomListView" TargetType="ListView">
         <Setter Property="Background" Value="#d0e6a3"/>
         <Setter Property="Foreground" Value="#e6a3d0"/>
-        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontFamily" Value="TildaSans"/>
     </Style>
     <Style x:Key="ArrowButtonStyle" TargetType="Button">

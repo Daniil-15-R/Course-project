@@ -80,7 +80,7 @@
                 <DataGridTextColumn Header="Id" Binding="{Binding id}" Width="Auto"/>
                 <DataGridTextColumn Header="Дата" Binding="{Binding accounting_date, StringFormat={}{0:dd.MM.yyyy}}" Width="100"/>
                 <DataGridTextColumn Header="Зарплата" Binding="{Binding salary, StringFormat={}{0:N2}}" Width="100"/>
-                <DataGridTextColumn Header="Коммунальные" Binding="{Binding utilities, StringFormat={}{0:N2}}" Width="100"/>
+                <DataGridTextColumn Header="Коммунальные услуги" Binding="{Binding utilities, StringFormat={}{0:N2}}" Width="100"/>
                 <DataGridTextColumn Header="Налоги" Binding="{Binding taxes, StringFormat={}{0:N2}}" Width="100"/>
                 <DataGridTextColumn Header="Лекарства" Binding="{Binding medicine_expenses, StringFormat={}{0:N2}}" Width="100"/>
                 <DataGridTextColumn Header="Еда" Binding="{Binding food_expenses, StringFormat={}{0:N2}}" Width="100"/>
