@@ -4,18 +4,20 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Course_project"
+      xmlns:winForms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+      xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+      xmlns:chart="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="800"
       Title="FinancePage" IsVisibleChanged="FinancePage_IsVisibleChanged">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <!-- Для панели фильтров -->
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="250"/>
             <RowDefinition Height="*"/>
-            <!-- Для DataGrid -->
             <RowDefinition Height="73"/>
-            <!-- Для кнопок -->
         </Grid.RowDefinitions>
 
         <!-- Панель фильтров -->
@@ -42,53 +44,80 @@
             </Grid>
         </WrapPanel>
 
+        <!-- Панель управления диаграммой -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+            <TextBlock Text="Пользователь:" Width="100" Margin="5" VerticalAlignment="Center" TextAlignment="Right"/>
+            <ComboBox Name="CmbUser" Width="200" Margin="5" DisplayMemberPath="FIO" SelectionChanged="UpdateChart"/>
+            <TextBlock Text="Тип диаграммы:" Width="100" Margin="5" VerticalAlignment="Center" TextAlignment="Right"/>
+            <ComboBox Name="CmbDiagram" Width="150" Margin="5" SelectionChanged="UpdateChart"/>
+        </StackPanel>
+
+        <!-- Диаграмма -->
+        <wfi:WindowsFormsHost Grid.Row="2" Margin="10">
+            <chart:Chart x:Name="ChartPayments" Dock="Fill">
+                <chart:Chart.Legends>
+                    <chart:Legend Name="LegendPayments" Docking="Top"/>
+                </chart:Chart.Legends>
+                <chart:Chart.ChartAreas>
+                    <chart:ChartArea Name="ChartAreaPayments">
+                        <chart:ChartArea.AxisX>
+                            <chart:Axis Title="Категории расходов"/>
+                        </chart:ChartArea.AxisX>
+                        <chart:ChartArea.AxisY>
+                            <chart:Axis Title="Сумма"/>
+                        </chart:ChartArea.AxisY>
+                    </chart:ChartArea>
+                </chart:Chart.ChartAreas>
+                <chart:Chart.Series>
+                    <chart:Series Name="SeriesPayments" ChartType="Column" IsValueShownAsLabel="True"/>
+                </chart:Chart.Series>
+            </chart:Chart>
+        </wfi:WindowsFormsHost>
+
         <!-- DataGrid -->
-        <DataGrid Style="{StaticResource MyCustomDataGrid}" Grid.Row="1" Name="DataGridFinance" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid Style="{StaticResource MyCustomDataGrid}" Grid.Row="3" Name="DataGridFinance" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding id}" />
-                <DataGridTextColumn Header="Дата" Binding="{Binding accounting_date}" />
-                <DataGridTextColumn Header="Зарплата" Binding="{Binding salary}" />
-                <DataGridTextColumn Header="Коммунальные услуги" Binding="{Binding utilities}" />
-                <DataGridTextColumn Header="Налоги" Binding="{Binding taxes}" />
-                <DataGridTextColumn Header="Затраты на лекарства" Binding="{Binding medicine_expenses}" />
-                <DataGridTextColumn Header="Затраты на еду" Binding="{Binding food_expenses}" />
-                <DataGridTextColumn Header="Затраты на прочие нужды" Binding="{Binding other_expenses}" />
-                <DataGridTextColumn Header="Добровольные взносы" Binding="{Binding voluntary_contributions}" />
-                <DataGridTextColumn Header="Итог" Binding="{Binding total}" />
+                <DataGridTextColumn Header="Id" Binding="{Binding id}" Width="Auto"/>
+                <DataGridTextColumn Header="Дата" Binding="{Binding accounting_date, StringFormat={}{0:dd.MM.yyyy}}" Width="100"/>
+                <DataGridTextColumn Header="Зарплата" Binding="{Binding salary, StringFormat={}{0:N2}}" Width="100"/>
+                <DataGridTextColumn Header="Коммунальные" Binding="{Binding utilities, StringFormat={}{0:N2}}" Width="100"/>
+                <DataGridTextColumn Header="Налоги" Binding="{Binding taxes, StringFormat={}{0:N2}}" Width="100"/>
+                <DataGridTextColumn Header="Лекарства" Binding="{Binding medicine_expenses, StringFormat={}{0:N2}}" Width="100"/>
+                <DataGridTextColumn Header="Еда" Binding="{Binding food_expenses, StringFormat={}{0:N2}}" Width="100"/>
+                <DataGridTextColumn Header="Прочие" Binding="{Binding other_expenses, StringFormat={}{0:N2}}" Width="100"/>
+                <DataGridTextColumn Header="Взносы" Binding="{Binding voluntary_contributions, StringFormat={}{0:N2}}" Width="100"/>
+                <DataGridTextColumn Header="Итог" Binding="{Binding total, StringFormat={}{0:N2}}" Width="100"/>
                 <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Style="{StaticResource MyCustomButton}" Name="ButtonEdit" Content="Редактировать" 
-                                Click="ButtonEdit_OnClick" Background="White" />
+                                    Click="ButtonEdit_OnClick" Background="White"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
-        <!-- Кнопки внизу -->
-        <Grid Grid.Row="2">
-            <!-- Кнопка "Добавить" -->
+        <!-- Кнопки управления -->
+        <Grid Grid.Row="4">
             <Button Style="{StaticResource MyCustomButton}" Name="ButtonAdd" Content="Добавить" 
-                    HorizontalAlignment="Left" Click="ButtonAdd_OnClick" 
-                    Width="133" />
+                    HorizontalAlignment="Left" Click="ButtonAdd_OnClick" Width="133"/>
 
-            <!-- Кнопка "Last" справа от кнопки "Добавить" -->
             <Button Style="{StaticResource ArrowButtonLeftStyle}" Click="LastButton_Cick" 
                     HorizontalAlignment="Left" Width="100" Height="20" Margin="140,27,0,26"/>
 
-            <!-- Кнопка "Next" слева от кнопки "Удалить" -->
             <Button Style="{StaticResource ArrowButtonStyle}" Click="NextButton_Cick" 
                     HorizontalAlignment="Right" Width="100" Height="20" Margin="0,27,140,26"/>
 
-            <!-- Кнопка "Удалить" -->
             <Button Style="{StaticResource MyCustomButton}" Name="ButtonDel" Content="Удалить" 
-                    HorizontalAlignment="Right" Click="ButtonDel_OnClick" 
-                    Width="133" />
+                    HorizontalAlignment="Right" Click="ButtonDel_OnClick" Width="133"/>
 
-            <!-- Кнопка "Назад" -->
             <Button Style="{StaticResource MyCustomButton}" Content="Назад" Click="BackButton_Click" 
-                    HorizontalAlignment="Center" Width="100" Height="30" />
+                    HorizontalAlignment="Left" Width="100" Height="30" Margin="245,22,0,21"/>
+            <Button Style="{StaticResource MyCustomButton}" Content="Создать отчет Word" Click="WordReport_Click"
+                    HorizontalAlignment="Center" Width="100" Height="30" Margin="0,22,0,21"/>
+            <Button Style="{StaticResource MyCustomButton}" Content="Создать отчет Excel" Click="ExcelReport_Click"
+            HorizontalAlignment="Left" Width="100" Height="30" Margin="455,22,0,21"/>
         </Grid>
     </Grid>
 </Page>

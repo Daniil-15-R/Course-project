@@ -4,24 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a97e7fa6e3c54a4fb6d1a647b1ceb061" Name="Diagram1" ZoomLevel="63">
-        <EntityTypeShape EntityType="course_workModel.Accounting" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="course_workModel.Dogs" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="course_workModel.FoodProducts" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="course_workModel.Medicines" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="course_workModel.ParasiteTreatmentSchedule" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="course_workModel.PlannedEvents" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="course_workModel.ShelterEmployees" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="course_workModel.ShelterNeeds" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="course_workModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="course_workModel.Users" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="course_workModel.VaccinationSchedule" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="course_workModel.WalkingSchedule" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
-        <AssociationConnector Association="course_workModel.FK__Medicines__dog_i__5EBF139D" ManuallyRouted="false" />
-        <AssociationConnector Association="course_workModel.FK__ParasiteT__dog_i__70DDC3D8" ManuallyRouted="false" />
-        <AssociationConnector Association="course_workModel.FK__PlannedEv__dog_i__73BA3083" ManuallyRouted="false" />
-        <AssociationConnector Association="course_workModel.FK__Vaccinati__dog_i__6E01572D" ManuallyRouted="false" />
-        <AssociationConnector Association="course_workModel.FK__WalkingSc__dog_i__76969D2E" ManuallyRouted="false" />
+      <Diagram DiagramId="7eb82e0ae31d47cfbd8d3c2731f03b14" Name="Diagram1" ZoomLevel="60">
+        <EntityTypeShape EntityType="Model.Accounting" Width="1.5" PointX="3.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Dogs" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.FoodProducts" Width="1.5" PointX="6" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Medicines" Width="1.5" PointX="6" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ParasiteTreatmentSchedule" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PlannedEvents" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ShelterEmployees" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ShelterNeeds" Width="1.5" PointX="6" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Users" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.VaccinationSchedule" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.WalkingSchedule" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_FoodProducts_Accounting" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Medicines_Accounting" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ShelterNeeds_Accounting" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Medicines__dog_i__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__ParasiteT__dog_i__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__PlannedEv__dog_i__73BA3083" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Vaccinati__dog_i__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__WalkingSc__dog_i__76969D2E" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

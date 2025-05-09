@@ -14,15 +14,31 @@ namespace Course_project
     
     public partial class Accounting
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Accounting()
+        {
+            this.FoodProducts = new HashSet<FoodProducts>();
+            this.Medicines = new HashSet<Medicines>();
+            this.ShelterNeeds = new HashSet<ShelterNeeds>();
+        }
+    
         public int id { get; set; }
         public System.DateTime accounting_date { get; set; }
-        public Nullable<decimal> salary { get; set; }
-        public Nullable<decimal> utilities { get; set; }
-        public Nullable<decimal> taxes { get; set; }
-        public Nullable<decimal> medicine_expenses { get; set; }
-        public Nullable<decimal> food_expenses { get; set; }
-        public Nullable<decimal> other_expenses { get; set; }
-        public Nullable<decimal> voluntary_contributions { get; set; }
+        public decimal salary { get; set; }
+        public decimal utilities { get; set; }
+        public decimal taxes { get; set; }
+        public decimal medicine_expenses { get; set; }
+        public decimal food_expenses { get; set; }
+        public decimal shelter_needs_expenses { get; set; }
+        public decimal other_expenses { get; set; }
+        public decimal voluntary_contributions { get; set; }
         public Nullable<decimal> total { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FoodProducts> FoodProducts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Medicines> Medicines { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ShelterNeeds> ShelterNeeds { get; set; }
     }
 }

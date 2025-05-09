@@ -18,7 +18,11 @@ namespace Course_project
         public string name_of_medicine { get; set; }
         public Nullable<int> dog_id { get; set; }
         public decimal cost { get; set; }
+        public int quantity { get; set; }
+        public Nullable<int> accounting_id { get; set; }
+        public System.DateTime purchase_date { get; set; }
     
+        public virtual Accounting Accounting { get; set; }
         public virtual Dogs Dogs { get; set; }
     }
 }

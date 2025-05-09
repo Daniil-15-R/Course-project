@@ -17,5 +17,10 @@ namespace Course_project
         public int id { get; set; }
         public string name_of_food { get; set; }
         public decimal cost { get; set; }
+        public int quantity { get; set; }
+        public Nullable<int> accounting_id { get; set; }
+        public System.DateTime purchase_date { get; set; }
+    
+        public virtual Accounting Accounting { get; set; }
     }
 }

@@ -47,7 +47,8 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding id}" />
                 <DataGridTextColumn Header="Название еды" Binding="{Binding name_of_food}" />
-                <DataGridTextColumn Header="Цена" Binding="{Binding cost}" />
+                <DataGridTextColumn Header="Цена" Binding="{Binding cost}"/>
+                <DataGridTextColumn Header="Количество" Binding="{Binding quantity}"/>
                 <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

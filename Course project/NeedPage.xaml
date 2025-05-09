@@ -82,6 +82,10 @@
             <!-- Кнопка "Назад" -->
             <Button Style="{StaticResource MyCustomButton}" Content="Назад" Click="BackButton_Click" 
                     HorizontalAlignment="Center" Width="100" Height="30" />
+            <Button Style="{StaticResource MyCustomButton}" Content="Создать отчет Word" Click="WordReport_Click" 
+        HorizontalAlignment="Left" Width="100" Height="30" Margin="240,22,0,21" />
+            <Button Style="{StaticResource MyCustomButton}" Content="Создать отчет Excel" Click="ExcelReport_Click" 
+        HorizontalAlignment="Left" Width="100" Height="30" Margin="455,22,0,21" />
         </Grid>
     </Grid>
 </Page>
