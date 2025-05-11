@@ -27,10 +27,16 @@
         </Grid.ColumnDefinitions>
         <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Название" Grid.Row="0" Grid.Column="0" />
         <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Цена" Grid.Row="1" Grid.Column="0"/>
+        <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Количество" Grid.Row="2" Grid.Column="0"/>
+        <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Id финансов" Grid.Row="3" Grid.Column="0"/>
+        <TextBlock Style="{StaticResource MyCustomTextBlock}" Text="Дата закупки" Grid.Row="4" Grid.Column="0"/>
         <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="0" Grid.Column="1" Text="{Binding title}"/>
         <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="1" Grid.Column="1" Text="{Binding cost}" Name="ComboBoxDogs"/>
+        <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="2" Grid.Column="1" Text="{Binding quantity}"/>
+        <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="3" Grid.Column="1" Text="{Binding accouting_id}"/>
+        <TextBox Style="{StaticResource MyCustomTextBox}" Grid.Row="4" Grid.Column="1" Text="{Binding purchase_date}"/>
         <!-- Кнопка "Сохранить" -->
-        <Button Style="{StaticResource MyCustomButton}" Name="ButtonSave" Content="Сохранить" Grid.Row="2" Grid.Column="1" 
+        <Button Style="{StaticResource MyCustomButton}" Name="ButtonSave" Content="Сохранить" Grid.Row="6" Grid.Column="1" 
     Width="133" Click="ButtonSave_OnClick" HorizontalAlignment="Left" Margin="0,10,0,0"/>
     </Grid>
 </Page>

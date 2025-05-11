@@ -48,6 +48,9 @@
                 <DataGridTextColumn Header="Id" Binding="{Binding id}" />
                 <DataGridTextColumn Header="Название" Binding="{Binding title}" />
                 <DataGridTextColumn Header="Цена" Binding="{Binding cost}" />
+                <DataGridTextColumn Header="Количество" Binding="{Binding quantity}"/>
+                <DataGridTextColumn Header="Id финансов" Binding="{Binding accouting_id}"/>
+                <DataGridTextColumn Header="Дата закупки" Binding="{Binding purchase_date}"/>
                 <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

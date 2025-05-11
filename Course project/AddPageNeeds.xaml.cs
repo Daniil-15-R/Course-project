@@ -39,6 +39,11 @@ namespace Course_project
                 errors.AppendLine("Введите название еды!");
             if (_need.cost <= 0) // Проверка, что цена больше 0
                 errors.AppendLine("Введите корректную цену!");
+            if (_need.purchase_date == default(DateTime))
+                errors.AppendLine("Укажите дату!");
+
+            if (_need.quantity < 0)
+                errors.AppendLine("Количество не может быть отрицательной!");
 
             // Если есть ошибки, показываем их и прерываем выполнение
             if (errors.Length > 0)

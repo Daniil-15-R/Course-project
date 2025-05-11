@@ -30,7 +30,11 @@ namespace Course_project
                 errors.AppendLine("Выберите собаку!");
             if (_medicines.cost <= 0) // Проверка, что цена больше 0
                 errors.AppendLine("Введите корректную цену!");
+            if (_medicines.purchase_date == default(DateTime))
+                errors.AppendLine("Укажите дату!");
 
+            if (_medicines.quantity < 0)
+                errors.AppendLine("Количество не может быть отрицательной!");
             // Если есть ошибки, показываем их и прерываем выполнение
             if (errors.Length > 0)
             {

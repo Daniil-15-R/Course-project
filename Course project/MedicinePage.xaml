@@ -49,6 +49,9 @@
                 <DataGridTextColumn Header="Название лекарства" Binding="{Binding name_of_medicine}" />
                 <DataGridTextColumn Header="ID собаки" Binding="{Binding dog_id}" />
                 <DataGridTextColumn Header="Цена" Binding="{Binding cost}" />
+                <DataGridTextColumn Header="Количество" Binding="{Binding quantity}"/>
+                <DataGridTextColumn Header="Id финансов" Binding="{Binding accouting_id}"/>
+                <DataGridTextColumn Header="Дата закупки" Binding="{Binding purchase_date}"/>
                 <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
