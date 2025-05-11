@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Course_project"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        Icon="Images/Dudusik_Dog_logo_Fin.ico">
 
     <Grid Style="{StaticResource MyCustomGrid}">
         <StackPanel Style="{StaticResource MyCustomStack1}" Margin="20">

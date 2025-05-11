@@ -354,9 +354,7 @@
   <ItemGroup>
     <Resource Include="Images\log.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pages\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\ConsoleCourse_Project\ConsoleCourse_Project.csproj">
       <Project>{3a4e0aa4-c07f-496f-a8aa-026fe69fbb30}</Project>
@@ -402,6 +400,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Dudusik_Dog_logo_Fin.ico" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
