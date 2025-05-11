@@ -40,8 +40,6 @@ namespace Course_project
             if (_events.dog_id <= 0)
                 errors.AppendLine("Введите корректный id собаки!");
 
-            if (_events.date < DateTime.Today)
-                errors.AppendLine("Дата мероприятия не может быть в прошлом!");
 
             // Если есть ошибки, показываем их и прерываем выполнение
             if (errors.Length > 0)

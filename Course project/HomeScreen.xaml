@@ -12,7 +12,7 @@
         <UniformGrid Rows="2" Columns="5" VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel  Margin="5">
                 <Button Name="DogButton" Style="{StaticResource MyCustomButton}" Click="DogButton_Click">
-                    <Image Source="Images/icon_dog.jpg" Width="50" Height="50" Stretch="Uniform" />
+                    <Image Source="Images/icon_dog.png" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
                 <TextBlock Name="DogBlock" Style="{StaticResource MyCustomTextBlock}" Text="1. Собаки" />
             </StackPanel>
