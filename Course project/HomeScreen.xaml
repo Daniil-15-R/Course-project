@@ -42,7 +42,7 @@
             </StackPanel>
             <StackPanel Margin="5">
                 <Button Name="FinanceButton" Style="{StaticResource MyCustomButton}" Click="FinanceButton_Click">
-                    <Image Source="Images/icon_finance.jpg" Width="50" Height="50" Stretch="Uniform" />
+                    <Image Source="Images/icon_finance.png" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
                 <TextBlock x:Name="FinanceBlock" Style="{StaticResource MyCustomTextBlock}" Text="6. Финансовый учет" />
             </StackPanel>
@@ -60,13 +60,13 @@
             </StackPanel>
             <StackPanel Margin="5">
                 <Button Name="WalkingButton" Style="{StaticResource MyCustomButton}" Click="WalkingButton_Click">
-                    <Image Source="Images/icon_walking.jpg" Width="50" Height="50" Stretch="Uniform" />
+                    <Image Source="Images/icon_walking.png" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
                 <TextBlock x:Name="WalkingBlock" Style="{StaticResource MyCustomTextBlock}" Text="9. График выгулов" />
             </StackPanel>
             <StackPanel Margin="5">
                 <Button Name="EventButton" Style="{StaticResource MyCustomButton}" Click="EventButton_Click">
-                    <Image Source="Images/icon_event.jpg" Width="50" Height="50" Stretch="Uniform" />
+                    <Image Source="Images/icon_event.png" Width="50" Height="50" Stretch="Uniform" />
                 </Button>
                 <TextBlock x:Name="EventBlock" Style="{StaticResource MyCustomTextBlock}" Text="10. Мероприятия" />
             </StackPanel>

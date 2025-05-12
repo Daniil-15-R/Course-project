@@ -336,11 +336,8 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\icon_employe.png" />
-    <Resource Include="Images\icon_event.jpg" />
-    <Resource Include="Images\icon_finance.jpg" />
     <Resource Include="Images\icon_needs.jpg" />
     <Resource Include="Images\icon_vaccination.png" />
-    <Resource Include="Images\icon_walking.jpg" />
     <Resource Include="Images\ikon_foot.png" />
   </ItemGroup>
   <ItemGroup>
@@ -401,6 +398,9 @@
     <Resource Include="Images\Dudusik_Dog_logo_Fin.ico" />
     <Resource Include="Images\icon_dog.png" />
     <Resource Include="Images\icon_parasite.png" />
+    <Resource Include="Images\icon_event.png" />
+    <Resource Include="Images\icon_finance.png" />
+    <Resource Include="Images\icon_walking.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
