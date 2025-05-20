@@ -122,7 +122,7 @@ namespace Course_project
         {
             if (_userRole.Equals("Admin", StringComparison.OrdinalIgnoreCase))
             {
-                NavigationService.Navigate(new DogPage(_currentUser, _userRole));
+                NavigationService.Navigate(new EventPage(_currentUser, _userRole));
             }
             else
             {
@@ -134,7 +134,7 @@ namespace Course_project
         {
             if (_userRole.Equals("Admin", StringComparison.OrdinalIgnoreCase))
             {
-                NavigationService.Navigate(new VacinationPage(_currentUser, _userRole));
+                NavigationService.Navigate(new ParasitePage(_currentUser, _userRole));
             }
             else
             {

@@ -122,7 +122,7 @@ namespace Course_project
         {
             if (_userRole.Equals("Admin", StringComparison.OrdinalIgnoreCase))
             {
-                NavigationService.Navigate(new MedicinePage(_currentUser, _userRole));
+                NavigationService.Navigate(new WalkingPage(_currentUser, _userRole));
             }
             else
             {
