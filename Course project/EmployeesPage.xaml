@@ -70,10 +70,6 @@
 
         <!-- Кнопки внизу -->
         <Grid Grid.Row="2">
-            <!-- Кнопка "Добавить" -->
-            <Button Style="{StaticResource MyCustomButton}" Name="ButtonAdd" Content="Добавить" 
-                    HorizontalAlignment="Left" Click="ButtonAdd_OnClick" 
-                    Width="133" />
 
             <!-- Кнопка "Last" справа от кнопки "Добавить" -->
             <Button Style="{StaticResource ArrowButtonLeftStyle}" Click="LastButton_Click" 

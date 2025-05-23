@@ -15,7 +15,7 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid Style="{StaticResource MyCustomGrid}">
-        <Frame x:Name="MainFrame" Navigated="MainFrame_Navigated"/>
+        <Frame x:Name="MainFrame" Navigated="MainFrame_Navigated" Margin="-9,-2,9,2"/>
         <UniformGrid Rows="3" Columns="3" VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel Margin="5">
                 <Button x:Name="DogButton" Style="{StaticResource MyCustomButton}" Click="DogButton_Click">
@@ -54,6 +54,6 @@
                 <TextBlock x:Name="EventBlock" Style="{StaticResource MyCustomTextBlock}" Text="6. График мероприятий" />
             </StackPanel>
         </UniformGrid>
-        <Button x:Name="BackButton" Style="{StaticResource MyCustomButton}" Content="Назад" Click="Back_Click" Width="100" Height="45" Margin="664,340,36,44"/>
+        <Button x:Name="BackButton" Style="{StaticResource MyCustomButton}" Content="Назад" Click="Back_Click" Width="100" Height="45" Margin="655,341,45,48"/>
     </Grid>
 </Window>

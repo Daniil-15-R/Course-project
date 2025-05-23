@@ -73,10 +73,6 @@ namespace Course_project
             NavigationService.Navigate(new AddPageEmployees((sender as Button).DataContext as ShelterEmployees));
         }
 
-        private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new AddPageEmployees(null));
-        }
 
         private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
         {
